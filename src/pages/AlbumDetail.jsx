@@ -1,0 +1,59 @@
+import { useParams, Navigate } from "react-router-dom";
+import Detail, { Block, Specs } from "../components/Detail";
+import useSpotifyCover from "../components/useSpotifyCover";
+import { ALBUMS } from "../data/albums";
+
+export default function AlbumDetail() {
+  const { slug } = useParams();
+  const a = ALBUMS.find((x) => x.slug === slug);
+  const cover = useSpotifyCover(a?.spotify, a?.cover);
+  if (!a) return <Navigate to="/album" replace />;
+
+  return (
+    <Detail
+      back="/album"
+      image={cover}
+      imageFit="cover"
+      title={a.title}
+      subtitle={a.artist}
+      action={{ href: a.spotify, icon: "spotify", label: "open on spotify" }}
+    >
+      <Block label="favorites">
+        <ol className="space-y-1">
+          {a.favorites.map((t, i) => (
+            <li key={t.title} className="flex gap-3">
+              <span className="text-neutral-400 w-6">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              {t.spotify ? (
+                <a
+                  href={t.spotify}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline underline-offset-4"
+                >
+                  {t.title}
+                </a>
+              ) : (
+                <span>{t.title}</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </Block>
+      {a.note && (
+        <Block label="note">
+          <p>{a.note}</p>
+        </Block>
+      )}
+      <Block label="details">
+        <Specs
+          rows={[
+            ["year", a.year],
+            ["language", a.language],
+          ]}
+        />
+      </Block>
+    </Detail>
+  );
+}

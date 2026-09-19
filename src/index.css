@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Every size in the layout is rem-based, so above 1920px the root font size
+   grows with the viewport: a 4K TV shows the 1080p layout at 2×, instead of
+   a 1080p-sized layout lost in white space. */
+@media (min-width: 1920px) {
+  html {
+    font-size: 0.8333vw;
+  }
+}
+
+body {
+  @apply bg-white text-black font-sans;
+}
+
+::selection {
+  background: #000;
+  color: #fff;
+}

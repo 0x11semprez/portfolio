@@ -3,11 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="0x11semprez — cloud architect & systems engineer" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⟁</text></svg>" />
-    <title>0x11semprez</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="0x11semprez, backend & systems engineer" />
+    <title>SEMPREZ</title>
+    <link rel="preload" href="%PUBLIC_URL%/fonts/YDMyungjo-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="%PUBLIC_URL%/fonts/YDMyungjo-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    <style>
+      /* YDMyungjo is the only typeface. Declared here (not in src/index.css) so
+         CRA does not try to bundle the licensed files at build time. */
+      @font-face {
+        font-family: "YDMyungjo";
+        src: url("%PUBLIC_URL%/fonts/YDMyungjo-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "YDMyungjo";
+        src: url("%PUBLIC_URL%/fonts/YDMyungjo-Bold.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
