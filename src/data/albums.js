@@ -1,7 +1,7 @@
 // Albums. Paste the Spotify album URL in `spotify` and the cover loads
 // automatically (no API key). Or set `cover` to a local file in
 // public/images/albums/ to override.
-// language: "english" | "french" | "latino" | "novoice"
+// language: one of ALBUM_LANGUAGES, spelled exactly the same (the filter matches on it)
 export const ALBUM_LANGUAGES = ["english", "french", "latino", "novoices"];
 
 export const ALBUMS = [
@@ -55,7 +55,7 @@ export const ALBUMS = [
     artist: "Daft Punk",
     title: "TRON: Legacy",
     year: 2010,
-    language: "novoice",
+    language: "novoices",
     spotify: "https://open.spotify.com/album/3Ni4KDlBVy4uXyq2NxEmCC",
     cover: null,
     favorites: [
