@@ -5,12 +5,13 @@ export default function Filters({ options, value, onChange, dark = false }) {
   const active = dark ? "text-white" : "text-black";
   const idle = dark ? "text-neutral-400 hover:text-white" : "text-neutral-400 hover:text-black";
   return (
-    <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 px-5 pb-12 text-base sm:text-lg uppercase tracking-wide">
+    <div className="flex flex-wrap justify-center gap-x-5 px-5 pb-10 text-base sm:text-lg uppercase tracking-wide">
       {all.map((o) => (
         <button
           key={o}
           onClick={() => onChange(o)}
-          className={`uppercase transition-colors ${o === value ? active : idle}`}
+          // px-2 -mx-2 py-2: ≥ 40px touch targets on phones, same look
+          className={`px-2 -mx-2 py-2 uppercase transition-colors ${o === value ? active : idle}`}
         >
           {o}
         </button>

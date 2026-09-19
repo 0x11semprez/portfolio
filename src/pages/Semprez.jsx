@@ -88,16 +88,18 @@ function VideoPrompt({ credit, onChoose }) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="video-prompt-title"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-white px-5"
+      className="fixed inset-0 z-50 flex justify-center overflow-y-auto bg-white px-5 py-8"
     >
-      <div className="w-full max-w-md text-center text-base sm:text-lg leading-relaxed">
-        <div className="flex justify-center gap-5 text-sm sm:text-base uppercase tracking-wide">
+      {/* my-auto: centered when it fits, scrollable when the screen is too
+          short (phone in landscape with the browser bars out) */}
+      <div className="my-auto w-full max-w-md text-center text-base sm:text-lg leading-relaxed">
+        <div className="flex justify-center gap-2 text-sm sm:text-base uppercase tracking-wide">
           {Object.keys(PROMPT).map((l) => (
             <button
               key={l}
               onClick={() => setLang(l)}
               aria-pressed={l === lang}
-              className={`transition-colors ${
+              className={`px-4 py-3 -my-3 transition-colors ${
                 l === lang ? "text-black" : "text-neutral-400 hover:text-black"
               }`}
             >
@@ -119,23 +121,23 @@ function VideoPrompt({ credit, onChoose }) {
           <strong>{t.warning}</strong> {t.sound}
         </p>
 
-        <div className="mt-8 flex justify-center gap-8 uppercase tracking-wide font-bold">
-          <button onClick={() => onChoose(true)} className="hover:text-neutral-400 transition-colors">
+        <div className="mt-6 flex justify-center gap-2 uppercase tracking-wide font-bold">
+          <button onClick={() => onChoose(true)} className="px-3 py-2 hover:text-neutral-400 transition-colors">
             {t.yes}
           </button>
-          <button onClick={() => onChoose(false)} className="text-neutral-400 hover:text-black transition-colors">
+          <button onClick={() => onChoose(false)} className="px-3 py-2 text-neutral-400 hover:text-black transition-colors">
             {t.no}
           </button>
         </div>
 
         {credit && (
-          <p className="mt-10 text-sm sm:text-base text-neutral-400">
+          <p className="mt-8 text-sm sm:text-base text-neutral-400">
             {t.credit(
               <a
                 href={credit.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline underline-offset-4 hover:text-black"
+                className="inline-block px-2 -mx-2 py-2.5 -my-2.5 underline underline-offset-4 hover:text-black"
               >
                 {credit.name}
               </a>
@@ -161,7 +163,9 @@ export default function Semprez({ videoMode = false, onVideoMode = () => {}, dar
       {video && videoMode === null && (
         <VideoPrompt credit={video.credit} onChoose={onVideoMode} />
       )}
-      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-3 pb-24">
+      {/* 6rem = main's pt-24, so the page is exactly one screen tall (no
+          scrollbar on a one-line page). dvh ignores the phone browser bars. */}
+      <div className="min-h-[calc(100vh-6rem)] supports-[height:100dvh]:min-h-[calc(100dvh-6rem)] flex items-center justify-center px-4 pb-24">
         <p
           ref={bioRef}
           className={`w-full leading-loose text-center transition-colors ${on ? "text-white" : ""}`}

@@ -30,16 +30,18 @@ export default function Detail({
       <Link
         to={back}
         aria-label="back"
-        className={`inline-flex text-neutral-400 ${hover} transition-colors`}
+        className={`inline-flex p-2 -m-2 text-neutral-400 ${hover} transition-colors`}
       >
         <Icon name="back" label="back" className="h-7 w-7 sm:h-8 sm:w-8" />
       </Link>
 
       <div className="mt-8 grid md:grid-cols-2 gap-10 md:gap-16">
         <div
-          className={`md:sticky md:top-24 self-start w-full ${
-            // logos (contain) don't need a full-width square on phones
-            imageFit === "contain" ? "max-w-xs mx-auto md:max-w-none" : ""
+          className={`md:[@media(min-height:600px)]:sticky md:top-24 self-start w-full mx-auto md:[@media(min-height:600px)]:max-w-none ${
+            // phones (and any screen under 600px tall): logos (contain) don't
+            // need a full-width square, and in landscape neither does a cover
+            // (70vh cap). Sticky only when the whole image fits on screen.
+            imageFit === "contain" ? "max-w-[min(20rem,70vh)]" : "max-w-[min(24rem,70vh)]"
           }`}
         >
           <div
@@ -56,7 +58,11 @@ export default function Detail({
                 }
               />
             ) : (
-              <div className="h-full w-full bg-neutral-100 flex items-center justify-center text-neutral-400 text-sm sm:text-base uppercase">
+              <div
+                className={`h-full w-full flex items-center justify-center px-2 text-center text-sm sm:text-base uppercase ${
+                  dark ? "bg-white/10 text-white/60" : "bg-neutral-100 text-neutral-400"
+                }`}
+              >
                 {title}
               </div>
             )}
@@ -73,7 +79,7 @@ export default function Detail({
                   target="_blank"
                   rel="noopener noreferrer"
                   title={action.label}
-                  className="inline-flex hover:text-neutral-400 transition-colors"
+                  className="inline-flex p-3 -m-3 hover:text-neutral-400 transition-colors"
                 >
                   <Icon name={action.icon} label={action.label} className="h-5 w-5" />
                 </a>
@@ -81,7 +87,7 @@ export default function Detail({
                 <span
                   title={action.label}
                   aria-disabled="true"
-                  className="inline-flex text-neutral-300"
+                  className="inline-flex p-3 -m-3 text-neutral-300"
                 >
                   <Icon name={action.icon} label={action.label} className="h-5 w-5" />
                 </span>
@@ -117,7 +123,7 @@ export function Block({ label, children }) {
 // key / value rows
 export function Specs({ rows }) {
   return (
-    <dl className="grid grid-cols-[6rem_1fr] sm:grid-cols-[8rem_1fr] gap-y-1 text-sm sm:text-base uppercase">
+    <dl className="grid grid-cols-[6rem_1fr] sm:grid-cols-[7rem_1fr] gap-y-1 text-sm sm:text-base uppercase">
       {rows.map(([k, v]) => (
         <div key={k} className="contents">
           <dt className="text-neutral-400">{k}</dt>
