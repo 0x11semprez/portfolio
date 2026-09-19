@@ -13,7 +13,8 @@ export default function StackDetail() {
       image={s.image}
       title={s.name}
       subtitle={stackCategories(s).join(" / ")}
-      action={{ href: s.link, icon: s.icon, label: "official site" }}
+      // one ↗ for every stack, no brand logos next to the name
+      action={{ href: s.link, icon: "link", label: "official site" }}
     >
       <Block label="what it is">
         <p>{s.what}</p>

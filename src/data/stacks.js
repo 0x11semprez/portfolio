@@ -1,6 +1,7 @@
 // Each stack is a "product". `what` explains the tech to a recruiter who
-// doesn't know it, `how` is what you actually do with it. `icon` = slug in
-// src/components/icons.js, used for the official-site link ("link" = ↗).
+// doesn't know it, `how` is what you actually do with it. `link` is the
+// official site, shown as a ↗ next to the name (`icon` is kept for reference,
+// the page no longer shows brand logos).
 // `category` is one of STACK_CATEGORIES (spelled exactly the same, that's what
 // the filter matches on), or an array when a stack belongs to several (Solidity
 // is both a language and a blockchain tool). Order here = grid order.
