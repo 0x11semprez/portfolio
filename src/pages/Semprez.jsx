@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { PROFILE } from "../data/profile";
 
 // Font-size bounds for the bio, in rem. MAX = text-xl (desktop). MIN = text-sm,
@@ -52,9 +52,37 @@ function useFitLines(ref) {
   }, [ref]);
 }
 
+// Copy for the first-visit dialog, per language.
+const PROMPT = {
+  en: {
+    title: "interactive mode?",
+    body: "Interactive mode plays a video in the background of this page.",
+    warning: "Warning: it contains flashing images.",
+    sound: "Sound is off.",
+    yes: "interactive",
+    no: "static",
+    credit: (name) => <>Video by {name}, thank you for this edit.</>,
+  },
+  fr: {
+    title: "mode interactif ?",
+    body: "Le mode interactif lit une vidéo en fond de page.",
+    warning: "Attention : elle contient des flashs lumineux.",
+    sound: "Le son est coupé.",
+    yes: "interactif",
+    no: "statique",
+    credit: (name) => <>Vidéo de {name}, merci pour ce montage.</>,
+  },
+};
+
 // First-visit choice between the video ("interactive") and a plain page,
-// with the flashing-images warning and the credit. English + French.
+// with the flashing-images warning and the credit. The visitor picks the
+// language (EN / FR) at the top; it starts on the browser's language.
 function VideoPrompt({ credit, onChoose }) {
+  const [lang, setLang] = useState(() =>
+    (navigator.language || "").toLowerCase().startsWith("fr") ? "fr" : "en"
+  );
+  const t = PROMPT[lang];
+
   return (
     <div
       role="dialog"
@@ -62,38 +90,56 @@ function VideoPrompt({ credit, onChoose }) {
       aria-labelledby="video-prompt-title"
       className="fixed inset-0 z-50 flex items-center justify-center bg-white px-5"
     >
-      <div className="w-full max-w-md text-base sm:text-lg leading-relaxed">
-        <h2 id="video-prompt-title" className="text-lg sm:text-xl font-bold uppercase tracking-wide">
-          interactive mode?
+      <div className="w-full max-w-md text-center text-base sm:text-lg leading-relaxed">
+        <div className="flex justify-center gap-5 text-sm sm:text-base uppercase tracking-wide">
+          {Object.keys(PROMPT).map((l) => (
+            <button
+              key={l}
+              onClick={() => setLang(l)}
+              aria-pressed={l === lang}
+              className={`transition-colors ${
+                l === lang ? "text-black" : "text-neutral-400 hover:text-black"
+              }`}
+            >
+              {l}
+            </button>
+          ))}
+        </div>
+
+        <h2
+          id="video-prompt-title"
+          className="mt-8 text-lg sm:text-xl font-bold uppercase tracking-wide"
+        >
+          {t.title}
         </h2>
 
         <p className="mt-6">
-          Interactive mode plays a video in the background of this page.
+          {t.body}
           <br />
-          <strong>Warning: it contains flashing images.</strong> Sound is off.
-        </p>
-        <p className="mt-4 text-neutral-500">
-          Le mode interactif lit une vidéo en fond de page.
-          <br />
-          <strong>Attention : elle contient des flashs lumineux.</strong> Le son est coupé.
+          <strong>{t.warning}</strong> {t.sound}
         </p>
 
-        <div className="mt-8 flex gap-8 uppercase tracking-wide font-bold">
+        <div className="mt-8 flex justify-center gap-8 uppercase tracking-wide font-bold">
           <button onClick={() => onChoose(true)} className="hover:text-neutral-400 transition-colors">
-            interactive
+            {t.yes}
           </button>
           <button onClick={() => onChoose(false)} className="text-neutral-400 hover:text-black transition-colors">
-            static
+            {t.no}
           </button>
         </div>
 
         {credit && (
           <p className="mt-10 text-sm sm:text-base text-neutral-400">
-            Video by{" "}
-            <a href={credit.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-black">
-              {credit.name}
-            </a>{" "}
-            — thank you for this edit. / Vidéo de {credit.name} — merci pour ce montage.
+            {t.credit(
+              <a
+                href={credit.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4 hover:text-black"
+              >
+                {credit.name}
+              </a>
+            )}
           </p>
         )}
       </div>
