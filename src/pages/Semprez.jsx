@@ -52,26 +52,6 @@ function useFitLines(ref) {
   }, [ref]);
 }
 
-// Video filling the viewport behind the page: muted, looped, no controls,
-// dimmed with a black wash. `object-cover` handles every screen ratio.
-function BackgroundVideo({ src, poster, dim }) {
-  return (
-    <div className="fixed inset-0 -z-10 overflow-hidden bg-black" aria-hidden="true">
-      <video
-        className="h-full w-full object-cover"
-        src={src}
-        poster={poster || undefined}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-      />
-      <div className="absolute inset-0 bg-black" style={{ opacity: dim ?? 0.7 }} />
-    </div>
-  );
-}
-
 // First-visit choice between the video ("interactive") and a plain page,
 // with the flashing-images warning and the credit. English + French.
 function VideoPrompt({ credit, onChoose }) {
@@ -121,20 +101,20 @@ function VideoPrompt({ credit, onChoose }) {
   );
 }
 
-// `videoMode`: null = not chosen yet, true = video on, false = plain page.
-export default function Semprez({ videoMode = false, onVideoMode = () => {} }) {
+// `videoMode`: null = not chosen yet (show the dialog), true / false = chosen.
+// `dark`: the background video (rendered by App) is showing, text goes white.
+export default function Semprez({ videoMode = false, onVideoMode = () => {}, dark = false }) {
   const bioRef = useRef(null);
   useFitLines(bioRef);
 
   const video = PROFILE.video?.src ? PROFILE.video : null;
-  const on = Boolean(video) && videoMode === true;
+  const on = dark;
 
   return (
     <>
       {video && videoMode === null && (
         <VideoPrompt credit={video.credit} onChoose={onVideoMode} />
       )}
-      {on && <BackgroundVideo src={video.src} poster={video.poster} dim={video.dim} />}
       <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-3 pb-24">
         <p
           ref={bioRef}

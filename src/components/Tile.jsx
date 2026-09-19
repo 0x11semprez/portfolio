@@ -7,6 +7,7 @@ const RATIO = {
 };
 
 // One "product" in the grid: image on top, uppercase label below.
+// `dark`: the page is showing the background video, so the label is white.
 export default function Tile({
   to,
   image,
@@ -14,6 +15,7 @@ export default function Tile({
   sublabel,
   ratio = "square",
   fit = "contain",
+  dark = false,
 }) {
   return (
     <Link to={to} className="group flex flex-col items-center">
@@ -37,7 +39,11 @@ export default function Tile({
           </div>
         )}
       </div>
-      <p className="mt-4 text-base sm:text-lg font-bold uppercase tracking-wide text-center">
+      <p
+        className={`mt-4 text-base sm:text-lg font-bold uppercase tracking-wide text-center transition-colors ${
+          dark ? "text-white" : ""
+        }`}
+      >
         {label}
       </p>
       {sublabel && (

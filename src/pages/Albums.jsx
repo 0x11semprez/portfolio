@@ -5,7 +5,7 @@ import Filters from "../components/Filters";
 import useSpotifyCover from "../components/useSpotifyCover";
 import { ALBUMS, ALBUM_LANGUAGES } from "../data/albums";
 
-function AlbumTile({ album }) {
+function AlbumTile({ album, dark }) {
   const cover = useSpotifyCover(album.spotify, album.cover);
   return (
     <Tile
@@ -15,21 +15,30 @@ function AlbumTile({ album }) {
       sublabel={album.artist}
       ratio="square"
       fit="cover"
+      dark={dark}
     />
   );
 }
 
-export default function Albums() {
+// `dark`: the background video (rendered by App, interactive mode) is showing
+// behind the grid, so the text goes white.
+export default function Albums({ dark = false }) {
   const [lang, setLang] = useState("all");
+  const on = dark;
   const list =
     lang === "all" ? ALBUMS : ALBUMS.filter((a) => a.language === lang);
 
   return (
     <>
-      <Filters options={ALBUM_LANGUAGES} value={lang} onChange={setLang} />
+      <Filters
+        options={ALBUM_LANGUAGES}
+        value={lang}
+        onChange={setLang}
+        dark={on}
+      />
       <Grid cols={3}>
         {list.map((a) => (
-          <AlbumTile key={a.slug} album={a} />
+          <AlbumTile key={a.slug} album={a} dark={on} />
         ))}
       </Grid>
     </>

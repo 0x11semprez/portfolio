@@ -10,12 +10,14 @@ export const PROFILE = {
   ].join("\n"),
   // Background video for this page ("interactive mode"): a file in
   // public/videos/, autoplayed muted and looped behind the text, dimmed by
-  // `dim` (0..1, black). `poster` shows while it loads. `credit` is the editor
-  // thanked in the warning dialog. Set `src` to null to remove the feature.
+  // `dim` (0..1, black), `contrast` (1 = as shot, 1.15 = a touch punchier).
+  // `poster` shows while it loads. `credit` is the editor thanked in the
+  // warning dialog. Set `src` to null to remove the feature.
   video: {
     src: "/videos/profile.mp4",
     poster: "/videos/profile.jpg",
     dim: 0.7,
+    contrast: 1.15,
     credit: { name: "yotsu", url: "https://www.youtube.com/@yot-su" },
   },
 };

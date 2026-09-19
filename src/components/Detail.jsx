@@ -4,7 +4,8 @@ import Icon from "./Icon";
 // "Product page": image left, info right. `action` = { href, icon, label }:
 // one brand icon that links out (github, spotify, the stack's own mark…),
 // shown inline next to the title. href null renders it grey and inert,
-// `label` becomes the tooltip.
+// `label` becomes the tooltip. `dark`: the page is showing the background
+// video, so the text and links go white.
 const RATIO = {
   square: "aspect-square",
   portrait: "aspect-[2/3]",
@@ -21,13 +22,15 @@ export default function Detail({
   subtitle,
   action,
   children,
+  dark = false,
 }) {
+  const hover = dark ? "hover:text-white" : "hover:text-black";
   return (
-    <div className="px-5 sm:px-10 pb-24">
+    <div className={`px-5 sm:px-10 pb-24 transition-colors ${dark ? "text-white" : ""}`}>
       <Link
         to={back}
         aria-label="back"
-        className="inline-flex text-neutral-400 hover:text-black transition-colors"
+        className={`inline-flex text-neutral-400 ${hover} transition-colors`}
       >
         <Icon name="back" label="back" className="h-7 w-7 sm:h-8 sm:w-8" />
       </Link>
@@ -70,7 +73,7 @@ export default function Detail({
                   target="_blank"
                   rel="noopener noreferrer"
                   title={action.label}
-                  className="inline-flex text-black hover:text-neutral-400 transition-colors"
+                  className="inline-flex hover:text-neutral-400 transition-colors"
                 >
                   <Icon name={action.icon} label={action.label} className="h-5 w-5" />
                 </a>
