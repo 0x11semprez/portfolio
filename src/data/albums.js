@@ -26,7 +26,7 @@ export const ALBUMS = [
     title: "Deux Frères",
     year: 2019,
     language: "french",
-    spotify: "https://open.spotify.com/album/1r6YkN7ZbmnzXk1bK6mhjA",
+    spotify: "https://open.spotify.com/album/2JtKf1aFxqS0M3QIj98nG5",
     cover: null,
     favorites: [
       { title: "Au DD", spotify: "" },
@@ -56,7 +56,7 @@ export const ALBUMS = [
     title: "TRON: Legacy",
     year: 2010,
     language: "novoices",
-    spotify: "https://open.spotify.com/album/3Ni4KDlBVy4uXyq2NxEmCC",
+    spotify: "https://open.spotify.com/album/4US3nmuLIKELhVZdBPiKxx",
     cover: null,
     favorites: [
       { title: "Derezzed", spotify: "" },
