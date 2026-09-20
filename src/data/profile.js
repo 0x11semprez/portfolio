@@ -7,7 +7,7 @@ export const PROFILE = {
     "semprez is a software engineer.",
     'semprez\'s favorite sentence is "all comes with a cost".',
     "Open to DevSecOps roles.",
-    "Open to C++ roles in audio or finance.",
+    "Open to C++ roles in audio, finance or defense.",
   ].join("\n"),
   // Background video for this page ("interactive mode"): a file in
   // public/videos/, autoplayed muted and looped behind the text, dimmed by
