@@ -42,6 +42,9 @@ const ICONS = {
   back: "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z",
   // «<<» double chevron, same grid (Material "keyboard double arrow left")
   chevrons: "M17.59 18L19 16.59 14.42 12 19 7.41 17.59 6l-6 6zM11 18l1.41-1.41L7.83 12l4.58-4.59L11 6l-6 6z",
+  // «>» single chevron, same grid (Material "chevron right"); the phone
+  // filter dropdown turns it downwards
+  chevron: "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z",
   // background-video toggle in the menu (Material play / pause)
   play: "M8 5v14l11-7z",
   pause: "M6 19h4V5H6v14zm8-14v14h4V5h-4z",
