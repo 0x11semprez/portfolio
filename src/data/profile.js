@@ -3,10 +3,10 @@ export const PROFILE = {
   name: "semprez",
   // One line per sentence (each newline = line break). Wrap text in ** to bold it.
   bio: [
-    "**semprez** doesn't have much to say. **semprez** loves y'all.",
-    "**semprez** is **a software engineer**.",
-    '**semprez**\'s favorite sentence is "**all comes with a cost**".',
-    "Open to **software engineering**, **DevOps**, and **C++** roles in **cloud**, **audio**, or **finance**.",
+    "semprez doesn't have much to say. semprez loves y'all.",
+    "semprez is a software engineer.",
+    'semprez\'s favorite sentence is "all comes with a cost".',
+    "Open to DevOps or C++ roles in audio,  finance.",
   ].join("\n"),
   // Background video for this page ("interactive mode"): a file in
   // public/videos/, autoplayed muted and looped behind the text, dimmed by
