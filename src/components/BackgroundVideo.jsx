@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 // Video filling the viewport behind a page: muted, looped, no controls,
 // dimmed with a black wash, contrast pushed up a touch. `object-cover`
 // handles every screen ratio. `pointer-events-none` + disablePictureInPicture
@@ -6,6 +8,38 @@
 // that drop it on a re-mount. `hidden` keeps it mounted (and playing, so it
 // doesn't restart) but invisible on pages that don't show it.
 export default function BackgroundVideo({ src, poster, dim, contrast, hidden = false }) {
+  const ref = useRef(null);
+
+  // Phones pause the video when the browser goes to the background (app
+  // switch, lock screen) and don't always resume it when you come back, so
+  // play() again on every "we're visible again" signal. If the browser wants
+  // a gesture first (iOS low power mode), the first tap does it.
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    const play = () => {
+      if (document.visibilityState === "hidden") return;
+      video.play().catch(() => {});
+    };
+    const onPause = () => {
+      if (!video.ended) play();
+    };
+    document.addEventListener("visibilitychange", play);
+    window.addEventListener("pageshow", play);
+    window.addEventListener("focus", play);
+    window.addEventListener("touchstart", play, { passive: true });
+    window.addEventListener("click", play);
+    video.addEventListener("pause", onPause);
+    return () => {
+      document.removeEventListener("visibilitychange", play);
+      window.removeEventListener("pageshow", play);
+      window.removeEventListener("focus", play);
+      window.removeEventListener("touchstart", play);
+      window.removeEventListener("click", play);
+      video.removeEventListener("pause", onPause);
+    };
+  }, []);
+
   const restart = (e) => {
     e.currentTarget.currentTime = 0;
     e.currentTarget.play().catch(() => {});
@@ -18,6 +52,7 @@ export default function BackgroundVideo({ src, poster, dim, contrast, hidden = f
       aria-hidden="true"
     >
       <video
+        ref={ref}
         className="h-full w-full object-cover pointer-events-none"
         style={{ filter: `contrast(${contrast ?? 1.15})` }}
         src={src}
