@@ -22,29 +22,31 @@ export default function AlbumDetail({ dark = false }) {
         subtitle={a.artist}
         action={{ href: a.spotify, icon: "spotify", label: "open on spotify" }}
       >
-        <Block label="favorites">
-          <ol className="space-y-1">
-            {a.favorites.map((t, i) => (
-              <li key={t.title} className="flex gap-3">
-                <span className="text-neutral-400 w-6">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                {t.spotify ? (
-                  <a
-                    href={t.spotify}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline underline-offset-4"
-                  >
-                    {t.title}
-                  </a>
-                ) : (
-                  <span>{t.title}</span>
-                )}
-              </li>
-            ))}
-          </ol>
-        </Block>
+        {a.favorites.length > 0 && (
+          <Block label="favorites">
+            <ol className="space-y-1">
+              {a.favorites.map((t, i) => (
+                <li key={t.title} className="flex gap-3">
+                  <span className="text-neutral-400 w-6">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {t.spotify ? (
+                    <a
+                      href={t.spotify}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline underline-offset-4"
+                    >
+                      {t.title}
+                    </a>
+                  ) : (
+                    <span>{t.title}</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </Block>
+        )}
         {a.note && (
           <Block label="note">
             <p>{a.note}</p>
