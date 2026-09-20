@@ -43,7 +43,7 @@ export const STACKS = [
     image: "/images/stacks/rust.svg",
     link: "https://www.rust-lang.org",
     what: "A systems programming language with no garbage collector and no runtime. Memory safety is checked at compile time, so the class of bugs that crashes C/C++ programs simply cannot be written.",
-    how: "Networking layers, cryptographic transports, anything where latency and correctness both matter. Main language for the Ophobia mixnet.",
+    how: "Networking layers, cryptographic transports, anything where latency and correctness both matter.",
     level: "primary",
   },
   {
@@ -76,7 +76,7 @@ export const STACKS = [
     image: "/images/stacks/solidity.svg",
     link: "https://soliditylang.org",
     what: "The language of Ethereum smart contracts: programs that run on the blockchain and move real money. Every instruction costs gas, so efficiency is measured in cents.",
-    how: "Gas-optimized contracts, low-level Yul/assembly, Foundry test suites. Yesod is written in it.",
+    how: "Gas-optimized contracts, low-level Yul/assembly, Foundry test suites.",
     level: "primary",
   },
   {
