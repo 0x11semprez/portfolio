@@ -15,12 +15,5 @@ function renderIntro(text) {
 }
 
 export default function Projects() {
-  return (
-    <>
-      <p className="mx-auto max-w-2xl px-5 sm:px-10 pb-14 text-center text-base sm:text-lg leading-relaxed">
-        {renderIntro(PROJECTS_INTRO)}
-      </p>
-      <ProjectShowcase projects={PROJECTS} />
-    </>
-  );
+  return <ProjectShowcase projects={PROJECTS} intro={renderIntro(PROJECTS_INTRO)} />;
 }

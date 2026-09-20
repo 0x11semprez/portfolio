@@ -21,7 +21,8 @@ export default function App() {
   const on = hasVideo && videoMode === true; // interactive mode chosen
   // pages that show the background video: white text, transparent bar
   const videoPage = pathname === "/" || pathname.startsWith("/album");
-  const dark = on && videoPage;
+  // the project showcase is black from edge to edge
+  const dark = (on && videoPage) || pathname === "/projects";
 
   useEffect(() => {
     window.scrollTo(0, 0);
