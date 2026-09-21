@@ -1,11 +1,11 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { PROFILE } from "../data/profile";
 
-// Font-size bounds for the bio, in rem: the projects intro's sizes. MAX =
-// text-6xl (desktop), MIN = text-3xl (phones); below it we let lines wrap
-// rather than shrink further.
+// Font-size bounds for the bio, in rem. MAX = text-6xl, the projects intro's
+// desktop size. MIN = text-xl; below it we let lines wrap rather than shrink
+// further, so phones get a readable size and a few wrapped lines.
 const MAX = 3.75;
-const MIN = 1.875;
+const MIN = 1.25;
 
 // Renders **bold** and line breaks from the bio string. One block per line.
 function renderBio(text) {
@@ -180,7 +180,7 @@ export default function Semprez({
       <div className="min-h-[calc(100vh-6rem)] supports-[height:100dvh]:min-h-[calc(100dvh-6rem)] flex items-center justify-center px-4 pb-24">
         <p
           ref={bioRef}
-          className={`w-full font-bold leading-tight tracking-tight text-center transition-colors ${on ? "text-white" : ""}`}
+          className={`w-full font-bold leading-snug tracking-tight text-center transition-colors ${on ? "text-white" : ""}`}
         >
           {renderBio(PROFILE.bio)}
         </p>
