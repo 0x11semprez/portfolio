@@ -19,7 +19,6 @@ export const ALBUMS = [
       { title: "Shoota", spotify: "" },
       { title: "Fell In Luv", spotify: "" },
     ],
-    note: "the album that defined a whole sound. no filler.",
   },
   {
     slug: "deux-freres",
@@ -34,7 +33,6 @@ export const ALBUMS = [
       { title: "Autre monde", spotify: "" },
       { title: "Zoulou tchaing", spotify: "" },
     ],
-    note: "grew up on this.",
   },
   {
     slug: "un-verano-sin-ti",
@@ -49,7 +47,6 @@ export const ALBUMS = [
       { title: "Me Porto Bonito", spotify: "" },
       { title: "Ojitos Lindos", spotify: "" },
     ],
-    note: "summer, permanently.",
   },
   {
     slug: "tron-legacy",
@@ -64,7 +61,6 @@ export const ALBUMS = [
       { title: "The Grid", spotify: "" },
       { title: "Solar Sailer", spotify: "" },
     ],
-    note: "coding soundtrack.",
   },
   {
     slug: "before-the-rain",

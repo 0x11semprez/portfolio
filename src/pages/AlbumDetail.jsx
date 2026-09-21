@@ -3,6 +3,7 @@ import Detail, { Block, Specs } from "../components/Detail";
 import useSpotifyCover from "../components/useSpotifyCover";
 import { ALBUMS } from "../data/albums";
 
+// Cover, the three favourite tracks, year and language. Nothing else.
 // `dark`: the background video (rendered by App, interactive mode) is showing
 // behind the page, so the text goes white.
 export default function AlbumDetail({ dark = false }) {
@@ -25,7 +26,7 @@ export default function AlbumDetail({ dark = false }) {
         {a.favorites.length > 0 && (
           <Block label="favorites">
             <ol className="space-y-1">
-              {a.favorites.map((t, i) => (
+              {a.favorites.slice(0, 3).map((t, i) => (
                 <li key={t.title} className="flex gap-3">
                   <span className="text-neutral-400 w-6">
                     {String(i + 1).padStart(2, "0")}
@@ -45,11 +46,6 @@ export default function AlbumDetail({ dark = false }) {
                 </li>
               ))}
             </ol>
-          </Block>
-        )}
-        {a.note && (
-          <Block label="note">
-            <p>{a.note}</p>
           </Block>
         )}
         <Block label="details">
