@@ -30,4 +30,26 @@ export const PROJECTS = [
       ["year", "2026"],
     ],
   },
+  {
+    slug: "itzamna",
+    name: "itzamna",
+    category: "systems / c / go",
+    tagline:
+      "a system VM to safely run and test critical or dangerous code in CI pipelines and CTF environments",
+    image: "/images/projects/itzamna.png",
+    detailImage: "/images/projects/itzamna-detail.png",
+    bg: "#fff",
+    color: "#422107",
+    link: "https://github.com/0x11semprez/itzamna",
+    linkLabel: "view on github",
+    description: [
+      "A system VM written from scratch in C. Untrusted binaries run in an isolated sandbox with no access to the host by default, under CPU, memory and time limits, with a full trace of every syscall the guest makes.",
+      "itzamna also ships with its own command line tool, written in Go, so the whole workflow (build, install, run, trace, check a binary) lives in one place.",
+    ],
+    details: [
+      ["stack", "c, cmake, go"],
+      ["status", "active"],
+      ["year", "2026"],
+    ],
+  },
 ];
