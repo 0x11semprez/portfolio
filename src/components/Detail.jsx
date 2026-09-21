@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Icon from "./Icon";
 
@@ -5,8 +6,10 @@ import Icon from "./Icon";
 // one brand icon that links out (github, spotify, the stack's own mark…),
 // shown inline next to the title. href null renders it grey and inert,
 // `label` becomes the tooltip. `imageInset`: contain images sit at 60% of
-// their box (small logos); false lets them fill it. `dark`: the page is
-// showing the background video, so the text and links go white.
+// their box (small logos); false lets them fill it. `bg`: paint the whole
+// page (body, browser chrome) that colour, so a project page keeps the
+// universe of the slide it was opened from. `dark`: the page is on a dark
+// background (the video, or a dark `bg`), so the text and links go white.
 const RATIO = {
   square: "aspect-square",
   portrait: "aspect-[2/3]",
@@ -24,8 +27,24 @@ export default function Detail({
   subtitle,
   action,
   children,
+  bg = null,
   dark = false,
 }) {
+  useEffect(() => {
+    if (!bg) return;
+    const meta = document.querySelector('meta[name="theme-color"]');
+    const prev = {
+      body: document.body.style.backgroundColor,
+      meta: meta?.getAttribute("content"),
+    };
+    document.body.style.backgroundColor = bg;
+    meta?.setAttribute("content", bg);
+    return () => {
+      document.body.style.backgroundColor = prev.body;
+      meta?.setAttribute("content", prev.meta || "#ffffff");
+    };
+  }, [bg]);
+
   const hover = dark ? "hover:text-white" : "hover:text-black";
   return (
     <div

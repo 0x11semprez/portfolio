@@ -23,11 +23,14 @@ export default function App() {
   // the only page that shows the background video: white text, transparent bar
   const videoPage = pathname === "/";
   // the project showcase: one slide per project, each in its own colours, so
-  // the bar follows the slide showing (0 = the white intro)
+  // the bar follows the slide showing (0 = the white intro). A project page
+  // keeps its slide's colours, so the bar follows that project.
   const [screen, setScreen] = useState(0);
-  const projectDark =
-    pathname === "/projects" && PROJECTS[screen - 1]?.ink === "#fff";
-  const dark = (on && videoPage) || projectDark;
+  const project =
+    pathname === "/projects"
+      ? PROJECTS[screen - 1]
+      : PROJECTS.find((p) => pathname === `/projects/${p.slug}`);
+  const dark = (on && videoPage) || project?.ink === "#fff";
 
   useEffect(() => {
     window.scrollTo(0, 0);

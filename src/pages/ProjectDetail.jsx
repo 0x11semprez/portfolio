@@ -14,11 +14,13 @@ export default function ProjectDetail() {
       imageFit="contain"
       imageRatio="square"
       imageInset={false}
+      bg={p.bg}
+      dark={p.ink === "#fff"}
       title={p.name}
       subtitle={p.category}
       action={{ href: p.link, icon: "github", label: p.linkLabel }}
     >
-      <p className="italic text-neutral-600">{p.tagline}</p>
+      <p className="italic opacity-70">{p.tagline}</p>
       <Block label="about">
         {p.description.map((d, i) => (
           <p key={i}>{d}</p>
