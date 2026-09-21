@@ -33,6 +33,18 @@ export const CONTACTS = [
     icon: "apple",
   },
   {
+    label: "gmail",
+    value: "traoresemprez@gmail.com",
+    href: "mailto:traoresemprez@gmail.com",
+    icon: "gmail",
+  },
+  {
+    label: "linkedin",
+    value: "Kassim Traore-Semprez",
+    href: "https://www.linkedin.com/in/kassim-traore-semprez",
+    icon: "linkedin",
+  },
+  {
     label: "github",
     value: "0x11semprez",
     href: "https://github.com/0x11semprez",

@@ -5,6 +5,7 @@
 import {
   siApple,
   siGithub,
+  siGmail,
   siTelegram,
   siDiscord,
   siSpotify,
@@ -22,6 +23,7 @@ import {
 const ICONS = {
   apple: siApple.path,
   github: siGithub.path,
+  gmail: siGmail.path,
   telegram: siTelegram.path,
   discord: siDiscord.path,
   spotify: siSpotify.path,
