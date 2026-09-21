@@ -52,4 +52,27 @@ export const PROJECTS = [
       ["year", "2026"],
     ],
   },
+  {
+    slug: "ayze",
+    name: "AYZE",
+    category: "financial engineering",
+    tagline:
+      "an on-chain credit default swap on the XRP Ledger, so lending no longer needs collateral",
+    image: "/images/projects/ayze.png",
+    detailImage: "/images/projects/ayze-detail.png",
+    bg: "#0a1a3f",
+    ink: "#fff",
+    color: "#0085c7",
+    link: "https://github.com/Keuchnotkush/AYZE",
+    linkLabel: "view on github",
+    description: [
+      "A marketplace of lending vaults on the XRP Ledger. A broker opens a vault and posts first-loss cover, lenders fund it, borrowers draw fixed tickets against it, and accredited protection sellers guarantee individual loans with conditional escrows: a credit default swap, settled on-chain.",
+      "Everything settles in native XRP, no issuer, no trust lines, no IOU. Built on the XLS-65 vault and XLS-66 lending protocol with XLS-70 credentials.",
+    ],
+    details: [
+      ["stack", "typescript, next.js, xrpl.js"],
+      ["status", "hackathon"],
+      ["year", "2026"],
+    ],
+  },
 ];
