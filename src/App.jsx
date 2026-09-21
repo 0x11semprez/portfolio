@@ -11,6 +11,7 @@ import Albums from "./pages/Albums";
 import AlbumDetail from "./pages/AlbumDetail";
 import useVideoMode from "./components/useVideoMode";
 import BackgroundVideo from "./components/BackgroundVideo";
+import Companion from "./components/Companion";
 import { PROFILE } from "./data/profile";
 import { PROJECTS } from "./data/projects";
 
@@ -50,6 +51,15 @@ export default function App() {
         }
       />
       <Menu open={menuOpen} onClose={() => setMenuOpen(false)} />
+
+      {/* the robot dog wanders every page in the page's ink; hidden behind
+          the menu, it sits on the projects intro dreaming of the way down */}
+      {!menuOpen && (
+        <Companion
+          ink={dark ? "#fff" : "#000"}
+          hint={pathname === "/projects" && screen === 0}
+        />
+      )}
 
       {/* kept mounted across pages so it doesn't restart when you come back */}
       {on && <BackgroundVideo {...PROFILE.video} hidden={!videoPage} />}

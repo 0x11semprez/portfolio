@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTx } from "../i18n";
 
@@ -12,10 +12,8 @@ import { useTx } from "../i18n";
 // down inside it (translateY, CSS transition). One wheel tick, swipe or arrow
 // key moves exactly one slide, so a small gesture always lands on a project.
 // `onScreen(i)` tells the app which slide is showing (0 = intro), for the
-// header colour. On the intro, a little fellow climbs up over the bottom edge
-// of the frame (out of the Röze slide underneath) and hangs there, so the
-// visitor knows there is more below; tap = next slide. He drops back down as
-// soon as the slides move, and climbs up again when the intro is back.
+// header colour, and for the robot dog (App), who sits on the intro dreaming
+// of the way down: tapping him sends "companion:next", which moves one slide.
 
 const STEP = 700; // ms, the slide transition
 
@@ -41,7 +39,6 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
     };
   }, [i, onScreen, projects]);
 
-  const goRef = useRef(() => {});
   useEffect(() => {
     // the lock swallows the rest of a trackpad's inertia: one flick = one slide
     let locked = false;
@@ -56,7 +53,7 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
         return to;
       });
     };
-    goRef.current = go;
+    const onNext = () => go(1);
     const onWheel = (e) => {
       e.preventDefault();
       if (Math.abs(e.deltaY) < 4) return;
@@ -85,7 +82,9 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
     window.addEventListener("touchmove", onTouchMove, { passive: false });
     window.addEventListener("touchend", onTouchEnd);
     window.addEventListener("keydown", onKey);
+    window.addEventListener("companion:next", onNext);
     return () => {
+      window.removeEventListener("companion:next", onNext);
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
@@ -135,44 +134,6 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
             </div>
           </Link>
         ))}
-      </div>
-
-      {/* the little fellow. Two animations on two elements, because both
-          move `transform`: the button rises / drops, the drawing inside bobs.
-          Reduced motion: no climb, no bob, he is just there (or not). */}
-      <style>{`
-        @keyframes peek-rise { from { transform: translateY(100%) } to { transform: translateY(0) } }
-        @keyframes peek-drop { from { transform: translateY(0) } to { transform: translateY(100%) } }
-        @keyframes peek-bob { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
-      `}</style>
-      <div className="pointer-events-none absolute inset-x-0 bottom-[env(safe-area-inset-bottom)] flex justify-center">
-        <button
-          onClick={() => goRef.current(1)}
-          aria-label="next project"
-          aria-hidden={i !== 0}
-          tabIndex={i === 0 ? 0 : -1}
-          className={`pointer-events-auto w-16 sm:w-24 text-black ${
-            i === 0
-              ? "motion-safe:[animation:peek-rise_.6s_ease-out_1s_both] motion-reduce:translate-y-0"
-              : "motion-safe:[animation:peek-drop_.3s_ease-in_both] motion-reduce:translate-y-full"
-          }`}
-        >
-          {/* head and eyes over the edge, two hands gripping it */}
-          <svg
-            viewBox="0 0 100 60"
-            className={`block h-auto w-full fill-current ${
-              i === 0
-                ? "motion-safe:[animation:peek-bob_3s_ease-in-out_1.6s_infinite]"
-                : ""
-            }`}
-          >
-            <circle cx="50" cy="33" r="27" />
-            <circle cx="40" cy="28" r="3.5" fill="#fff" />
-            <circle cx="60" cy="28" r="3.5" fill="#fff" />
-            <path d="M4 60c0-6 3-9 9-9h10c6 0 9 3 9 9z" />
-            <path d="M68 60c0-6 3-9 9-9h10c6 0 9 3 9 9z" />
-          </svg>
-        </button>
       </div>
     </div>
   );
