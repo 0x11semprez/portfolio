@@ -10,9 +10,10 @@ export default function ProjectDetail() {
   return (
     <Detail
       back="/projects"
-      image={p.image}
-      imageFit="cover"
-      imageRatio="wide"
+      image={p.detailImage || p.image}
+      imageFit="contain"
+      imageRatio="square"
+      imageInset={false}
       title={p.name}
       subtitle={p.category}
       action={{ href: p.link, icon: "github", label: p.linkLabel }}

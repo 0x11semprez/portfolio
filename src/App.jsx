@@ -12,6 +12,7 @@ import AlbumDetail from "./pages/AlbumDetail";
 import useVideoMode from "./components/useVideoMode";
 import BackgroundVideo from "./components/BackgroundVideo";
 import { PROFILE } from "./data/profile";
+import { PROJECTS } from "./data/projects";
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,12 +22,29 @@ export default function App() {
   const on = hasVideo && videoMode === true; // interactive mode chosen
   // the only page that shows the background video: white text, transparent bar
   const videoPage = pathname === "/";
-  // the project showcase is black from edge to edge
-  const dark = (on && videoPage) || pathname === "/projects";
+  // the project showcase: one screen per project, each in its own colours, so
+  // the bar follows the screen in view (index 0 = the white intro)
+  const [screen, setScreen] = useState(0);
+  const projectDark =
+    pathname === "/projects" && PROJECTS[screen - 1]?.ink === "#fff";
+  const dark = (on && videoPage) || projectDark;
 
   useEffect(() => {
     window.scrollTo(0, 0);
     setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (pathname !== "/projects") return;
+    const read = () =>
+      setScreen(Math.round(window.scrollY / window.innerHeight));
+    read();
+    window.addEventListener("scroll", read, { passive: true });
+    window.addEventListener("resize", read);
+    return () => {
+      window.removeEventListener("scroll", read);
+      window.removeEventListener("resize", read);
+    };
   }, [pathname]);
 
   return (
