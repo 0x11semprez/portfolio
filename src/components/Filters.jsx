@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Icon from "./Icon";
+import { useT } from "../i18n";
 
 // Filter row (album language, stack category), styled like yeezy's MALE / FEMALE switch.
 // On phones the row doesn't fit, so it becomes a dropdown: the current choice
@@ -7,9 +8,12 @@ import Icon from "./Icon";
 // `dark`: the page is showing the background video, so the active option is white.
 export default function Filters({ options, value, onChange, dark = false }) {
   const [open, setOpen] = useState(false);
+  const t = useT(); // options are ids ("all", "languages"…), shown translated
   const all = ["all", ...options];
   const active = dark ? "text-white" : "text-black";
-  const idle = dark ? "text-neutral-400 hover:text-white" : "text-neutral-400 hover:text-black";
+  const idle = dark
+    ? "text-neutral-400 hover:text-white"
+    : "text-neutral-400 hover:text-black";
   const pick = (o) => {
     onChange(o);
     setOpen(false);
@@ -24,7 +28,7 @@ export default function Filters({ options, value, onChange, dark = false }) {
           aria-haspopup="listbox"
           className={`flex items-center gap-2 px-2 py-2 uppercase ${active}`}
         >
-          {value}
+          {t(value)}
           {/* same chevron as the menu's <<, turned downwards; flips up while open */}
           <Icon
             name="chevron"
@@ -34,13 +38,18 @@ export default function Filters({ options, value, onChange, dark = false }) {
         </button>
         {open && (
           <ul role="listbox" className="flex flex-col items-center">
-            {all.filter((o) => o !== value).map((o) => (
-              <li key={o} role="option" aria-selected={false}>
-                <button onClick={() => pick(o)} className={`px-2 py-2 uppercase transition-colors ${idle}`}>
-                  {o}
-                </button>
-              </li>
-            ))}
+            {all
+              .filter((o) => o !== value)
+              .map((o) => (
+                <li key={o} role="option" aria-selected={false}>
+                  <button
+                    onClick={() => pick(o)}
+                    className={`px-2 py-2 uppercase transition-colors ${idle}`}
+                  >
+                    {t(o)}
+                  </button>
+                </li>
+              ))}
           </ul>
         )}
       </div>
@@ -54,7 +63,7 @@ export default function Filters({ options, value, onChange, dark = false }) {
             // px-2 -mx-2 py-2: ≥ 40px touch targets, same look
             className={`px-2 -mx-2 py-2 uppercase transition-colors ${o === value ? active : idle}`}
           >
-            {o}
+            {t(o)}
           </button>
         ))}
       </div>

@@ -1,5 +1,6 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { PROFILE } from "../data/profile";
+import { useLang, useTx } from "../i18n";
 
 // Font-size bounds for the bio, in rem. MAX = text-6xl, the projects intro's
 // desktop size. Every sentence stays on one line on every screen: the size
@@ -27,8 +28,9 @@ function renderBio(text) {
 
 // Picks the largest font size (≤ MAX) at which the widest line still fits the
 // container on a single line and all the lines fit its height. Re-runs on
-// resize and once the font has loaded.
-function useFitLines(ref) {
+// resize, once the font has loaded, and when the text changes (`key`: the
+// language).
+function useFitLines(ref, key) {
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -58,6 +60,14 @@ function useFitLines(ref) {
         (el.clientWidth / widest) * 100,
         free / (lines.length * lineHeight),
       );
+      // glyph advances don't scale exactly linearly at small sizes (hinting),
+      // so check the real width at the chosen size and correct, a few times
+      for (let k = 0; k < 3 && size >= MIN * rem; k++) {
+        el.style.fontSize = `${size}px`;
+        const real = Math.max(...lines.map((l) => l.scrollWidth));
+        if (real <= el.clientWidth) break;
+        size *= el.clientWidth / real;
+      }
       const wrap = size < MIN * rem;
       if (wrap) size = MIN * rem;
       el.style.fontSize = `${size}px`;
@@ -67,9 +77,15 @@ function useFitLines(ref) {
     fit();
     const ro = new ResizeObserver(fit);
     ro.observe(el);
+    // the font swaps in after the first fit (a new face = new widths, same
+    // height, so the observer doesn't see it): refit on every font load
     document.fonts?.ready.then(fit);
-    return () => ro.disconnect();
-  }, [ref]);
+    document.fonts?.addEventListener("loadingdone", fit);
+    return () => {
+      ro.disconnect();
+      document.fonts?.removeEventListener("loadingdone", fit);
+    };
+  }, [ref, key]);
 }
 
 // Copy for the first-visit dialog, per language.
@@ -96,11 +112,10 @@ const PROMPT = {
 
 // First-visit choice between the video ("interactive") and a plain page,
 // with the flashing-images warning and the credit. The visitor picks the
-// language (EN / FR) at the top; it starts on the browser's language.
+// language (EN / FR) at the top: it is the site's language (same as the
+// header switch), starting on the browser's.
 function VideoPrompt({ credit, onChoose }) {
-  const [lang, setLang] = useState(() =>
-    (navigator.language || "").toLowerCase().startsWith("fr") ? "fr" : "en",
-  );
+  const [lang, setLang] = useLang();
   const t = PROMPT[lang];
 
   return (
@@ -182,8 +197,10 @@ export default function Semprez({
   onVideoMode = () => {},
   dark = false,
 }) {
+  const [lang] = useLang();
+  const tx = useTx();
   const bioRef = useRef(null);
-  useFitLines(bioRef);
+  useFitLines(bioRef, lang);
 
   const video = PROFILE.video?.src ? PROFILE.video : null;
   const on = dark;
@@ -200,7 +217,7 @@ export default function Semprez({
           ref={bioRef}
           className={`w-full font-bold leading-snug tracking-tight text-center transition-colors ${on ? "text-white" : ""}`}
         >
-          {renderBio(PROFILE.bio)}
+          {renderBio(tx(PROFILE.bio))}
         </p>
       </div>
     </>

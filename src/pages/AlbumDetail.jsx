@@ -2,12 +2,14 @@ import { useParams, Navigate } from "react-router-dom";
 import Detail, { Block, Specs } from "../components/Detail";
 import useSpotifyCover from "../components/useSpotifyCover";
 import { ALBUMS } from "../data/albums";
+import { useT } from "../i18n";
 
 // Cover, the three favourite tracks, year and language. Nothing else.
 // `dark`: the background video (rendered by App, interactive mode) is showing
 // behind the page, so the text goes white.
 export default function AlbumDetail({ dark = false }) {
   const { slug } = useParams();
+  const t = useT();
   const a = ALBUMS.find((x) => x.slug === slug);
   const cover = useSpotifyCover(a?.spotify, a?.cover);
   if (!a) return <Navigate to="/album" replace />;
@@ -21,10 +23,14 @@ export default function AlbumDetail({ dark = false }) {
         imageFit="cover"
         title={a.title}
         subtitle={a.artist}
-        action={{ href: a.spotify, icon: "spotify", label: "open on spotify" }}
+        action={{
+          href: a.spotify,
+          icon: "spotify",
+          label: t("open on spotify"),
+        }}
       >
         {a.favorites.length > 0 && (
-          <Block label="favorites">
+          <Block label={t("favorites")}>
             <ol className="space-y-1">
               {a.favorites.slice(0, 3).map((t, i) => (
                 <li key={t.title} className="flex gap-3">
@@ -48,11 +54,11 @@ export default function AlbumDetail({ dark = false }) {
             </ol>
           </Block>
         )}
-        <Block label="details">
+        <Block label={t("details")}>
           <Specs
             rows={[
-              ["year", a.year],
-              ["language", a.language],
+              [t("year"), a.year],
+              [t("language"), t(a.language)],
             ]}
           />
         </Block>

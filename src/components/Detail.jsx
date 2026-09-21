@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Icon from "./Icon";
+import { useT } from "../i18n";
 
 // "Product page": image left, info right. `action` = { href, icon, label }:
 // one brand icon that links out (github, spotify, the stack's own mark…),
@@ -45,6 +46,7 @@ export default function Detail({
     };
   }, [bg]);
 
+  const t = useT();
   const hover = dark ? "hover:text-white" : "hover:text-black";
   return (
     <div
@@ -52,10 +54,10 @@ export default function Detail({
     >
       <Link
         to={back}
-        aria-label="back"
+        aria-label={t("back")}
         className={`inline-flex p-2 -m-2 text-neutral-400 ${hover} transition-colors`}
       >
-        <Icon name="back" label="back" className="h-7 w-7 sm:h-8 sm:w-8" />
+        <Icon name="back" label={t("back")} className="h-7 w-7 sm:h-8 sm:w-8" />
       </Link>
 
       <div className="mt-6 sm:mt-8 grid md:grid-cols-2 gap-8 md:gap-16">

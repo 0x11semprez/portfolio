@@ -1,5 +1,6 @@
 import ProjectShowcase from "../components/ProjectShowcase";
 import { PROJECTS, PROJECTS_INTRO } from "../data/projects";
+import { useTx } from "../i18n";
 
 // Renders **bold** from the intro string.
 function renderIntro(text) {
@@ -15,10 +16,11 @@ function renderIntro(text) {
 }
 
 export default function Projects({ onScreen }) {
+  const tx = useTx();
   return (
     <ProjectShowcase
       projects={PROJECTS}
-      intro={renderIntro(PROJECTS_INTRO)}
+      intro={renderIntro(tx(PROJECTS_INTRO))}
       onScreen={onScreen}
     />
   );

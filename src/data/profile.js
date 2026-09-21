@@ -1,15 +1,26 @@
 // "SEMPREZ" page: one paragraph that defines you. Edit freely.
 export const PROFILE = {
   name: "semprez",
-  // One line per sentence (each newline = line break). Wrap text in ** to bold it.
-  bio: [
-    "semprez likes to talk about everything.",
-    "semprez loves y'all.",
-    "semprez is a software engineer.",
-    'semprez\'s favorite sentence is "all comes with a cost".',
-    "Open to DevSecOps roles.",
-    "Open to C++ roles in audio, finance or defense.",
-  ].join("\n"),
+  // One line per sentence (each newline = line break). Wrap text in ** to bold
+  // it. `{ en, fr }`: the language switch in the header picks one.
+  bio: {
+    en: [
+      "semprez likes to talk about everything.",
+      "semprez loves y'all.",
+      "semprez is a software engineer.",
+      'semprez\'s favorite sentence is "all comes with a cost".',
+      "Open to DevSecOps roles.",
+      "Open to C++ roles in audio, finance or defense.",
+    ].join("\n"),
+    fr: [
+      "semprez aime parler de tout.",
+      "semprez vous aime.",
+      "semprez est ingénieur logiciel.",
+      'la phrase préférée de semprez : "tout a un coût".',
+      "Ouvert aux postes DevSecOps.",
+      "Ouvert aux postes C++ en audio, finance ou défense.",
+    ].join("\n"),
+  },
   // Background video for this page ("interactive mode"): a file in
   // public/videos/, autoplayed muted and looped behind the text, dimmed by
   // `dim` (0..1, black), `contrast` (1 = as shot, 1.15 = a touch punchier).

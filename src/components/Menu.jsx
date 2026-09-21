@@ -2,12 +2,14 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { SECTIONS, CONTACTS } from "../data/profile";
 import Icon from "./Icon";
+import { useT } from "../i18n";
 
 // Full-screen overlay behind the header `+`: section links centered on top,
 // the four contact icons in one centered row pinned to the bottom. Contacts without `href` copy on click.
 // Contact icons get p-2 -m-2: 40px touch targets, same look.
 export default function Menu({ open, onClose }) {
   const [copied, setCopied] = useState(null);
+  const t = useT();
 
   const copy = (value, label) => {
     navigator.clipboard.writeText(value);
@@ -69,7 +71,7 @@ export default function Menu({ open, onClose }) {
             className="text-xs uppercase text-neutral-400 transition-opacity"
             style={{ opacity: copied ? 1 : 0 }}
           >
-            copied
+            {t("copied")}
           </span>
         </div>
       </div>

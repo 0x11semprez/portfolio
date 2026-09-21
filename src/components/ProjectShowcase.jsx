@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import Icon from "./Icon";
+import { useTx } from "../i18n";
 
 // Full-screen showcase as a vertical slider, no page scroll at all:
 //   1. the intro alone, big bold text on white, like the menu;
@@ -12,15 +12,17 @@ import Icon from "./Icon";
 // down inside it (translateY, CSS transition). One wheel tick, swipe or arrow
 // key moves exactly one slide, so a small gesture always lands on a project.
 // `onScreen(i)` tells the app which slide is showing (0 = intro), for the
-// header colour. The menu's `<<` chevrons, turned downwards at the bottom of
-// the frame, say "there is more": tap = next slide; on the last slide they
-// turn up and go back to the top.
+// header colour. On the intro, a little fellow climbs up over the bottom edge
+// of the frame (out of the Röze slide underneath) and hangs there, so the
+// visitor knows there is more below; tap = next slide. He drops back down as
+// soon as the slides move, and climbs up again when the intro is back.
 
 const STEP = 700; // ms, the slide transition
 
 export default function ProjectShowcase({ projects, intro, onScreen }) {
   const [i, setI] = useState(0);
   const count = projects.length + 1;
+  const tx = useTx(); // `{ en, fr }` strings in the data → the current language
 
   useEffect(() => {
     onScreen?.(i);
@@ -92,9 +94,6 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
     };
   }, [count]);
 
-  const last = i === count - 1;
-  const ink = i === 0 ? "#000" : projects[i - 1].ink || "#000";
-
   // fixed frame under the header (z-40) and the menu (z-30)
   return (
     <div className="fixed inset-0 z-20 overflow-hidden">
@@ -128,30 +127,53 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
             />
             <div className="mt-8 sm:mt-12 text-center">
               <p className="mx-auto max-w-2xl text-base sm:text-2xl leading-snug">
-                {p.tagline}
+                {tx(p.tagline)}
               </p>
               <p className="mt-3 sm:mt-4 text-xs sm:text-base uppercase tracking-wide">
-                {p.category}
+                {tx(p.category)}
               </p>
             </div>
           </Link>
         ))}
       </div>
 
-      <button
-        onClick={() => goRef.current(last ? -count : 1)}
-        aria-label={last ? "back to top" : "next project"}
-        className="absolute inset-x-0 bottom-[max(1.25rem,env(safe-area-inset-bottom))] mx-auto flex h-12 w-12 items-center justify-center transition-colors hover:opacity-60 motion-safe:animate-bounce"
-        style={{ color: ink }}
-      >
-        <Icon
-          name="chevrons"
-          label=""
-          className={`h-11 w-11 sm:h-12 sm:w-12 transition-transform duration-300 ${
-            last ? "rotate-90" : "-rotate-90"
+      {/* the little fellow. Two animations on two elements, because both
+          move `transform`: the button rises / drops, the drawing inside bobs.
+          Reduced motion: no climb, no bob, he is just there (or not). */}
+      <style>{`
+        @keyframes peek-rise { from { transform: translateY(100%) } to { transform: translateY(0) } }
+        @keyframes peek-drop { from { transform: translateY(0) } to { transform: translateY(100%) } }
+        @keyframes peek-bob { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
+      `}</style>
+      <div className="pointer-events-none absolute inset-x-0 bottom-[env(safe-area-inset-bottom)] flex justify-center">
+        <button
+          onClick={() => goRef.current(1)}
+          aria-label="next project"
+          aria-hidden={i !== 0}
+          tabIndex={i === 0 ? 0 : -1}
+          className={`pointer-events-auto w-16 sm:w-24 text-black ${
+            i === 0
+              ? "motion-safe:[animation:peek-rise_.6s_ease-out_1s_both] motion-reduce:translate-y-0"
+              : "motion-safe:[animation:peek-drop_.3s_ease-in_both] motion-reduce:translate-y-full"
           }`}
-        />
-      </button>
+        >
+          {/* head and eyes over the edge, two hands gripping it */}
+          <svg
+            viewBox="0 0 100 60"
+            className={`block h-auto w-full fill-current ${
+              i === 0
+                ? "motion-safe:[animation:peek-bob_3s_ease-in-out_1.6s_infinite]"
+                : ""
+            }`}
+          >
+            <circle cx="50" cy="33" r="27" />
+            <circle cx="40" cy="28" r="3.5" fill="#fff" />
+            <circle cx="60" cy="28" r="3.5" fill="#fff" />
+            <path d="M4 60c0-6 3-9 9-9h10c6 0 9 3 9 9z" />
+            <path d="M68 60c0-6 3-9 9-9h10c6 0 9 3 9 9z" />
+          </svg>
+        </button>
+      </div>
     </div>
   );
 }
