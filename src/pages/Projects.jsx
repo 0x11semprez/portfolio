@@ -10,10 +10,16 @@ function renderIntro(text) {
       </strong>
     ) : (
       part
-    )
+    ),
   );
 }
 
-export default function Projects() {
-  return <ProjectShowcase projects={PROJECTS} intro={renderIntro(PROJECTS_INTRO)} />;
+export default function Projects({ onScreen }) {
+  return (
+    <ProjectShowcase
+      projects={PROJECTS}
+      intro={renderIntro(PROJECTS_INTRO)}
+      onScreen={onScreen}
+    />
+  );
 }
