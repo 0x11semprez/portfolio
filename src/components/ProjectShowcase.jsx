@@ -12,8 +12,7 @@ import { useTx } from "../i18n";
 // down inside it (translateY, CSS transition). One wheel tick, swipe or arrow
 // key moves exactly one slide, so a small gesture always lands on a project.
 // `onScreen(i)` tells the app which slide is showing (0 = intro), for the
-// header colour, and for the robot dog (App), who sits on the intro dreaming
-// of the way down: tapping him sends "companion:next", which moves one slide.
+// header colour.
 
 const STEP = 700; // ms, the slide transition
 
@@ -53,7 +52,6 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
         return to;
       });
     };
-    const onNext = () => go(1);
     const onWheel = (e) => {
       e.preventDefault();
       if (Math.abs(e.deltaY) < 4) return;
@@ -82,9 +80,7 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
     window.addEventListener("touchmove", onTouchMove, { passive: false });
     window.addEventListener("touchend", onTouchEnd);
     window.addEventListener("keydown", onKey);
-    window.addEventListener("companion:next", onNext);
     return () => {
-      window.removeEventListener("companion:next", onNext);
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
