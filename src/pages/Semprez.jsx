@@ -2,10 +2,11 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { PROFILE } from "../data/profile";
 
 // Font-size bounds for the bio, in rem. MAX = text-6xl, the projects intro's
-// desktop size. MIN = text-xl; below it we let lines wrap rather than shrink
-// further, so phones get a readable size and a few wrapped lines.
+// desktop size. Every sentence stays on one line on every screen: the size
+// follows the widest line down to MIN (text-xs), and only below that (very
+// narrow phones) do lines wrap.
 const MAX = 3.75;
-const MIN = 1.25;
+const MIN = 0.75;
 
 // Renders **bold** and line breaks from the bio string. One block per line.
 function renderBio(text) {
@@ -25,7 +26,8 @@ function renderBio(text) {
 }
 
 // Picks the largest font size (≤ MAX) at which the widest line still fits the
-// container on a single line. Re-runs on resize and once the font has loaded.
+// container on a single line and all the lines fit its height. Re-runs on
+// resize and once the font has loaded.
 function useFitLines(ref) {
   useLayoutEffect(() => {
     const el = ref.current;
@@ -39,7 +41,23 @@ function useFitLines(ref) {
       const rem = parseFloat(
         getComputedStyle(document.documentElement).fontSize,
       );
-      let size = Math.min(MAX * rem, (el.clientWidth / widest) * 100);
+      // fit the width, and the height too (phone in landscape): the lines'
+      // stack must fit between the container's top and the bottom of the
+      // screen, above its bottom padding (the box is min-h, so measure the
+      // screen, not the box)
+      const box = el.parentElement;
+      const free =
+        window.innerHeight -
+        box.getBoundingClientRect().top -
+        parseFloat(getComputedStyle(box).paddingBottom);
+      const lineHeight =
+        parseFloat(getComputedStyle(el).lineHeight) /
+        parseFloat(el.style.fontSize);
+      let size = Math.min(
+        MAX * rem,
+        (el.clientWidth / widest) * 100,
+        free / (lines.length * lineHeight),
+      );
       const wrap = size < MIN * rem;
       if (wrap) size = MIN * rem;
       el.style.fontSize = `${size}px`;
