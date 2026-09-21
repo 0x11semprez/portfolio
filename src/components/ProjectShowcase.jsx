@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 
 // Full-screen showcase as a vertical slider, no page scroll at all:
 //   1. the intro alone, big bold text on white, like the menu;
-//   2. one slide per project: the logo in a box of fixed height (so every
-//      logo, whatever its shape, leaves the text at the same place), the
-//      tagline centered under it. The whole slide is the link to the project.
+//   2. one slide per project: the logo at one height (narrower screens cap
+//      its width instead, the box always hugs the visible logo), the tagline
+//      at one fixed gap under it, the pair centered on the slide. The whole
+//      slide is the link to the project.
 // The slides sit in a fixed, viewport-sized frame and a track slides up and
 // down inside it (translateY, CSS transition). One wheel tick, swipe or arrow
 // key moves exactly one slide, so a small gesture always lands on a project.
@@ -111,15 +112,13 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
             className="flex h-full flex-col items-center justify-center px-5 sm:px-10 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))] pb-[env(safe-area-inset-bottom)]"
             style={{ backgroundColor: p.bg, color: p.ink || "#000" }}
           >
-            <div className="flex h-[26vh] sm:h-[40vh] w-full max-w-5xl items-end justify-center">
-              <img
-                src={p.image}
-                alt=""
-                aria-hidden
-                className="max-h-full max-w-full object-contain"
-              />
-            </div>
-            <div className="mt-8 sm:mt-12 min-h-[18vh] text-center">
+            <img
+              src={p.image}
+              alt=""
+              aria-hidden
+              className="max-h-[24vh] sm:max-h-[36vh] max-w-full h-auto w-auto"
+            />
+            <div className="mt-8 sm:mt-12 text-center">
               <p className="mx-auto max-w-2xl text-base sm:text-2xl leading-snug">
                 {p.tagline}
               </p>

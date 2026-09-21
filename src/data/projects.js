@@ -59,7 +59,6 @@ export const PROJECTS = [
     tagline:
       "an on-chain credit default swap on the XRP Ledger, so lending no longer needs collateral",
     image: "/images/projects/ayze.png",
-    detailImage: "/images/projects/ayze-detail.png",
     bg: "#0a1a3f",
     ink: "#fff",
     color: "#0085c7",
