@@ -1,11 +1,11 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { PROFILE } from "../data/profile";
 
-// Font-size bounds for the bio, in rem. MAX = text-xl (desktop). MIN = text-sm,
-// the smallest size used anywhere else on phones; below it we let lines wrap
+// Font-size bounds for the bio, in rem: the projects intro's sizes. MAX =
+// text-6xl (desktop), MIN = text-3xl (phones); below it we let lines wrap
 // rather than shrink further.
-const MAX = 1.25;
-const MIN = 0.875;
+const MAX = 3.75;
+const MIN = 1.875;
 
 // Renders **bold** and line breaks from the bio string. One block per line.
 function renderBio(text) {
@@ -18,7 +18,7 @@ function renderBio(text) {
           </strong>
         ) : (
           part
-        )
+        ),
       )}
     </span>
   ));
@@ -36,7 +36,9 @@ function useFitLines(ref) {
       lines.forEach((l) => (l.style.whiteSpace = "nowrap"));
       el.style.fontSize = "100px";
       const widest = Math.max(...lines.map((l) => l.scrollWidth));
-      const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      const rem = parseFloat(
+        getComputedStyle(document.documentElement).fontSize,
+      );
       let size = Math.min(MAX * rem, (el.clientWidth / widest) * 100);
       const wrap = size < MIN * rem;
       if (wrap) size = MIN * rem;
@@ -79,7 +81,7 @@ const PROMPT = {
 // language (EN / FR) at the top; it starts on the browser's language.
 function VideoPrompt({ credit, onChoose }) {
   const [lang, setLang] = useState(() =>
-    (navigator.language || "").toLowerCase().startsWith("fr") ? "fr" : "en"
+    (navigator.language || "").toLowerCase().startsWith("fr") ? "fr" : "en",
   );
   const t = PROMPT[lang];
 
@@ -122,10 +124,16 @@ function VideoPrompt({ credit, onChoose }) {
         </p>
 
         <div className="mt-6 flex justify-center gap-2 uppercase tracking-wide font-bold">
-          <button onClick={() => onChoose(true)} className="px-3 py-2 hover:text-neutral-400 transition-colors">
+          <button
+            onClick={() => onChoose(true)}
+            className="px-3 py-2 hover:text-neutral-400 transition-colors"
+          >
             {t.yes}
           </button>
-          <button onClick={() => onChoose(false)} className="px-3 py-2 text-neutral-400 hover:text-black transition-colors">
+          <button
+            onClick={() => onChoose(false)}
+            className="px-3 py-2 text-neutral-400 hover:text-black transition-colors"
+          >
             {t.no}
           </button>
         </div>
@@ -140,7 +148,7 @@ function VideoPrompt({ credit, onChoose }) {
                 className="inline-block px-2 -mx-2 py-2.5 -my-2.5 underline underline-offset-4 hover:text-black"
               >
                 {credit.name}
-              </a>
+              </a>,
             )}
           </p>
         )}
@@ -151,7 +159,11 @@ function VideoPrompt({ credit, onChoose }) {
 
 // `videoMode`: null = not chosen yet (show the dialog), true / false = chosen.
 // `dark`: the background video (rendered by App) is showing, text goes white.
-export default function Semprez({ videoMode = false, onVideoMode = () => {}, dark = false }) {
+export default function Semprez({
+  videoMode = false,
+  onVideoMode = () => {},
+  dark = false,
+}) {
   const bioRef = useRef(null);
   useFitLines(bioRef);
 
@@ -168,7 +180,7 @@ export default function Semprez({ videoMode = false, onVideoMode = () => {}, dar
       <div className="min-h-[calc(100vh-6rem)] supports-[height:100dvh]:min-h-[calc(100dvh-6rem)] flex items-center justify-center px-4 pb-24">
         <p
           ref={bioRef}
-          className={`w-full leading-loose text-center transition-colors ${on ? "text-white" : ""}`}
+          className={`w-full font-bold leading-tight tracking-tight text-center transition-colors ${on ? "text-white" : ""}`}
         >
           {renderBio(PROFILE.bio)}
         </p>
