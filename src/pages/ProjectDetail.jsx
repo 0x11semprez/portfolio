@@ -12,7 +12,7 @@ export default function ProjectDetail() {
 
   return (
     <Detail
-      back="/projects"
+      back={`/projects#${p.slug}`}
       image={p.detailImage || p.image}
       imageFit="contain"
       imageRatio="square"

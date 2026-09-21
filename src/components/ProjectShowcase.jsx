@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTx } from "../i18n";
 
 // Full-screen showcase as a vertical slider, no page scroll at all:
@@ -12,14 +12,25 @@ import { useTx } from "../i18n";
 // down inside it (translateY, CSS transition). One wheel tick, swipe or arrow
 // key moves exactly one slide, so a small gesture always lands on a project.
 // `onScreen(i)` tells the app which slide is showing (0 = intro), for the
-// header colour.
+// header colour. The slide showing is kept in the URL hash (/projects#slug,
+// none for the intro), so coming back from a project — its back arrow, the
+// browser's back, a reload — lands on that project's slide, not the intro.
 
 const STEP = 700; // ms, the slide transition
 
 export default function ProjectShowcase({ projects, intro, onScreen }) {
-  const [i, setI] = useState(0);
+  const { hash } = useLocation();
+  const navigate = useNavigate();
+  const [i, setI] = useState(() => {
+    const at = projects.findIndex((p) => `#${p.slug}` === hash);
+    return at < 0 ? 0 : at + 1;
+  });
   const count = projects.length + 1;
   const tx = useTx(); // `{ en, fr }` strings in the data → the current language
+
+  useEffect(() => {
+    navigate({ hash: i === 0 ? "" : projects[i - 1].slug }, { replace: true });
+  }, [i, navigate, projects]);
 
   useEffect(() => {
     onScreen?.(i);
