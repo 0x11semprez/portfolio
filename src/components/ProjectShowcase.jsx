@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // Full-screen showcase as a vertical slider, no page scroll at all:
-//   1. the intro alone, big bold text on white, like the menu;
+//   1. the intro alone on white, same text size as the profile page;
 //   2. one slide per project: the logo in a box of fixed height (so every
 //      logo, whatever its shape, leaves the text at the same place), the
 //      tagline centered under it. The whole slide is the link to the project.
@@ -85,9 +85,7 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
       >
         {/* 1. the intro alone */}
         <section className="flex h-full items-center justify-center bg-white px-5 sm:px-10">
-          <p className="max-w-4xl text-center text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
-            {intro}
-          </p>
+          <p className="max-w-2xl text-center text-xl leading-loose">{intro}</p>
         </section>
 
         {/* 2. one slide per project */}
