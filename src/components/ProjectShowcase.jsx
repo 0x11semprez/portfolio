@@ -20,7 +20,20 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
 
   useEffect(() => {
     onScreen?.(i);
-  }, [i, onScreen]);
+    // colour the browser chrome (status bar, Safari's toolbar) like the slide
+    const bg = i === 0 ? "#ffffff" : projects[i - 1].bg;
+    const meta = document.querySelector('meta[name="theme-color"]');
+    const prev = {
+      meta: meta?.getAttribute("content"),
+      body: document.body.style.backgroundColor,
+    };
+    meta?.setAttribute("content", bg);
+    document.body.style.backgroundColor = bg;
+    return () => {
+      meta?.setAttribute("content", prev.meta || "#ffffff");
+      document.body.style.backgroundColor = prev.body;
+    };
+  }, [i, onScreen, projects]);
 
   useEffect(() => {
     // the lock swallows the rest of a trackpad's inertia: one flick = one slide
@@ -95,7 +108,7 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
           <Link
             key={p.slug}
             to={`/projects/${p.slug}`}
-            className="flex h-full flex-col items-center justify-center px-5 sm:px-10 pb-[env(safe-area-inset-bottom)]"
+            className="flex h-full flex-col items-center justify-center px-5 sm:px-10 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))] pb-[env(safe-area-inset-bottom)]"
             style={{ backgroundColor: p.bg, color: p.ink || "#000" }}
           >
             <div className="flex h-[26vh] sm:h-[40vh] w-full max-w-5xl items-end justify-center">
