@@ -47,7 +47,7 @@ export default function Header({
         </button>
 
         <div className="flex items-center gap-3 sm:gap-5">
-          <div className="flex items-center text-3xl sm:text-4xl font-bold leading-none tracking-tight">
+          <div className="flex items-center text-xl sm:text-2xl font-bold leading-none tracking-tight">
             {LANGS.map((l) => (
               <button
                 key={l}
