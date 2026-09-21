@@ -3,7 +3,8 @@ export const PROFILE = {
   name: "semprez",
   // One line per sentence (each newline = line break). Wrap text in ** to bold it.
   bio: [
-    "semprez doesn't have much to say. semprez loves y'all.",
+    "semprez likes to talk about everything.",
+    "semprez loves y'all.",
     "semprez is a software engineer.",
     'semprez\'s favorite sentence is "all comes with a cost".',
     "Open to DevSecOps roles.",
