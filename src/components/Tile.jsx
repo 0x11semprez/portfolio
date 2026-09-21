@@ -31,12 +31,14 @@ export default function Tile({
               fit === "cover"
                 ? "h-full w-full object-cover object-top"
                 : "object-contain"
-            } ${fit === "contain" ? "p-6" : ""}`}
+            } ${fit === "contain" ? "p-4 sm:p-6" : ""}`}
           />
         ) : (
           <div
             className={`h-full w-full flex items-center justify-center px-2 text-center text-sm sm:text-base uppercase ${
-              dark ? "bg-white/10 text-white/60" : "bg-neutral-100 text-neutral-400"
+              dark
+                ? "bg-white/10 text-white/60"
+                : "bg-neutral-100 text-neutral-400"
             }`}
           >
             {sublabel || label}

@@ -6,6 +6,10 @@ const COLS = {
 
 export default function Grid({ cols = 6, children }) {
   return (
-    <div className={`grid ${COLS[cols]} gap-x-6 gap-y-14 px-5 sm:px-10 pb-24`}>{children}</div>
+    <div
+      className={`grid ${COLS[cols]} gap-x-4 gap-y-10 sm:gap-x-6 sm:gap-y-14 px-5 sm:px-10 pb-24`}
+    >
+      {children}
+    </div>
   );
 }
