@@ -1,6 +1,10 @@
-Put the YDMyungjo files here (licensed — not committed by the tool):
+Site typeface, in order of preference:
 
-  YDMyungjo-Regular.woff2   → font-weight 400 (body, labels, specs)
-  YDMyungjo-Bold.woff2      → font-weight 700 (titles, section names)
+  NanumMyeongjo-{Regular,ExtraBold}.woff2  (committed; Naver, SIL OFL,
+    see NanumMyeongjo-OFL.txt; Latin subset from Google Fonts; ExtraBold
+    serves weight 700, its Bold is too light next to YDMyungjo)
 
-`public/index.html` declares the @font-face for exactly these two paths.
+  YDMyungjo-Regular.woff2 / YDMyungjo-Bold.woff2  (licensed, NOT committed —
+    drop them here and the site switches to them, nothing else to change)
+
+`public/index.html` declares the @font-face for exactly these paths.

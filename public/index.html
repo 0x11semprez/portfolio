@@ -7,10 +7,12 @@
     <meta name="description" content="0x11semprez, backend & systems engineer" />
     <title>pupp3tm4st3r</title>
     <link rel="preload" href="%PUBLIC_URL%/fonts/YDMyungjo-Regular.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="%PUBLIC_URL%/fonts/YDMyungjo-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="%PUBLIC_URL%/fonts/NanumMyeongjo-ExtraBold.woff2" as="font" type="font/woff2" crossorigin />
     <style>
-      /* YDMyungjo is the only typeface. Declared here (not in src/index.css) so
-         CRA does not try to bundle the licensed files at build time. */
+      /* One typeface. YDMyungjo (licensed, files not committed) when its files
+         are present, else Nanum Myeongjo (OFL, committed): same Myeongjo
+         family, same feel. Declared here (not in src/index.css) so CRA does
+         not try to bundle the font files at build time. */
       @font-face {
         font-family: "YDMyungjo";
         src: url("%PUBLIC_URL%/fonts/YDMyungjo-Regular.woff2") format("woff2");
@@ -21,6 +23,21 @@
       @font-face {
         font-family: "YDMyungjo";
         src: url("%PUBLIC_URL%/fonts/YDMyungjo-Bold.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Nanum Myeongjo";
+        src: url("%PUBLIC_URL%/fonts/NanumMyeongjo-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        /* Nanum's Bold reads light next to YDMyungjo's; ExtraBold is the match */
+        font-family: "Nanum Myeongjo";
+        src: url("%PUBLIC_URL%/fonts/NanumMyeongjo-ExtraBold.woff2") format("woff2");
         font-weight: 700;
         font-style: normal;
         font-display: swap;
