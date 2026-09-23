@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Icon from "./Icon";
 import { useTx } from "../i18n";
 
 // Full-screen showcase as a vertical slider, no page scroll at all:
@@ -15,6 +16,9 @@ import { useTx } from "../i18n";
 // header colour. The slide showing is kept in the URL hash (/projects#slug,
 // none for the intro), so coming back from a project — its back arrow, the
 // browser's back, a reload — lands on that project's slide, not the intro.
+// The menu's `<<` chevrons, turned downwards at the bottom of the frame, say
+// "there is more": tap = next slide; on the last slide they turn up and go
+// back to the top.
 
 const STEP = 700; // ms, the slide transition
 
@@ -49,6 +53,7 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
     };
   }, [i, onScreen, projects]);
 
+  const goRef = useRef(() => {});
   useEffect(() => {
     // the lock swallows the rest of a trackpad's inertia: one flick = one slide
     let locked = false;
@@ -63,6 +68,7 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
         return to;
       });
     };
+    goRef.current = go;
     const onWheel = (e) => {
       e.preventDefault();
       if (Math.abs(e.deltaY) < 4) return;
@@ -99,6 +105,9 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
       window.removeEventListener("keydown", onKey);
     };
   }, [count]);
+
+  const last = i === count - 1;
+  const ink = i === 0 ? "#000" : projects[i - 1].ink || "#000";
 
   // fixed frame under the header (z-40) and the menu (z-30)
   return (
@@ -142,6 +151,25 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
           </Link>
         ))}
       </div>
+
+      <button
+        onClick={() => goRef.current(last ? -count : 1)}
+        aria-label={tx(
+          last
+            ? { en: "back to top", fr: "retour en haut" }
+            : { en: "next project", fr: "projet suivant" },
+        )}
+        className="absolute inset-x-0 bottom-[max(1.25rem,env(safe-area-inset-bottom))] mx-auto flex h-12 w-12 items-center justify-center transition-colors hover:opacity-60 motion-safe:animate-bounce"
+        style={{ color: ink }}
+      >
+        <Icon
+          name="chevrons"
+          label=""
+          className={`h-11 w-11 sm:h-12 sm:w-12 transition-transform duration-300 ${
+            last ? "rotate-90" : "-rotate-90"
+          }`}
+        />
+      </button>
     </div>
   );
 }
