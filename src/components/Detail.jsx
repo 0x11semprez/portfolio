@@ -62,7 +62,7 @@ export default function Detail({
 
       <div className="mt-6 sm:mt-8 grid md:grid-cols-2 gap-8 md:gap-16">
         <div
-          className={`md:[@media(min-height:600px)]:sticky md:top-24 self-start w-full mx-auto md:[@media(min-height:600px)]:max-w-none ${
+          className={`md:[@media(min-height:600px)]:sticky md:top-[calc(6rem+env(safe-area-inset-top))] self-start w-full mx-auto md:[@media(min-height:600px)]:max-w-none ${
             // phones (and any screen under 600px tall): logos (contain) don't
             // need a full-width square, and in landscape neither does a cover
             // (70vh cap). Sticky only when the whole image fits on screen.

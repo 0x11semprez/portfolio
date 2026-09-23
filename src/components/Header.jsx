@@ -6,12 +6,16 @@ import { LANGS, useLang, useT } from "../i18n";
 // (the active one in the bar's colour, the other grey, same look as the
 // video prompt's picker), then `video` = { on, toggle }, the play / pause
 // button for the profile page's background video (null when the page has
-// none). Icons are 44px (48px from sm), p-2 -m-2 pads the touch target
-// without changing the layout.
+// none). The << is 44px (48px from sm), play / pause is sized to the EN / FR
+// letters; p-2 -m-2 pads the touch target
+// without changing the layout. `bg`: the bar's colour (a project's screen),
+// painted up into the notch / status bar: iOS Safari tints its top bar from
+// the fixed element at the top, a transparent bar leaves it white.
 export default function Header({
   menuOpen,
   onToggleMenu,
   dark = false,
+  bg = null,
   video = null,
 }) {
   const [lang, setLang] = useLang();
@@ -25,10 +29,11 @@ export default function Header({
     : "text-neutral-400 hover:text-black";
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 h-16 transition-colors ${
-        // over the video or a dark screen: no bar at all, the page shows through
-        dark ? "bg-transparent" : "bg-white"
+      className={`fixed inset-x-0 top-0 z-40 h-[calc(4rem+env(safe-area-inset-top))] pt-[env(safe-area-inset-top)] transition-colors ${
+        // over the video: no bar at all, the page shows through
+        bg ? "" : dark ? "bg-transparent" : "bg-white"
       }`}
+      style={bg ? { backgroundColor: bg } : undefined}
     >
       <div className="flex h-full items-center justify-between px-5 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))]">
         <button
@@ -73,7 +78,8 @@ export default function Header({
               <Icon
                 name={video.on ? "pause" : "play"}
                 label={t(video.on ? "pause video" : "play video")}
-                className="h-11 w-11 sm:h-12 sm:w-12"
+                // the glyph matches the EN / FR capitals, not the << icon
+                className="h-7 w-7 sm:h-8 sm:w-8"
               />
             </button>
           )}

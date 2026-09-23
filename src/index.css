@@ -23,3 +23,12 @@ body {
   background: #000;
   color: #fff;
 }
+
+/* iOS draws a big play triangle over a video it won't autoplay (low power
+   mode). The background video is decoration: the first tap starts it. */
+.bg-video::-webkit-media-controls,
+.bg-video::-webkit-media-controls-start-playback-button,
+.bg-video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+}

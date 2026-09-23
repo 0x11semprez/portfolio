@@ -210,9 +210,9 @@ export default function Semprez({
       {video && videoMode === null && (
         <VideoPrompt credit={video.credit} onChoose={onVideoMode} />
       )}
-      {/* 6rem = main's pt-24, so the page is exactly one screen tall (no
+      {/* 6rem + notch = main's top padding, so the page is exactly one screen tall (no
           scrollbar on a one-line page). dvh ignores the phone browser bars. */}
-      <div className="min-h-[calc(100vh-6rem)] supports-[height:100dvh]:min-h-[calc(100dvh-6rem)] flex items-center justify-center px-4 pb-24">
+      <div className="min-h-[calc(100vh-6rem-env(safe-area-inset-top))] supports-[height:100dvh]:min-h-[calc(100dvh-6rem-env(safe-area-inset-top))] flex items-center justify-center px-4 pb-24">
         <p
           ref={bioRef}
           className={`w-full font-bold leading-snug tracking-tight text-center transition-colors ${on ? "text-white" : ""}`}

@@ -43,6 +43,7 @@ export default function App() {
         menuOpen={menuOpen}
         onToggleMenu={() => setMenuOpen((o) => !o)}
         dark={dark && !menuOpen}
+        bg={project && !menuOpen ? project.bg : null}
         video={
           hasVideo && videoPage
             ? { on: videoMode === true, toggle: () => setVideoMode((m) => !m) }
@@ -54,7 +55,7 @@ export default function App() {
       {/* kept mounted across pages so it doesn't restart when you come back */}
       {on && <BackgroundVideo {...PROFILE.video} hidden={!videoPage} />}
 
-      <main className="pt-24 mx-auto max-w-[100rem]">
+      <main className="pt-[calc(6rem+env(safe-area-inset-top))] mx-auto max-w-[100rem]">
         <Routes>
           <Route
             path="/"

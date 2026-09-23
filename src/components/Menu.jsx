@@ -20,7 +20,7 @@ export default function Menu({ open, onClose }) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-30 bg-white pt-16 overflow-y-auto">
+    <div className="fixed inset-0 z-30 bg-white pt-[calc(4rem+env(safe-area-inset-top))] overflow-y-auto">
       {/* numbers sized in vh so the four of them fill the screen on any height */}
       <div className="px-5 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] flex flex-col min-h-full">
         <nav className="flex-1 flex flex-col items-center justify-evenly">

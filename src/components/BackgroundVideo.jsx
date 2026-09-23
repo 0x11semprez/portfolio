@@ -6,7 +6,10 @@ import { useEffect, useRef } from "react";
 // keep the browser from showing its hover chrome (Firefox's picture-in-picture
 // toggle, etc.). `loop` should be enough, onEnded is a fallback for browsers
 // that drop it on a re-mount. `hidden` keeps it mounted (and playing, so it
-// doesn't restart) but invisible on pages that don't show it.
+// doesn't restart) but invisible on pages that don't show it. The box is
+// 100lvh tall (the largest viewport, toolbars hidden) so it runs under the
+// notch and the home bar; iOS's own play button (shown when it refuses to
+// autoplay, low power mode) is hidden in index.css.
 export default function BackgroundVideo({ src, poster, dim, contrast, hidden = false }) {
   const ref = useRef(null);
 
@@ -46,14 +49,14 @@ export default function BackgroundVideo({ src, poster, dim, contrast, hidden = f
   };
   return (
     <div
-      className={`fixed inset-0 -z-10 overflow-hidden bg-black pointer-events-none select-none ${
+      className={`fixed inset-x-0 top-0 h-lvh min-h-full -z-10 overflow-hidden bg-black pointer-events-none select-none ${
         hidden ? "invisible" : ""
       }`}
       aria-hidden="true"
     >
       <video
         ref={ref}
-        className="h-full w-full object-cover pointer-events-none"
+        className="bg-video h-full w-full object-cover pointer-events-none"
         style={{ filter: `contrast(${contrast ?? 1.15})` }}
         src={src}
         onEnded={restart}
