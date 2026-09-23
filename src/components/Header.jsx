@@ -6,8 +6,7 @@ import { LANGS, useLang, useT } from "../i18n";
 // (the active one in the bar's colour, the other grey, same look as the
 // video prompt's picker), then `video` = { on, toggle }, the play / pause
 // button for the profile page's background video (null when the page has
-// none). The << is 44px (48px from sm), play / pause is sized to the EN / FR
-// letters; p-2 -m-2 pads the touch target
+// none). The << is 44px (48px from sm), p-2 -m-2 pads the touch target
 // without changing the layout. `bg`: the bar's colour (a project's screen),
 // painted up into the notch / status bar: iOS Safari tints its top bar from
 // the fixed element at the top, a transparent bar leaves it white.
@@ -51,20 +50,20 @@ export default function Header({
           />
         </button>
 
-        <div className="flex items-center gap-3 sm:gap-5">
-          <div className="flex items-center text-xl sm:text-2xl font-bold leading-none tracking-tight">
-            {LANGS.map((l) => (
-              <button
-                key={l}
-                onClick={() => setLang(l)}
-                aria-pressed={l === lang}
-                // px-2 py-2: ≥ 40px touch targets, same look
-                className={`px-2 py-2 uppercase transition-colors ${l === lang ? active : idle}`}
-              >
-                {l}
-              </button>
-            ))}
-          </div>
+        {/* one row, one baseline: EN, FR and play / pause are spaced alike
+            (px-2 each) and the icon is exactly as tall as the capitals */}
+        <div className="flex items-baseline text-xl sm:text-2xl font-bold leading-none tracking-tight">
+          {LANGS.map((l) => (
+            <button
+              key={l}
+              onClick={() => setLang(l)}
+              aria-pressed={l === lang}
+              // px-2 py-2: ≥ 40px touch targets, same look
+              className={`px-2 py-2 uppercase transition-colors ${l === lang ? active : idle}`}
+            >
+              {l}
+            </button>
+          ))}
 
           {video && (
             <button
@@ -73,13 +72,13 @@ export default function Header({
                 video.on ? "pause background video" : "play background video",
               )}
               aria-pressed={video.on}
-              className={`flex items-center justify-center p-2 -m-2 transition-colors ${color}`}
+              className={`px-2 py-2 transition-colors ${color}`}
             >
               <Icon
                 name={video.on ? "pause" : "play"}
                 label={t(video.on ? "pause video" : "play video")}
-                // the glyph matches the EN / FR capitals, not the << icon
-                className="h-7 w-7 sm:h-8 sm:w-8"
+                tight
+                className="inline h-[0.775em] w-auto align-baseline"
               />
             </button>
           )}
