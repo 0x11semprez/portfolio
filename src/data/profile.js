@@ -9,8 +9,8 @@ export const PROFILE = {
       "semprez loves y'all.",
       "semprez is a software engineer.",
       'semprez\'s favorite sentence is "all comes with a cost".',
-      "Open to DevSecOps roles.",
-      "Open to C++ roles in audio, finance or defense.",
+      "Open to DevOps roles.",
+      "Open to C++, Golang roles in finance or defense.",
     ].join("\n"),
     fr: [
       "semprez aime parler de tout.",
