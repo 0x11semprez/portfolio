@@ -11,7 +11,7 @@ export default function AlbumDetail({ dark = false }) {
   const { slug } = useParams();
   const t = useT();
   const a = ALBUMS.find((x) => x.slug === slug);
-  const cover = useSpotifyCover(a?.spotify, a?.cover);
+  const { src: cover } = useSpotifyCover(a?.spotify, a?.cover);
   if (!a) return <Navigate to="/album" replace />;
 
   return (

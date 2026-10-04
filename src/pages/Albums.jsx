@@ -4,13 +4,17 @@ import Tile from "../components/Tile";
 import Filters from "../components/Filters";
 import useSpotifyCover from "../components/useSpotifyCover";
 import { ALBUMS, ALBUM_LANGUAGES } from "../data/albums";
+import { useT } from "../i18n";
 
 function AlbumTile({ album, dark }) {
-  const cover = useSpotifyCover(album.spotify, album.cover);
+  const { src, srcSet } = useSpotifyCover(album.spotify, album.cover);
   return (
     <Tile
       to={`/album/${album.slug}`}
-      image={cover}
+      image={src}
+      srcSet={srcSet}
+      // 2 columns on phones, 3 from md
+      sizes="(min-width: 768px) 33vw, 50vw"
       label={album.title}
       sublabel={album.artist}
       ratio="square"
@@ -24,6 +28,7 @@ function AlbumTile({ album, dark }) {
 // behind the grid, so the text goes white.
 export default function Albums({ dark = false }) {
   const [lang, setLang] = useState("all");
+  const t = useT();
   const on = dark;
   const list =
     lang === "all" ? ALBUMS : ALBUMS.filter((a) => a.language === lang);
@@ -36,6 +41,14 @@ export default function Albums({ dark = false }) {
         onChange={setLang}
         dark={on}
       />
+      {/* how many albums the current filter shows */}
+      <p
+        className={`-mt-6 pb-10 text-center text-sm sm:text-base uppercase tracking-wide ${
+          on ? "text-white/60" : "text-neutral-400"
+        }`}
+      >
+        {list.length} {t(list.length === 1 ? "album" : "albums")}
+      </p>
       <Grid cols={3}>
         {list.map((a) => (
           <AlbumTile key={a.slug} album={a} dark={on} />

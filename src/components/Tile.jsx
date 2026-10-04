@@ -11,6 +11,8 @@ const RATIO = {
 export default function Tile({
   to,
   image,
+  srcSet,
+  sizes,
   label,
   sublabel,
   ratio = "square",
@@ -25,6 +27,8 @@ export default function Tile({
         {image ? (
           <img
             src={image}
+            srcSet={srcSet}
+            sizes={srcSet ? sizes : undefined}
             alt={label}
             loading="lazy"
             className={`max-h-full max-w-full transition-opacity duration-300 group-hover:opacity-70 ${

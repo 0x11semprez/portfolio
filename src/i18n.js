@@ -91,6 +91,8 @@ const UI = {
     "blockchain tools": "outils blockchain",
     // albums
     favorites: "favoris",
+    album: "album",
+    albums: "albums",
     language: "langue",
     english: "anglais",
     french: "français",
