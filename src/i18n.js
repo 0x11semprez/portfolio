@@ -97,6 +97,7 @@ const UI = {
     english: "anglais",
     french: "français",
     latino: "latino",
+    other: "autre",
     novoices: "sans voix",
     "open on spotify": "ouvrir sur spotify",
     back: "retour",

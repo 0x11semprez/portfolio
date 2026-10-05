@@ -2,8 +2,9 @@
 // automatically (no API key). Or set `cover` to a local file in
 // public/images/albums/ to override. `spotify: null` when the album isn't on
 // Spotify: the link icon goes grey and `cover` must be set.
-// language: one of ALBUM_LANGUAGES, spelled exactly the same (the filter matches on it)
-export const ALBUM_LANGUAGES = ["english", "french", "latino", "novoices"];
+// language: one of ALBUM_LANGUAGES, spelled exactly the same (the filter matches on it).
+// "other": sung in another language (Japanese, Korean, Arabic…)
+export const ALBUM_LANGUAGES = ["english", "french", "latino", "other", "novoices"];
 
 export const ALBUMS = [
   {
