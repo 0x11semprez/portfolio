@@ -7,38 +7,11 @@ import { ALBUMS } from "../data/albums";
 import { SECRET_ALBUM } from "../data/secretAlbum";
 import { useT } from "../i18n";
 
-// Easter egg: an album by SECRET_ALBUM.door is a hidden door. One tap opens
-// it as usual (a beat later); 3 quick taps (each within 400ms of the last)
-// open the hidden album instead.
-function useDoor(album) {
-  const navigate = useNavigate();
-  const taps = useRef({ n: 0, timer: 0 });
-  useEffect(() => () => clearTimeout(taps.current.timer), []);
-  if (album.artist !== SECRET_ALBUM.door) return undefined;
-  return (e) => {
-    e.preventDefault();
-    const t = taps.current;
-    clearTimeout(t.timer);
-    t.n += 1;
-    if (t.n >= 3) {
-      t.n = 0;
-      navigate(`/album/${SECRET_ALBUM.slug}`);
-      return;
-    }
-    t.timer = setTimeout(() => {
-      t.n = 0;
-      navigate(`/album/${album.slug}`);
-    }, 400);
-  };
-}
-
 function AlbumTile({ album, dark }) {
   const { src, srcSet } = useSpotifyCover(album.spotify, album.cover);
-  const door = useDoor(album);
   return (
     <Tile
       to={`/album/${album.slug}`}
-      onClick={door}
       image={src}
       srcSet={srcSet}
       // 2 columns on phones, 3 from md
@@ -105,6 +78,16 @@ export default function Albums({ dark = false }) {
     const l = load("albums-letter", "all");
     return LETTERS.includes(l) ? l : "all";
   });
+  // Easter egg: 3 quick taps on the album count (each within a second of
+  // the last) open my own album, hidden from the grid
+  const navigate = useNavigate();
+  const taps = useRef({ n: 0, at: 0 });
+  const tap = () => {
+    const now = Date.now();
+    const n = now - taps.current.at < 1000 ? taps.current.n + 1 : 1;
+    taps.current = { n, at: now };
+    if (n >= 3) navigate(`/album/${SECRET_ALBUM.slug}`);
+  };
   const list = at === "all" ? SORTED : SORTED.filter((a) => letter(a.title) === at);
 
   // before the first paint, so the grid never flashes at the top
@@ -154,9 +137,10 @@ export default function Albums({ dark = false }) {
           </button>
         ))}
       </nav>
-      {/* how many albums the letter shows */}
+      {/* how many albums the letter shows (and the easter egg's door) */}
       <p
-        className={`pb-10 text-center text-sm sm:text-base uppercase tracking-wide ${
+        onClick={tap}
+        className={`pb-10 select-none text-center text-sm sm:text-base uppercase tracking-wide ${
           dark ? "text-white" : "text-black"
         }`}
       >

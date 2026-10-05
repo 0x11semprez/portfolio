@@ -1,11 +1,10 @@
-// The easter egg: my own album. It isn't in the grid; tapping an album by
-// `door` 3 times in a row on the albums page opens it. The tracks play in this order,
+// The easter egg: my own album. It isn't in the grid; tapping the album
+// count on the albums page 3 times in a row opens it. The tracks play in this order,
 // one after the other. Files in public/audio/neverforgetloyalty/.
 const DIR = "/audio/neverforgetloyalty";
 
 export const SECRET_ALBUM = {
   slug: "neverforgetloyalty",
-  door: "Rahlff",
   artist: "UNKNOWN",
   title: "NEVERFORGETLOYALTY",
   cover: "/images/albums/neverforgetloyalty.jpg",
