@@ -8,7 +8,7 @@ import { SECRET_ALBUM } from "../data/secretAlbum";
 import { useT } from "../i18n";
 
 // Easter egg: an album by SECRET_ALBUM.door is a hidden door. One tap opens
-// it as usual (a beat later); 7 quick taps (each within 400ms of the last)
+// it as usual (a beat later); 3 quick taps (each within 400ms of the last)
 // open the hidden album instead.
 function useDoor(album) {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function useDoor(album) {
     const t = taps.current;
     clearTimeout(t.timer);
     t.n += 1;
-    if (t.n >= 7) {
+    if (t.n >= 3) {
       t.n = 0;
       navigate(`/album/${SECRET_ALBUM.slug}`);
       return;

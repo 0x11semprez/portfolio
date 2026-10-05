@@ -1,5 +1,5 @@
 // The easter egg: my own album. It isn't in the grid; tapping an album by
-// `door` 7 times in a row on the albums page opens it. The tracks play in this order,
+// `door` 3 times in a row on the albums page opens it. The tracks play in this order,
 // one after the other. Files in public/audio/neverforgetloyalty/.
 const DIR = "/audio/neverforgetloyalty";
 
