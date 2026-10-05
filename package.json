@@ -15,7 +15,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "smoke": "node scripts/smoke.js",
-    "covers": "node scripts/covers.js"
+    "covers": "node scripts/covers.js",
+    "github": "node scripts/github.js"
   },
   "browserslist": {
     "production": [
