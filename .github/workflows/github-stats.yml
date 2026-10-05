@@ -1,0 +1,37 @@
+# Refreshes the GitHub contribution count on the stacks page every day:
+# runs scripts/github.js, commits src/data/github.json when the number
+# changed, and the push redeploys the site on Vercel.
+# Needs the repo secret GH_STATS_TOKEN: a personal access token (classic,
+# scope read:user) so the count includes private contributions.
+name: GitHub stats
+
+on:
+  schedule:
+    - cron: "17 5 * * *" # every day, 05:17 UTC
+  workflow_dispatch: # and by hand, from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch the contribution count
+        run: node scripts/github.js
+        env:
+          GH_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
+
+      - name: Commit it if it changed
+        run: |
+          git diff --quiet src/data/github.json && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(stacks): refresh GitHub contributions" src/data/github.json
+          git push

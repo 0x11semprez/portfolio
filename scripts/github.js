@@ -1,7 +1,9 @@
 // Fetches my GitHub contribution count for the last 12 months (the number on
 // my GitHub profile, private contributions included) once, at build time, so
 // the stacks page needs no token and makes no request.
-// Writes src/data/github.json. Needs the GitHub CLI, logged in. Run: npm run github
+// Writes src/data/github.json. Needs the GitHub CLI, logged in (or GH_TOKEN
+// set). Run: npm run github. A daily GitHub Action runs it too
+// (.github/workflows/github-stats.yml).
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
