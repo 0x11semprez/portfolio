@@ -1,18 +1,12 @@
-import { useState } from "react";
 import Grid from "../components/Grid";
 import Tile from "../components/Tile";
-import Filters from "../components/Filters";
-import { STACKS, STACK_CATEGORIES, stackCategories } from "../data/stacks";
+import { STACKS } from "../data/stacks";
 import GITHUB from "../data/github.json";
 import { useT } from "../i18n";
 
+// Every stack in one grid, no filters.
 export default function Stacks() {
-  const [cat, setCat] = useState("all");
   const t = useT();
-  const list =
-    cat === "all"
-      ? STACKS
-      : STACKS.filter((s) => stackCategories(s).includes(cat));
 
   return (
     <>
@@ -26,9 +20,8 @@ export default function Stacks() {
           {t("contributions on github in the last 12 months")}
         </p>
       </div>
-      <Filters options={STACK_CATEGORIES} value={cat} onChange={setCat} />
       <Grid cols={6}>
-        {list.map((s) => (
+        {STACKS.map((s) => (
           <Tile
             key={s.slug}
             to={`/stacks/${s.slug}`}
