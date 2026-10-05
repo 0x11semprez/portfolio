@@ -11,10 +11,14 @@ import { useT } from "../i18n";
 // page (body, browser chrome) that colour, so a project page keeps the
 // universe of the slide it was opened from. `dark`: the page is on a dark
 // background (the video, or a dark `bg`), so the text and links go white.
+// `stacked`: one column, like a GitHub README: the image centered on top,
+// the text under it. `centered`: stacked, and the text centered too.
+// `accent`: colour for the title and the labels (an album's cover accent).
 const RATIO = {
   square: "aspect-square",
   portrait: "aspect-[2/3]",
   wide: "aspect-[16/10]",
+  tall: "aspect-[3/4]",
 };
 
 export default function Detail({
@@ -30,7 +34,11 @@ export default function Detail({
   children,
   bg = null,
   dark = false,
+  stacked = false,
+  centered = false,
+  accent = null,
 }) {
+  stacked = stacked || centered;
   useEffect(() => {
     if (!bg) return;
     const meta = document.querySelector('meta[name="theme-color"]');
@@ -47,35 +55,50 @@ export default function Detail({
   }, [bg]);
 
   const t = useT();
-  const hover = dark ? "hover:text-white" : "hover:text-black";
+  // one colour everywhere: labels bold, values regular, no grey
   return (
     <div
       className={`px-5 sm:px-10 pb-24 transition-colors ${dark ? "text-white" : ""}`}
+      style={accent ? { "--accent": accent } : undefined}
     >
       <Link
         to={back}
         aria-label={t("back")}
-        className={`inline-flex p-2 -m-2 text-neutral-400 ${hover} transition-colors`}
+        className="inline-flex p-2 -m-2 hover:scale-110 transition-transform"
       >
         <Icon name="back" label={t("back")} className="h-7 w-7 sm:h-8 sm:w-8" />
       </Link>
 
-      <div className="mt-6 sm:mt-8 grid md:grid-cols-2 gap-8 md:gap-16">
+      <div
+        className={`mt-6 sm:mt-8 ${
+          stacked
+            ? "mx-auto max-w-2xl flex flex-col gap-10 sm:gap-14"
+            : "grid md:grid-cols-2 gap-8 md:gap-16"
+        }`}
+      >
         <div
-          className={`md:[@media(min-height:600px)]:sticky md:top-[calc(6rem+env(safe-area-inset-top))] self-start w-full mx-auto md:[@media(min-height:600px)]:max-w-none ${
-            // phones (and any screen under 600px tall): logos (contain) don't
-            // need a full-width square, and in landscape neither does a cover
-            // (70vh cap). Sticky only when the whole image fits on screen.
-            imageFit === "contain" && imageInset
-              ? "max-w-[min(20rem,70vh)]"
-              : "max-w-[min(24rem,70vh)]"
-          }`}
+          className={
+            stacked && imageFit !== "cover"
+              ? // a logo: as big as on its slide, wider than the text column
+                // (self-center keeps it centered when it overflows)
+                "w-[min(calc(100vw-2.5rem),60rem)] self-center"
+              : stacked
+              ? "w-full"
+              : `md:[@media(min-height:600px)]:sticky md:top-[calc(6rem+env(safe-area-inset-top))] self-start w-full mx-auto md:[@media(min-height:600px)]:max-w-none ${
+                  // phones (and any screen under 600px tall): logos (contain) don't
+                  // need a full-width square, and in landscape neither does a cover
+                  // (70vh cap). Sticky only when the whole image fits on screen.
+                  imageFit === "contain" && imageInset
+                    ? "max-w-[min(20rem,70vh)]"
+                    : "max-w-[min(24rem,70vh)]"
+                }`
+          }
         >
           {/* cover: a fixed-ratio box. contain: the box hugs the image, so
               the gap to the text is the grid's own, same on every page */}
           <div
             className={`w-full flex items-center justify-center overflow-hidden ${
-              imageFit === "cover" ? RATIO[imageRatio] : ""
+              imageFit === "cover" && !stacked ? RATIO[imageRatio] : ""
             }`}
           >
             {image ? (
@@ -83,19 +106,26 @@ export default function Detail({
                 src={image}
                 alt={imageAlt || title}
                 className={
-                  imageFit === "cover"
-                    ? "h-full w-full object-cover object-top"
-                    : imageInset
-                      ? "max-h-48 max-w-48 md:max-h-80 md:max-w-80 object-contain"
-                      : "max-h-[45dvh] md:max-h-[60vh] w-full object-contain"
+                  stacked && imageFit === "cover"
+                    ? `${RATIO[imageRatio]} w-full object-cover shadow-2xl ${
+                        // the cover's height stays under about 60vh
+                        imageRatio === "tall"
+                          ? "max-w-[min(30rem,45vh)]"
+                          : "max-w-[min(30rem,60vh)]"
+                      }`
+                    : stacked
+                    ? "w-full h-auto max-h-[52vh] object-contain"
+                    : imageFit === "cover"
+                      ? "h-full w-full object-cover object-top"
+                      : imageInset
+                        ? "max-h-48 max-w-48 md:max-h-80 md:max-w-80 object-contain"
+                        : "max-h-[45dvh] md:max-h-[60vh] w-full object-contain"
                 }
               />
             ) : (
               <div
                 className={`h-full w-full flex items-center justify-center px-2 text-center text-sm sm:text-base uppercase ${
-                  dark
-                    ? "bg-white/10 text-white/60"
-                    : "bg-neutral-100 text-neutral-400"
+                  dark ? "bg-white/10 text-white" : "bg-neutral-100 text-black"
                 }`}
               >
                 {title}
@@ -104,8 +134,16 @@ export default function Detail({
           </div>
         </div>
 
-        <div className="max-w-md">
-          <h1 className="flex items-center gap-3 text-lg sm:text-xl font-bold uppercase tracking-wide">
+        <div
+          className={
+            centered ? "w-full text-center" : stacked ? "w-full" : "max-w-md"
+          }
+        >
+          <h1
+            className={`flex items-center gap-3 text-lg sm:text-xl font-bold uppercase tracking-wide text-[color:var(--accent,currentColor)] ${
+              centered ? "justify-center" : ""
+            }`}
+          >
             {title}
             {action &&
               (action.href ? (
@@ -114,7 +152,7 @@ export default function Detail({
                   target="_blank"
                   rel="noopener noreferrer"
                   title={action.label}
-                  className="inline-flex p-3 -m-3 hover:text-neutral-400 transition-colors"
+                  className="inline-flex p-3 -m-3 hover:scale-110 transition-transform"
                 >
                   <Icon
                     name={action.icon}
@@ -126,7 +164,7 @@ export default function Detail({
                 <span
                   title={action.label}
                   aria-disabled="true"
-                  className="inline-flex p-3 -m-3 text-neutral-300"
+                  className="inline-flex p-3 -m-3 cursor-not-allowed"
                 >
                   <Icon
                     name={action.icon}
@@ -137,9 +175,7 @@ export default function Detail({
               ))}
           </h1>
           {subtitle && (
-            <p className="mt-1 text-base sm:text-lg uppercase text-neutral-400">
-              {subtitle}
-            </p>
+            <p className="mt-1 text-base sm:text-lg uppercase">{subtitle}</p>
           )}
 
           <div className="mt-10 space-y-8 text-base sm:text-lg leading-relaxed">
@@ -155,7 +191,7 @@ export default function Detail({
 export function Block({ label, children }) {
   return (
     <section>
-      <h2 className="text-sm sm:text-base font-bold uppercase text-neutral-400 mb-2">
+      <h2 className="text-sm sm:text-base font-bold uppercase mb-2 text-[color:var(--accent,currentColor)]">
         {label}
       </h2>
       <div className="space-y-3">{children}</div>
@@ -163,13 +199,19 @@ export function Block({ label, children }) {
   );
 }
 
-// key / value rows
-export function Specs({ rows }) {
+// key / value rows. `centered`: each row "KEY value" centered on its own.
+export function Specs({ rows, centered = false }) {
   return (
-    <dl className="grid grid-cols-[6rem_1fr] sm:grid-cols-[7rem_1fr] gap-y-1 text-sm sm:text-base uppercase">
+    <dl
+      className={`text-sm sm:text-base uppercase ${
+        centered
+          ? "flex flex-col items-center gap-y-1"
+          : "grid grid-cols-[6rem_1fr] sm:grid-cols-[7rem_1fr] gap-y-1"
+      }`}
+    >
       {rows.map(([k, v]) => (
-        <div key={k} className="contents">
-          <dt className="text-neutral-400">{k}</dt>
+        <div key={k} className={centered ? "flex gap-3" : "contents"}>
+          <dt className="font-bold text-[color:var(--accent,currentColor)]">{k}</dt>
           <dd>{v}</dd>
         </div>
       ))}

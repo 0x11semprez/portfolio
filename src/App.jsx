@@ -9,6 +9,7 @@ import Stacks from "./pages/Stacks";
 import StackDetail from "./pages/StackDetail";
 import Albums from "./pages/Albums";
 import AlbumDetail from "./pages/AlbumDetail";
+import SecretAlbum from "./pages/SecretAlbum";
 import useVideoMode from "./components/useVideoMode";
 import BackgroundVideo from "./components/BackgroundVideo";
 import { PROFILE } from "./data/profile";
@@ -30,10 +31,14 @@ export default function App() {
     pathname === "/projects"
       ? PROJECTS[screen - 1]
       : PROJECTS.find((p) => pathname === `/projects/${p.slug}`);
-  const dark = (on && videoPage) || project?.ink === "#fff";
+  // an album page paints itself its cover's main colour, the bar follows
+  const [album, setAlbum] = useState(null);
+  const theme = project || (pathname.startsWith("/album/") ? album : null);
+  const dark = (on && videoPage) || theme?.ink === "#fff";
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // the album grid puts itself back where you left it (Albums.jsx)
+    if (pathname !== "/album") window.scrollTo(0, 0);
     setMenuOpen(false);
   }, [pathname]);
 
@@ -43,7 +48,7 @@ export default function App() {
         menuOpen={menuOpen}
         onToggleMenu={() => setMenuOpen((o) => !o)}
         dark={dark && !menuOpen}
-        bg={project && !menuOpen ? project.bg : null}
+        bg={theme && !menuOpen ? theme.bg : null}
         video={
           hasVideo && videoPage
             ? { on: videoMode === true, toggle: () => setVideoMode((m) => !m) }
@@ -72,7 +77,14 @@ export default function App() {
           <Route path="/stacks" element={<Stacks />} />
           <Route path="/stacks/:slug" element={<StackDetail />} />
           <Route path="/album" element={<Albums />} />
-          <Route path="/album/:slug" element={<AlbumDetail />} />
+          <Route
+            path="/album/neverforgetloyalty"
+            element={<SecretAlbum onTheme={setAlbum} />}
+          />
+          <Route
+            path="/album/:slug"
+            element={<AlbumDetail onTheme={setAlbum} />}
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

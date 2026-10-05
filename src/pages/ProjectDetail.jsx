@@ -2,6 +2,7 @@ import { useParams, Navigate } from "react-router-dom";
 import Detail, { Block, Specs } from "../components/Detail";
 import { PROJECTS } from "../data/projects";
 import { useT, useTx } from "../i18n";
+import bold from "../components/bold";
 
 export default function ProjectDetail() {
   const { slug } = useParams();
@@ -17,20 +18,21 @@ export default function ProjectDetail() {
       imageFit="contain"
       imageRatio="square"
       imageInset={false}
+      centered
       bg={p.bg}
       dark={p.ink === "#fff"}
       title={p.name}
       subtitle={tx(p.category)}
       action={{ href: p.link, icon: "github", label: t(p.linkLabel) }}
     >
-      <p className="italic opacity-70">{tx(p.tagline)}</p>
+      <p className="italic">{tx(p.tagline)}</p>
       <Block label={t("about")}>
         {tx(p.description).map((d, i) => (
-          <p key={i}>{d}</p>
+          <p key={i}>{bold(d)}</p>
         ))}
       </Block>
       <Block label={t("details")}>
-        <Specs rows={p.details.map(([k, v]) => [t(k), t(v)])} />
+        <Specs centered rows={p.details.map(([k, v]) => [t(k), t(v)])} />
       </Block>
     </Detail>
   );

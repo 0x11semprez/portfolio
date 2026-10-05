@@ -147,9 +147,7 @@ def main():
         json.dump({"w": W, "h": H, "eyes": out}, fh, separators=(",", ":"))
     print(f"{len(eyes)} eyes, {W}x{H}")
 
-    # the wordmark keeps room around it, it fills the project page's image box
-    word = np.array(Image.open(os.path.join(HERE, "wordmark.png")).convert("L")).astype(float)
-    word = trim(word, pad=word.shape[1] // 10)
+    word = trim(np.array(Image.open(os.path.join(HERE, "wordmark.png")).convert("L")).astype(float))
     save(word, "ophobia-detail.png")
 
 

@@ -8,7 +8,16 @@ module.exports = {
     fontFamily: {
       sans: ['"YDMyungjo"', '"Nanum Myeongjo"', "serif"],
     },
-    extend: {},
+    extend: {
+      // one letter of a wavy line: up and down on an eased (sine-like) curve
+      keyframes: {
+        wave: {
+          "0%, 100%": { transform: "translateY(0.12em)" },
+          "50%": { transform: "translateY(-0.12em)" },
+        },
+      },
+      animation: { wave: "wave 1.6s ease-in-out infinite" },
+    },
   },
   plugins: [],
 };

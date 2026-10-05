@@ -31,8 +31,11 @@ export default function Menu({ open, onClose }) {
               end={s.path === "/"}
               onClick={onClose}
               className={({ isActive }) =>
-                `uppercase text-[min(15vh,22vw)] leading-none font-bold tracking-tight text-center ${
-                  isActive ? "text-black" : "text-neutral-300 hover:text-black"
+                `uppercase text-[min(15vh,22vw)] leading-none tracking-tight text-center text-black ${
+                  // one colour: the page you're on bold, the others regular
+                  isActive
+                    ? "font-bold"
+                    : "font-normal hover:underline underline-offset-8"
                 }`
               }
             >
@@ -51,7 +54,7 @@ export default function Menu({ open, onClose }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   title={c.label}
-                  className="p-2 -m-2 text-black hover:text-neutral-400 transition-colors"
+                  className="p-2 -m-2 text-black hover:scale-110 transition-transform"
                 >
                   <Icon name={c.icon} label={c.label} />
                 </a>
@@ -60,7 +63,7 @@ export default function Menu({ open, onClose }) {
                   key={c.label}
                   onClick={() => copy(c.value, c.label)}
                   title={`${c.label}: ${c.value}`}
-                  className="p-2 -m-2 text-black hover:text-neutral-400 transition-colors"
+                  className="p-2 -m-2 text-black hover:scale-110 transition-transform"
                 >
                   <Icon name={c.icon} label={c.label} />
                 </button>
@@ -68,7 +71,7 @@ export default function Menu({ open, onClose }) {
             )}
           </div>
           <span
-            className="text-xs uppercase text-neutral-400 transition-opacity"
+            className="text-xs uppercase text-black transition-opacity"
             style={{ opacity: copied ? 1 : 0 }}
           >
             {t("copied")}

@@ -5,21 +5,24 @@ import { useT } from "../i18n";
 // Filter row (album language, stack category), styled like yeezy's MALE / FEMALE switch.
 // On phones the row doesn't fit, so it becomes a dropdown: the current choice
 // with the menu's chevron turned downwards, tap it and the other options list underneath.
-// `dark`: the page is showing the background video, so the active option is white.
+// `dark`: the page is showing the background video, so the row is white.
 export default function Filters({ options, value, onChange, dark = false }) {
   const [open, setOpen] = useState(false);
   const t = useT(); // options are ids ("all", "languages"…), shown translated
   const all = ["all", ...options];
-  const active = dark ? "text-white" : "text-black";
-  const idle = dark
-    ? "text-neutral-400 hover:text-white"
-    : "text-neutral-400 hover:text-black";
+  // one colour: the current option bold, the others regular
+  const active = "font-bold";
+  const idle = "font-normal hover:underline underline-offset-4";
   const pick = (o) => {
     onChange(o);
     setOpen(false);
   };
   return (
-    <div className="px-5 pb-10 text-base sm:text-lg uppercase tracking-wide">
+    <div
+      className={`px-5 pb-10 text-base sm:text-lg uppercase tracking-wide ${
+        dark ? "text-white" : "text-black"
+      }`}
+    >
       {/* phones: dropdown */}
       <div className="sm:hidden flex flex-col items-center">
         <button

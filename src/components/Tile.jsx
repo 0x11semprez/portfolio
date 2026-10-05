@@ -18,9 +18,10 @@ export default function Tile({
   ratio = "square",
   fit = "contain",
   dark = false,
+  onClick,
 }) {
   return (
-    <Link to={to} className="group flex flex-col items-center">
+    <Link to={to} onClick={onClick} className="group flex flex-col items-center">
       <div
         className={`w-full ${RATIO[ratio]} flex items-center justify-center overflow-hidden`}
       >
@@ -40,9 +41,7 @@ export default function Tile({
         ) : (
           <div
             className={`h-full w-full flex items-center justify-center px-2 text-center text-sm sm:text-base uppercase ${
-              dark
-                ? "bg-white/10 text-white/60"
-                : "bg-neutral-100 text-neutral-400"
+              dark ? "bg-white/10 text-white" : "bg-neutral-100 text-black"
             }`}
           >
             {sublabel || label}
@@ -57,7 +56,11 @@ export default function Tile({
         {label}
       </p>
       {sublabel && (
-        <p className="mt-1 text-sm sm:text-base uppercase text-neutral-400 text-center">
+        <p
+          className={`mt-1 text-sm sm:text-base uppercase text-center ${
+            dark ? "text-white" : ""
+          }`}
+        >
           {sublabel}
         </p>
       )}

@@ -1,12 +1,16 @@
+import { LISTENED } from "./albumsListened";
+
 // Albums. Paste the Spotify album URL in `spotify` and the cover loads
 // automatically (no API key). Or set `cover` to a local file in
 // public/images/albums/ to override. `spotify: null` when the album isn't on
 // Spotify: the link icon goes grey and `cover` must be set.
-// language: one of ALBUM_LANGUAGES, spelled exactly the same (the filter matches on it).
+// language: one of ALBUM_LANGUAGES, spelled exactly the same (shown, translated,
+// on the album page).
 // "other": sung in another language (Japanese, Korean, Arabic…)
 export const ALBUM_LANGUAGES = ["english", "french", "latino", "other", "novoices"];
 
-export const ALBUMS = [
+// The hand-picked albums. ALBUMS (below) adds the listening history to them.
+const PICKED = [
   {
     slug: "die-lit",
     artist: "Playboi Carti",
@@ -97,8 +101,8 @@ export const ALBUMS = [
     title: "13 Samson",
     year: 2026,
     language: "french",
-    spotify: null,
-    cover: "/images/albums/13-samson.jpg",
+    spotify: "https://open.spotify.com/album/7IHdXxQ0mt6JJSMMEJfS0D",
+    cover: null,
     favorites: [
       { title: "Brigitte", spotify: "" },
       { title: "Tu crois c'est un jeu la guedro", spotify: "" },
@@ -167,8 +171,8 @@ export const ALBUMS = [
     title: "monoxyde",
     year: 2025,
     language: "french",
-    spotify: null,
-    cover: "/images/albums/monoxyde.jpg",
+    spotify: "https://open.spotify.com/album/41aYvPkIld2dV4YUzgGWoS",
+    cover: null,
     favorites: [
       { title: "Monoxyde", spotify: "" },
     ],
@@ -179,8 +183,8 @@ export const ALBUMS = [
     title: "iMONSTER",
     year: 2025,
     language: "french",
-    spotify: null,
-    cover: "/images/albums/imonster.jpg",
+    spotify: "https://open.spotify.com/album/2SBFtGFI94eANfOufrfRlL",
+    cover: null,
     favorites: [
       { title: "Rêve pas", spotify: "" },
       { title: "MAVIECTROPDLAMERDE", spotify: "" },
@@ -594,8 +598,8 @@ export const ALBUMS = [
     title: "Hood",
     year: 2025,
     language: "french",
-    spotify: null,
-    cover: "/images/albums/hood.jpg",
+    spotify: "https://open.spotify.com/album/4f3ioscXiYqj2x92O2isxx",
+    cover: null,
     favorites: [
       { title: "Météo", spotify: "" },
     ],
@@ -606,8 +610,8 @@ export const ALBUMS = [
     title: "Captain Freeza",
     year: 2026,
     language: "french",
-    spotify: null,
-    cover: "/images/albums/captain-freeza.jpg",
+    spotify: "https://open.spotify.com/album/2T02CC9RSrST6GQDHTspql",
+    cover: null,
     favorites: [
       { title: "Outro", spotify: "" },
       { title: "Éléphant", spotify: "" },
@@ -2894,4 +2898,21 @@ export const ALBUMS = [
       { title: "EXTENDO", spotify: "" },
     ],
   },
+  {
+    slug: "misunderstood",
+    artist: "Yung Bans",
+    title: "MISUNDERSTOOD",
+    year: 2019,
+    language: "english",
+    spotify: "https://open.spotify.com/album/6UGajHeNjVlZN2I9LJhT2l",
+    cover: null,
+    favorites: [
+      { title: "SOS", spotify: "https://open.spotify.com/track/1x9D30vekbYI3Ne14zgTXG" },
+      { title: "Going Bezurk", spotify: "https://open.spotify.com/track/1XHI9VslTKzp5vsKd8AASV" },
+      { title: "Ready Set Go (feat. 03 Greedo & XXXTENTACION)", spotify: "https://open.spotify.com/track/5Iz8Iz5jdWwW95JusFxGrC" },
+    ],
+  },
 ];
+
+// what the album page shows: the hand-picked ones, then the history
+export const ALBUMS = [...PICKED, ...LISTENED];

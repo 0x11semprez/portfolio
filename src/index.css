@@ -4,6 +4,13 @@
 
 html {
   -webkit-font-smoothing: antialiased;
+  /* no grey box flashing over a tapped link (a whole slide is one) */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* the focus ring only for the keyboard, not after a tap or a click */
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* Every size in the layout is rem-based, so above 1920px the root font size
@@ -17,6 +24,8 @@ html {
 
 body {
   @apply bg-white text-black font-sans;
+  /* project and album pages repaint it: fade, don't flash */
+  transition: background-color 300ms ease;
 }
 
 ::selection {

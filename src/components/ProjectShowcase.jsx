@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Icon from "./Icon";
 import OphobiaEyes from "./OphobiaEyes";
+import WavyText from "./WavyText";
 import { useTx } from "../i18n";
 
 // Full-screen showcase as a vertical slider, no page scroll at all:
@@ -23,7 +24,9 @@ import { useTx } from "../i18n";
 // under iOS Safari's floating toolbar, a bottom offset would hide it there.
 
 const STEP = 700; // ms, the slide transition
-const LOGO = "max-h-[24vh] sm:max-h-[36vh] max-w-full h-auto w-auto";
+// every logo big, at one width, the same as on its project page
+// (Detail.jsx); the height cap keeps the tagline on screen
+const LOGO = "w-[min(100%,60rem)] h-auto max-h-[52vh] object-contain";
 
 export default function ProjectShowcase({ projects, intro, onScreen }) {
   const { hash } = useLocation();
@@ -144,7 +147,7 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
             )}
             <div className="mt-8 sm:mt-12 text-center">
               <p className="mx-auto max-w-2xl text-base sm:text-2xl leading-snug">
-                {tx(p.tagline)}
+                {p.wave ? <WavyText text={tx(p.tagline)} /> : tx(p.tagline)}
               </p>
               <p className="mt-3 sm:mt-4 text-xs sm:text-base uppercase tracking-wide">
                 {tx(p.category)}
@@ -161,7 +164,7 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
             ? { en: "back to top", fr: "retour en haut" }
             : { en: "next project", fr: "projet suivant" },
         )}
-        className="absolute inset-x-0 top-[calc(100vh-4.5rem)] supports-[height:100dvh]:top-[calc(100dvh-4.5rem-env(safe-area-inset-bottom))] mx-auto flex h-12 w-12 items-center justify-center transition-colors hover:opacity-60 motion-safe:animate-bounce"
+        className="absolute inset-x-0 top-[calc(100vh-4.5rem)] supports-[height:100dvh]:top-[calc(100dvh-4.5rem-env(safe-area-inset-bottom))] mx-auto flex h-12 w-12 items-center justify-center transition-colors motion-safe:animate-bounce"
         style={{ color: ink }}
       >
         <Icon

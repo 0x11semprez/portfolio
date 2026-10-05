@@ -135,7 +135,9 @@ function VideoPrompt({ credit, onChoose }) {
               onClick={() => setLang(l)}
               aria-pressed={l === lang}
               className={`px-4 py-3 -my-3 transition-colors ${
-                l === lang ? "text-black" : "text-neutral-400 hover:text-black"
+                l === lang
+                  ? "font-bold"
+                  : "font-normal hover:underline underline-offset-4"
               }`}
             >
               {l}
@@ -159,20 +161,20 @@ function VideoPrompt({ credit, onChoose }) {
         <div className="mt-6 flex justify-center gap-2 uppercase tracking-wide font-bold">
           <button
             onClick={() => onChoose(true)}
-            className="px-3 py-2 hover:text-neutral-400 transition-colors"
+            className="px-3 py-2 hover:underline underline-offset-4"
           >
             {t.yes}
           </button>
           <button
             onClick={() => onChoose(false)}
-            className="px-3 py-2 text-neutral-400 hover:text-black transition-colors"
+            className="px-3 py-2 font-normal hover:underline underline-offset-4"
           >
             {t.no}
           </button>
         </div>
 
         {credit && (
-          <p className="mt-8 text-sm sm:text-base text-neutral-400">
+          <p className="mt-8 text-sm sm:text-base">
             {t.credit(
               <a
                 href={credit.url}

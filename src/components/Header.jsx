@@ -3,7 +3,7 @@ import { LANGS, useLang, useT } from "../i18n";
 
 // `dark`: the page behind is showing the background video, so the bar goes
 // transparent and the icons white. Top right: the EN / FR language switch
-// (the active one in the bar's colour, the other grey, same look as the
+// (one colour: the active one bold, the other regular, same look as the
 // video prompt's picker), then `video` = { on, toggle }, the play / pause
 // button for the profile page's background video (null when the page has
 // none). The << is 44px (48px from sm), p-2 -m-2 pads the touch target
@@ -19,13 +19,10 @@ export default function Header({
 }) {
   const [lang, setLang] = useLang();
   const t = useT();
-  const color = dark
-    ? "text-white hover:text-neutral-400"
-    : "text-black hover:text-neutral-400";
-  const active = dark ? "text-white" : "text-black";
-  const idle = dark
-    ? "text-neutral-400 hover:text-white"
-    : "text-neutral-400 hover:text-black";
+  // no grey anywhere: icons grow a little on hover
+  const color = `${dark ? "text-white" : "text-black"} hover:scale-110`;
+  const active = "font-bold";
+  const idle = "font-normal hover:underline underline-offset-4";
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 h-[calc(4rem+env(safe-area-inset-top))] pt-[env(safe-area-inset-top)] transition-colors ${
@@ -38,7 +35,7 @@ export default function Header({
         <button
           onClick={onToggleMenu}
           aria-label={t(menuOpen ? "close menu" : "open menu")}
-          className={`flex items-center justify-center p-2 -m-2 transition-colors ${color}`}
+          className={`flex items-center justify-center p-2 -m-2 transition-transform ${color}`}
         >
           {/* << like the C++ stream operator; flips to >> while the menu is open */}
           <Icon
@@ -52,7 +49,11 @@ export default function Header({
 
         {/* one row, one baseline: EN, FR and play / pause are spaced alike
             (px-2 each) and the icon is exactly as tall as the capitals */}
-        <div className="flex items-baseline text-xl sm:text-2xl font-bold leading-none tracking-tight">
+        <div
+          className={`flex items-baseline text-xl sm:text-2xl leading-none tracking-tight ${
+            dark ? "text-white" : "text-black"
+          }`}
+        >
           {LANGS.map((l) => (
             <button
               key={l}
@@ -72,7 +73,7 @@ export default function Header({
                 video.on ? "pause background video" : "play background video",
               )}
               aria-pressed={video.on}
-              className={`px-2 py-2 transition-colors ${color}`}
+              className={`px-2 py-2 transition-transform ${color}`}
             >
               <Icon
                 name={video.on ? "pause" : "play"}
