@@ -76,6 +76,7 @@ const UI = {
     status: "statut",
     year: "année",
     active: "actif",
+    research: "recherche",
     // stacks
     "what it is": "ce que c'est",
     "how i use it": "comment je l'utilise",

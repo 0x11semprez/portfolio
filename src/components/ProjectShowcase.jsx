@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Icon from "./Icon";
+import OphobiaEyes from "./OphobiaEyes";
 import { useTx } from "../i18n";
 
 // Full-screen showcase as a vertical slider, no page scroll at all:
@@ -22,6 +23,7 @@ import { useTx } from "../i18n";
 // under iOS Safari's floating toolbar, a bottom offset would hide it there.
 
 const STEP = 700; // ms, the slide transition
+const LOGO = "max-h-[24vh] sm:max-h-[36vh] max-w-full h-auto w-auto";
 
 export default function ProjectShowcase({ projects, intro, onScreen }) {
   const { hash } = useLocation();
@@ -128,19 +130,18 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
         </section>
 
         {/* 2. one slide per project */}
-        {projects.map((p) => (
+        {projects.map((p, at) => (
           <Link
             key={p.slug}
             to={`/projects/${p.slug}`}
             className="flex h-full flex-col items-center justify-center px-5 sm:px-10 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))] pb-[env(safe-area-inset-bottom)]"
             style={{ backgroundColor: p.bg, color: p.ink || "#000" }}
           >
-            <img
-              src={p.image}
-              alt=""
-              aria-hidden
-              className="max-h-[24vh] sm:max-h-[36vh] max-w-full h-auto w-auto"
-            />
+            {p.slug === "ophobia" ? (
+              <OphobiaEyes active={i === at + 1} className={LOGO} />
+            ) : (
+              <img src={p.image} alt="" aria-hidden className={LOGO} />
+            )}
             <div className="mt-8 sm:mt-12 text-center">
               <p className="mx-auto max-w-2xl text-base sm:text-2xl leading-snug">
                 {tx(p.tagline)}
