@@ -15,7 +15,7 @@ const { execSync } = require("child_process");
 
 const ROOT = path.resolve(__dirname, "..");
 const PUBLIC = path.join(ROOT, "public");
-const PORT = 4173;
+const PORT = Number(process.env.PORT) || 4173; // PORT=4180 when 4173 is taken
 const BASE = `http://127.0.0.1:${PORT}`;
 
 // ---------------------------------------------------------------- playwright

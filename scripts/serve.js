@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-// Serves build/ like Vercel does (static files + SPA fallback + Range requests
-// for the video). Used by scripts/smoke.js; standalone: node scripts/serve.js 4173
+// Serves build/ like Vercel does (static files, a folder's index.html,
+// vercel.json's album rewrite, 404.html with a 404, Range requests for the
+// video). Used by scripts/smoke.js; standalone: node scripts/serve.js 4173
 const fs = require("fs");
 const path = require("path");
 const http = require("http");
@@ -25,13 +26,20 @@ function serve(port) {
   const server = http.createServer((req, res) => {
     const url = decodeURIComponent(req.url.split("?")[0]);
     let file = path.join(BUILD, url);
-    if (!file.startsWith(BUILD) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) {
-      // SPA fallback, like vercel.json's rewrite
+    let status = 200;
+    if (file.startsWith(BUILD) && fs.existsSync(file) && fs.statSync(file).isDirectory())
+      file = path.join(file, "index.html");
+    if (!file.startsWith(BUILD) || !fs.existsSync(file)) {
       if (path.extname(url)) {
         res.writeHead(404);
         return res.end("not found");
       }
-      file = path.join(BUILD, "index.html");
+      // like vercel.json's rewrite, else Vercel's 404.html
+      if (url.startsWith("/album/")) file = path.join(BUILD, "album-shell.html");
+      else {
+        file = path.join(BUILD, "404.html");
+        status = 404;
+      }
     }
     const type = MIME[path.extname(file)] || "application/octet-stream";
     const size = fs.statSync(file).size;
@@ -47,7 +55,7 @@ function serve(port) {
       });
       return fs.createReadStream(file, { start, end }).pipe(res);
     }
-    res.writeHead(200, { "content-type": type, "content-length": size, "accept-ranges": "bytes" });
+    res.writeHead(status, { "content-type": type, "content-length": size, "accept-ranges": "bytes" });
     fs.createReadStream(file).pipe(res);
   });
   return new Promise((ok) => server.listen(port, "127.0.0.1", () => ok(server)));

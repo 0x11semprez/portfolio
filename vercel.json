@@ -1,5 +1,5 @@
 {
   "framework": "vite",
   "outputDirectory": "build",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [{ "source": "/album/:path*", "destination": "/album-shell.html" }]
 }
