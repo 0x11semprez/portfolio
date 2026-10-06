@@ -49,10 +49,10 @@ export const PROJECTS = [
   {
     slug: "ophobia",
     name: "ophobia",
-    category: { en: "privacy / networking / go", fr: "vie privée / réseau / go" },
+    category: { en: "privacy / networking / go / rust", fr: "vie privée / réseau / go / rust" },
     tagline: {
-      en: "a Loopix-style mixnet that hides network-level metadata from a global passive adversary",
-      fr: "un mixnet inspiré de Loopix qui cache les métadonnées réseau à un adversaire passif global",
+      en: "a privacy blockchain whose nodes talk through a Loopix-style mixnet, hiding network-level metadata from a global passive adversary",
+      fr: "une blockchain privée dont les nœuds communiquent à travers un mixnet inspiré de Loopix, qui cache les métadonnées réseau à un adversaire passif global",
     },
     image: "/images/projects/ophobia.png",
     detailImage: "/images/projects/ophobia-detail.png",
@@ -62,16 +62,20 @@ export const PROJECTS = [
     linkLabel: "view on github",
     description: {
       en: [
-        "The name comes from **scopophobia**, the intense fear of being watched. ophobia started as a **privacy-first blockchain**, co-designing the cryptographic, diffusion and network layers. We cut the scope down to **the mixnet**: the network layer, where today's privacy coins leak the most.",
-        "Designed after the **Loopix** paper: a stratified topology of mix nodes, **Poisson-distributed delays** at each hop, and **cover traffic** (loop and drop messages), so an adversary watching the whole internet can't link who talks to whom.",
+        "The name comes from **scopophobia**, the intense fear of being watched. Privacy coins hide amounts and addresses, but leak at **the network layer**: IP addresses, propagation timing and peer topology are enough to deanonymize a share of transactions. ophobia has two parts: **a mixnet** that hides that metadata, and **a Rust chain** (ring signatures, PoW, mempool) whose nodes gossip their blocks and transactions through it.",
+        "We're two. **I built the mixnet**, in Go, after the **Loopix** paper: clients, providers and a stratified topology of mix nodes, **Poisson-distributed delays** at each hop, and **cover traffic** (loop and drop messages), so an adversary watching the whole internet can't link who talks to whom.",
+        "A local **TCP bridge** plugs each chain node into its own mixnet client. Three nodes run over it and all end at the same height and tip.",
       ],
       fr: [
-        "Le nom vient de la **scopophobie**, la peur intense d'être observé. ophobia a commencé comme une **blockchain pensée pour la vie privée**, qui concevait ensemble les couches cryptographique, de diffusion et réseau. Nous avons réduit le périmètre **au mixnet** : la couche réseau, là où les privacy coins actuelles fuient le plus.",
-        "Conçu d'après le papier **Loopix** : une topologie de mix nodes en couches, des **délais tirés selon une loi de Poisson** à chaque saut, et du **trafic de couverture** (messages loop et drop), pour qu'un adversaire qui observe tout internet ne puisse pas relier qui parle à qui.",
+        "Le nom vient de la **scopophobie**, la peur intense d'être observé. Les privacy coins cachent les montants et les adresses, mais fuient par **la couche réseau** : adresses IP, timing de propagation et topologie des pairs suffisent à désanonymiser une partie des transactions. ophobia a deux parties : **un mixnet** qui cache ces métadonnées, et **une chaîne Rust** (ring signatures, PoW, mempool) dont les nœuds font circuler leurs blocs et transactions à travers lui.",
+        "Nous sommes deux. **J'ai construit le mixnet**, en Go, d'après le papier **Loopix** : clients, providers et une topologie de mix nodes en couches, des **délais tirés selon une loi de Poisson** à chaque saut, et du **trafic de couverture** (messages loop et drop), pour qu'un adversaire qui observe tout internet ne puisse pas relier qui parle à qui.",
+        "Un **bridge TCP** local branche chaque nœud de la chaîne sur son propre client mixnet. Trois nœuds lancés dessus finissent tous à la même hauteur, sur le même tip.",
       ],
     },
     details: [
-      ["stack", "go"],
+      ["role", "mixnet engineer"],
+      ["team", "2"],
+      ["stack", "go, rust"],
       ["status", "research"],
       ["year", "2026"],
     ],
