@@ -166,7 +166,8 @@ function setMeta(html, attr, key, value) {
 function render(template, page) {
   let html = template;
   const url = ORIGIN + page.url;
-  html = swap(html, /<title>[^<]*<\/title>/, `<title>${esc(page.title)}</title>`);
+  // <title> stays index.html's on every page: the tab never changes name.
+  // page.title only goes to link previews.
   html = setMeta(html, "name", "description", page.description);
   html = swap(html, /(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`);
   html = setMeta(html, "property", "og:url", url);
@@ -186,9 +187,8 @@ function render(template, page) {
 }
 
 // a page no search engine should list: no canonical, noindex
-function shell(template, title) {
-  let html = swap(template, /\s*<link rel="canonical"[^>]*>/, "");
-  html = swap(html, /<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`);
+function shell(template) {
+  const html = swap(template, /\s*<link rel="canonical"[^>]*>/, "");
   return html.replace("<head>", `<head>\n    <meta name="robots" content="noindex" />`);
 }
 
@@ -219,9 +219,9 @@ export default function seo() {
       }
       // the album pages: the listening history, personal, not what this
       // site is found for. One shell serves them all (vercel.json).
-      write(path.join(out, "album-shell.html"), shell(template, `Album | ${SITE}`));
+      write(path.join(out, "album-shell.html"), shell(template));
       // unknown URLs: a real 404 status, the app then sends you home
-      write(path.join(out, "404.html"), shell(template, SITE));
+      write(path.join(out, "404.html"), shell(template));
 
       const urls = list
         .map(

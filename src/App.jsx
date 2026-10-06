@@ -11,27 +11,12 @@ import useVideoMode from "./components/useVideoMode";
 import BackgroundVideo from "./components/BackgroundVideo";
 import { PROFILE } from "./data/profile";
 import { PROJECTS } from "./data/projects";
-import { STACKS } from "./data/stacks";
 
 // The album pages carry the whole listening history (~400 KB of data): they
 // load in their own chunk, only when one of them is opened.
 const Albums = lazy(() => import("./pages/Albums"));
 const AlbumDetail = lazy(() => import("./pages/AlbumDetail"));
 const SecretAlbum = lazy(() => import("./pages/SecretAlbum"));
-
-// The tab title (and what search results show) for each page.
-const SITE = "Kassim Traore-Semprez";
-function pageTitle(pathname) {
-  const [, section, slug] = pathname.split("/");
-  if (section === "projects" && slug)
-    return PROJECTS.find((p) => p.slug === slug)?.name;
-  if (section === "projects") return "projects";
-  if (section === "stacks" && slug)
-    return STACKS.find((s) => s.slug === slug)?.name;
-  if (section === "stacks") return "stacks";
-  if (section === "album") return "album";
-  return null;
-}
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -58,10 +43,6 @@ export default function App() {
     // the album grid puts itself back where you left it (Albums.jsx)
     if (pathname !== "/album") window.scrollTo(0, 0);
     setMenuOpen(false);
-    const page = pageTitle(pathname);
-    document.title = page
-      ? `${page} | ${SITE}`
-      : `${SITE} | DevOps, C++ & Go engineer`;
   }, [pathname]);
 
   return (
