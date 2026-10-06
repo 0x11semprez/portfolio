@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const http = require("http");
 
-// BUILD_PATH: same variable react-scripts uses to build somewhere else
+// BUILD_PATH: same variable vite.config.mjs uses to build somewhere else
 const BUILD = path.resolve(process.env.BUILD_PATH || path.join(__dirname, "../build"));
 const MIME = {
   ".html": "text/html",

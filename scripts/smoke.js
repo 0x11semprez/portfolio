@@ -39,7 +39,7 @@ function loadPlaywright() {
 const serve = require("./serve");
 
 // ------------------------------------------------------- data (regex parsed)
-// The data files are ESM used by CRA; we don't execute them, we scan them.
+// The data files are ESM used by Vite; we don't execute them, we scan them.
 const read = (f) => fs.readFileSync(path.join(ROOT, "src/data", f), "utf8");
 const strArray = (src, name) => {
   const m = src.match(new RegExp(`export const ${name}\\s*=\\s*\\[([^\\]]*)\\]`));
@@ -84,7 +84,7 @@ async function attempt(name, fn) {
 async function main() {
   if (!process.argv.includes("--no-build")) {
     console.log("building…");
-    execSync("CI=true npx react-scripts build", { cwd: ROOT, stdio: "pipe" });
+    execSync("npx vite build", { cwd: ROOT, stdio: "pipe" });
   }
   const { chromium } = loadPlaywright();
   const server = await serve(PORT);

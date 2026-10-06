@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./public/index.html", "./src/**/*.{js,jsx}"],
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     // One Myeongjo: YDMyungjo when its (licensed) files are there, Nanum
     // Myeongjo otherwise. `sans` is what Tailwind preflight puts on <html>,
