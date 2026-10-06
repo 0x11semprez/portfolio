@@ -7,7 +7,7 @@ export const PROFILE = {
     en: [
       "semprez's name is Kassim.",
       "semprez is a software engineer.",
-      'semprez\'s favorite sentence is "all comes with a cost".',
+      'semprez\'s favorite saying is "all comes with a cost".',
       "Open to DevOps roles.",
       "Open to C++, Go roles in finance or defense.",
     ].join("\n"),
