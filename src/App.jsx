@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
@@ -7,14 +7,17 @@ import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import Stacks from "./pages/Stacks";
 import StackDetail from "./pages/StackDetail";
-import Albums from "./pages/Albums";
-import AlbumDetail from "./pages/AlbumDetail";
-import SecretAlbum from "./pages/SecretAlbum";
 import useVideoMode from "./components/useVideoMode";
 import BackgroundVideo from "./components/BackgroundVideo";
 import { PROFILE } from "./data/profile";
 import { PROJECTS } from "./data/projects";
 import { STACKS } from "./data/stacks";
+
+// The album pages carry the whole listening history (~400 KB of data): they
+// load in their own chunk, only when one of them is opened.
+const Albums = lazy(() => import("./pages/Albums"));
+const AlbumDetail = lazy(() => import("./pages/AlbumDetail"));
+const SecretAlbum = lazy(() => import("./pages/SecretAlbum"));
 
 // The tab title (and what search results show) for each page.
 const SITE = "Kassim Traore-Semprez";
@@ -80,32 +83,37 @@ export default function App() {
       {on && <BackgroundVideo {...PROFILE.video} hidden={!videoPage} />}
 
       <main className="pt-[calc(6rem+env(safe-area-inset-top))] mx-auto max-w-[100rem]">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Semprez
-                videoMode={videoMode}
-                onVideoMode={setVideoMode}
-                dark={dark}
-              />
-            }
-          />
-          <Route path="/projects" element={<Projects onScreen={setScreen} />} />
-          <Route path="/projects/:slug" element={<ProjectDetail />} />
-          <Route path="/stacks" element={<Stacks />} />
-          <Route path="/stacks/:slug" element={<StackDetail />} />
-          <Route path="/album" element={<Albums />} />
-          <Route
-            path="/album/neverforgetloyalty"
-            element={<SecretAlbum onTheme={setAlbum} />}
-          />
-          <Route
-            path="/album/:slug"
-            element={<AlbumDetail onTheme={setAlbum} />}
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Semprez
+                  videoMode={videoMode}
+                  onVideoMode={setVideoMode}
+                  dark={dark}
+                />
+              }
+            />
+            <Route
+              path="/projects"
+              element={<Projects onScreen={setScreen} />}
+            />
+            <Route path="/projects/:slug" element={<ProjectDetail />} />
+            <Route path="/stacks" element={<Stacks />} />
+            <Route path="/stacks/:slug" element={<StackDetail />} />
+            <Route path="/album" element={<Albums />} />
+            <Route
+              path="/album/neverforgetloyalty"
+              element={<SecretAlbum onTheme={setAlbum} />}
+            />
+            <Route
+              path="/album/:slug"
+              element={<AlbumDetail onTheme={setAlbum} />}
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
       </main>
     </>
   );
