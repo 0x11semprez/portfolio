@@ -26,7 +26,9 @@ import { useTx } from "../i18n";
 const STEP = 700; // ms, the slide transition
 // every logo big, at one width, the same as on its project page
 // (Detail.jsx); the height cap keeps the tagline on screen
-const LOGO = "w-[min(100%,60rem)] h-auto max-h-[52vh] object-contain";
+const LOGO = "w-[min(100%,60rem)] h-auto max-h-[52vh] [@media(max-height:480px)]:max-h-[30vh] object-contain";
+// phones in landscape: the slide's content clears the header and the chevron
+const SHORT = "[@media(max-height:480px)]:pt-16 [@media(max-height:480px)]:pb-[4.5rem]";
 
 export default function ProjectShowcase({ projects, intro, onScreen }) {
   const { hash } = useLocation();
@@ -126,8 +128,8 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
         }}
       >
         {/* 1. the intro alone */}
-        <section className="flex h-full items-center justify-center bg-white px-5 sm:px-10">
-          <p className="max-w-4xl text-center text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+        <section className={`flex h-full items-center justify-center bg-white px-5 sm:px-10 ${SHORT}`}>
+          <p className="max-w-4xl text-center text-3xl sm:text-5xl lg:text-6xl [@media(max-height:480px)]:text-3xl font-bold leading-tight tracking-tight">
             {intro}
           </p>
         </section>
@@ -137,7 +139,7 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
           <Link
             key={p.slug}
             to={`/11/${p.slug}`}
-            className="flex h-full flex-col items-center justify-center px-5 sm:px-10 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))] pb-[env(safe-area-inset-bottom)]"
+            className={`flex h-full flex-col items-center justify-center px-5 sm:px-10 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))] pb-[env(safe-area-inset-bottom)] ${SHORT}`}
             style={{ backgroundColor: p.bg, color: p.ink || "#000" }}
           >
             {p.slug === "ophobia" ? (
@@ -145,8 +147,8 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
             ) : (
               <img src={p.image} alt="" aria-hidden className={LOGO} />
             )}
-            <div className="mt-8 sm:mt-12 text-center">
-              <p className="mx-auto max-w-2xl text-base sm:text-2xl leading-snug">
+            <div className="mt-8 sm:mt-12 [@media(max-height:480px)]:mt-4 text-center">
+              <p className="mx-auto max-w-2xl text-base sm:text-2xl [@media(max-height:480px)]:text-base leading-snug">
                 {p.wave ? <WavyText text={tx(p.tagline)} /> : tx(p.tagline)}
               </p>
               <p className="mt-3 sm:mt-4 text-xs sm:text-base uppercase tracking-wide">
