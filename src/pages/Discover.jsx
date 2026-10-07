@@ -32,7 +32,7 @@ export default function Discover() {
               : [block.type, DISCOVER[i - 1].type].includes("knowing")
                 ? "mt-28 sm:mt-36"
                 : block.type === "text" && DISCOVER[i - 1].type === "text"
-                  ? "mt-24 sm:mt-28"
+                  ? "mt-32 sm:mt-40"
                   : "mt-16"
           }
         >
