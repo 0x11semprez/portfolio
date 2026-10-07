@@ -10,7 +10,7 @@ const VIEW = "920 820";
 const SIZE = 23;
 
 // Centered label, one <tspan> per line.
-function Label({ x, y, lines }) {
+export function Label({ x, y, lines }) {
   return (
     <text
       x={x}

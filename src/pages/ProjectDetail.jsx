@@ -3,6 +3,7 @@ import Detail, { Block, Specs } from "../components/Detail";
 import { PROJECTS } from "../data/projects";
 import { useT, useTx } from "../i18n";
 import bold from "../components/bold";
+import ProjectDiagram from "../components/ProjectDiagrams";
 
 export default function ProjectDetail() {
   const { slug } = useParams();
@@ -30,6 +31,9 @@ export default function ProjectDetail() {
         {tx(p.description).map((d, i) => (
           <p key={i}>{bold(d)}</p>
         ))}
+        <div className="pt-6">
+          <ProjectDiagram slug={p.slug} />
+        </div>
       </Block>
       <Block label={t("details")}>
         <Specs centered rows={p.details.map(([k, v]) => [t(k), t(v)])} />
