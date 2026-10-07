@@ -32,14 +32,12 @@ export const PROJECTS = [
     linkLabel: "view on github",
     description: {
       en: [
-        "A **sampler VST** built with JUCE (VST3 & Standalone), on its own **sampling engine written from scratch**. **47 audio formats** supported, with automatic format detection.",
-        "Röze also ships with its own **CLI, written in Go**: build, install and manage your sample library without leaving the terminal.",
-        "More on GitHub.",
+        "A **sampler VST** built with JUCE, on its own **sampling engine written from scratch**: **47 audio formats**, detected automatically.",
+        "Plus a **CLI in Go** to build, install and manage your samples from the terminal.",
       ],
       fr: [
-        "Un **sampler VST** développé avec JUCE (VST3 et Standalone), sur son propre **sampling engine écrit de zéro**. **47 formats audio** pris en charge, avec détection automatique du format.",
-        "Röze est aussi livré avec sa propre **CLI, écrite en Golang** : build, installation et gestion de votre bibliothèque de samples, sans quitter le terminal.",
-        "Plus d'informations sur GitHub.",
+        "Un **sampler VST** développé avec JUCE, sur son propre **sampling engine écrit de zéro** : **47 formats audio**, détectés automatiquement.",
+        "Et une **CLI en Golang** pour build, installer et gérer vos samples depuis le terminal.",
       ],
     },
     details: [
@@ -64,14 +62,12 @@ export const PROJECTS = [
     linkLabel: "view on github",
     description: {
       en: [
-        "The name comes from **scopophobia**, the fear of being watched. Privacy coins hide amounts and addresses, but leak at **the network layer**: IP addresses and propagation timing are enough to deanonymize transactions.",
-        "ophobia has two parts: **a mixnet in Go** and **a blockchain in Rust**. We're two, and **I built the mixnet**, after the **Loopix** paper: Poisson delays at each hop and cover traffic, so a global passive adversary can't link who talks to whom.",
-        "More on GitHub.",
+        "Named after **scopophobia**, the fear of being watched. Privacy coins hide amounts and addresses, but leak at **the network layer**.",
+        "We're two: **I built the mixnet in Go**, after the **Loopix** paper. The other half is **a blockchain in Rust**.",
       ],
       fr: [
-        "Le nom vient de la **scopophobie**, la peur d'être observé. Les privacy coins cachent les montants et les adresses, mais exposent des informations sur **la network layer** : les adresses IP et le timing de propagation suffisent à désanonymiser des transactions.",
-        "ophobia se compose de deux parties : **un mixnet en Golang** et **une blockchain en Rust**. Nous sommes deux, et **j'ai construit le mixnet**, d'après le paper **Loopix** : des Poisson delays à chaque hop et du cover traffic, pour qu'un global passive adversary ne puisse pas savoir qui parle à qui.",
-        "Plus d'informations sur GitHub.",
+        "Le nom vient de la **scopophobie**, la peur d'être observé. Les privacy coins cachent montants et adresses, mais exposent des informations sur **la network layer**.",
+        "Nous sommes deux : **j'ai construit le mixnet en Golang**, d'après le paper **Loopix**. L'autre moitié est **une blockchain en Rust**.",
       ],
     },
     details: [
@@ -98,14 +94,12 @@ export const PROJECTS = [
     linkLabel: "view on github",
     description: {
       en: [
-        "A marketplace of **lending vaults on the XRP Ledger**. A broker opens a vault and posts **first-loss capital**, lenders fund it, borrowers draw from it, and protection sellers guarantee the loans: **a credit default swap, settled on-chain**.",
-        "Everything settles in **native XRP**. Built on XLS-65 vaults, the XLS-66 lending protocol and XLS-70 credentials.",
-        "More on GitHub.",
+        "**Lending vaults on the XRP Ledger**, with **a credit default swap settled on-chain**: protection sellers guarantee the loans.",
+        "Everything settles in **native XRP**, on XLS-65, XLS-66 and XLS-70.",
       ],
       fr: [
-        "Une marketplace de **lending vaults sur le XRP Ledger**. Un broker ouvre un vault et y dépose du **first-loss capital**, des prêteurs le financent, des emprunteurs y empruntent, et des protection sellers garantissent les prêts : **un credit default swap, settled on-chain**.",
-        "Tout se règle en **XRP natif**. Construit sur les vaults XLS-65, le lending protocol XLS-66 et les credentials XLS-70.",
-        "Plus d'informations sur GitHub.",
+        "Des **lending vaults sur le XRP Ledger**, avec **un credit default swap settled on-chain** : des protection sellers garantissent les prêts.",
+        "Tout se règle en **XRP natif**, sur XLS-65, XLS-66 et XLS-70.",
       ],
     },
     details: [
