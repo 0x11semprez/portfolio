@@ -9,7 +9,6 @@ export const PROFILE = {
       "semprez is a software engineer.",
       'motto: "all comes with a cost".',
       "Open to real-time C++ roles.",
-      "Open to Go backend roles.",
       "Open to DevOps roles.",
     ].join("\n"),
     fr: [
@@ -17,7 +16,6 @@ export const PROFILE = {
       "semprez est ingénieur logiciel.",
       'sa devise : "tout a un coût".',
       "Ouvert aux postes C++ temps réel.",
-      "Ouvert aux postes backend Go.",
       "Ouvert aux postes DevOps.",
     ].join("\n"),
   },
