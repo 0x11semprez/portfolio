@@ -25,7 +25,13 @@ export default function Discover() {
     <article className="mx-auto max-w-3xl px-5 pb-24 text-center text-lg sm:text-xl leading-relaxed">
       {DISCOVER.map((block, i) => (
         <section key={i} className={i ? "mt-16" : ""}>
-          <h2 className="text-xl sm:text-2xl font-bold uppercase tracking-wide">
+          <h2
+            className={`font-bold uppercase tracking-wide ${
+              block.oneLine
+                ? "whitespace-nowrap text-[min(1.5rem,calc((100vw-2.5rem)/22))]"
+                : "text-xl sm:text-2xl"
+            }`}
+          >
             {tx(block.title)}
           </h2>
           {(tx(block.body) || []).map((p, j) => (

@@ -49,7 +49,7 @@ export default function Tile({
         )}
       </div>
       <p
-        className={`mt-4 text-base sm:text-lg font-bold uppercase tracking-wide text-center transition-colors ${
+        className={`mt-4 text-base sm:text-lg font-bold uppercase tracking-wide text-center [overflow-wrap:anywhere] transition-colors ${
           dark ? "text-white" : ""
         }`}
       >
@@ -57,7 +57,7 @@ export default function Tile({
       </p>
       {sublabel && (
         <p
-          className={`mt-1 text-sm sm:text-base uppercase text-center ${
+          className={`mt-1 text-sm sm:text-base uppercase text-center [overflow-wrap:anywhere] ${
             dark ? "text-white" : ""
           }`}
         >

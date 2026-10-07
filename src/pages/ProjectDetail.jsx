@@ -9,11 +9,11 @@ export default function ProjectDetail() {
   const t = useT();
   const tx = useTx();
   const p = PROJECTS.find((x) => x.slug === slug);
-  if (!p) return <Navigate to="/projects" replace />;
+  if (!p) return <Navigate to="/11" replace />;
 
   return (
     <Detail
-      back={`/projects#${p.slug}`}
+      back={`/11#${p.slug}`}
       image={p.detailImage || p.image}
       imageFit="contain"
       imageRatio="square"

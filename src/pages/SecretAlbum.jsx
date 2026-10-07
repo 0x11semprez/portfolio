@@ -37,7 +37,7 @@ export default function SecretAlbum({ onTheme }) {
 
   return (
     <Detail
-      back="/album"
+      back="/20"
       image={A.cover}
       imageFit="cover"
       imageRatio="tall"

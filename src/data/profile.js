@@ -74,7 +74,7 @@ export const CONTACTS = [
 export const SECTIONS = [
   { label: "98", path: "/" },
   { label: "03", path: "/03" },
-  { label: "11", path: "/projects" },
-  { label: "17", path: "/stacks" },
-  { label: "20", path: "/album" },
+  { label: "11", path: "/11" },
+  { label: "17", path: "/17" },
+  { label: "20", path: "/20" },
 ];

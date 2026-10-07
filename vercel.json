@@ -1,5 +1,14 @@
 {
   "framework": "vite",
   "outputDirectory": "build",
-  "rewrites": [{ "source": "/album/:path*", "destination": "/album-shell.html" }]
+  "redirects": [
+    { "source": "/98", "destination": "/", "permanent": true },
+    { "source": "/projects", "destination": "/11", "permanent": true },
+    { "source": "/projects/:path*", "destination": "/11/:path*", "permanent": true },
+    { "source": "/stacks", "destination": "/17", "permanent": true },
+    { "source": "/stacks/:path*", "destination": "/17/:path*", "permanent": true },
+    { "source": "/album", "destination": "/20", "permanent": true },
+    { "source": "/album/:path*", "destination": "/20/:path*", "permanent": true }
+  ],
+  "rewrites": [{ "source": "/20/:path*", "destination": "/album-shell.html" }]
 }

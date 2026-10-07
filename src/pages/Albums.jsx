@@ -11,7 +11,7 @@ function AlbumTile({ album, dark }) {
   const { src, srcSet } = useSpotifyCover(album.spotify, album.cover);
   return (
     <Tile
-      to={`/album/${album.slug}`}
+      to={`/20/${album.slug}`}
       image={src}
       srcSet={srcSet}
       // 2 columns on phones, 3 from md
@@ -86,7 +86,7 @@ export default function Albums({ dark = false }) {
     const now = Date.now();
     const n = now - taps.current.at < 1000 ? taps.current.n + 1 : 1;
     taps.current = { n, at: now };
-    if (n >= 3) navigate(`/album/${SECRET_ALBUM.slug}`);
+    if (n >= 3) navigate(`/20/${SECRET_ALBUM.slug}`);
   };
   const list = at === "all" ? SORTED : SORTED.filter((a) => letter(a.title) === at);
 

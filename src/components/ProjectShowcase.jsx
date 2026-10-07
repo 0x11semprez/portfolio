@@ -15,7 +15,7 @@ import { useTx } from "../i18n";
 // down inside it (translateY, CSS transition). One wheel tick, swipe or arrow
 // key moves exactly one slide, so a small gesture always lands on a project.
 // `onScreen(i)` tells the app which slide is showing (0 = intro), for the
-// header colour. The slide showing is kept in the URL hash (/projects#slug,
+// header colour. The slide showing is kept in the URL hash (/11#slug,
 // none for the intro), so coming back from a project — its back arrow, the
 // browser's back, a reload — lands on that project's slide, not the intro.
 // A single chevron pointing down at the bottom of the frame says "there is
@@ -136,7 +136,7 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
         {projects.map((p, at) => (
           <Link
             key={p.slug}
-            to={`/projects/${p.slug}`}
+            to={`/11/${p.slug}`}
             className="flex h-full flex-col items-center justify-center px-5 sm:px-10 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))] pb-[env(safe-area-inset-bottom)]"
             style={{ backgroundColor: p.bg, color: p.ink || "#000" }}
           >

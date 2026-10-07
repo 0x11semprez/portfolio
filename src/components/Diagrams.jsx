@@ -1,7 +1,7 @@
 import { useTx } from "../i18n";
 
 // The two diagrams of the "03" page, redrawn from their Pinterest originals
-// as SVG: black lines on white, labels in the site's font (inherited), in the
+// as SVG: black lines on white (no grey), labels in the site's font (inherited), in the
 // current language. Coordinates are the originals' pixels.
 
 // Centered label, one <tspan> per line.
@@ -52,12 +52,12 @@ function Venn({ label }) {
   );
 }
 
-// From the inside out, lighter to darker, all touching on the left.
+// From the inside out, all touching on the left. All black: no grey on the site.
 const ZONES = [
-  { cx: 389, r: 101, stroke: "#aaa", x: 389, en: ["COMFORT", "ZONE"], fr: ["ZONE DE", "CONFORT"] },
-  { cx: 469, r: 181, stroke: "#888", x: 566, en: ["FEAR", "ZONE"], fr: ["ZONE DE", "PEUR"] },
-  { cx: 576, r: 288, stroke: "#555", x: 749, en: ["LEARNING", "ZONE"], fr: ["ZONE D'", "APPRENTISSAGE"] },
-  { cx: 676, r: 388, stroke: "#000", x: 957, en: ["GROWTH", "ZONE"], fr: ["ZONE DE", "CROISSANCE"] },
+  { cx: 389, r: 101, x: 389, en: ["COMFORT", "ZONE"], fr: ["ZONE DE", "CONFORT"] },
+  { cx: 469, r: 181, x: 566, en: ["FEAR", "ZONE"], fr: ["ZONE DE", "PEUR"] },
+  { cx: 576, r: 288, x: 749, en: ["LEARNING", "ZONE"], fr: ["ZONE D'", "APPRENTISSAGE"] },
+  { cx: 676, r: 388, x: 957, en: ["GROWTH", "ZONE"], fr: ["ZONE DE", "CROISSANCE"] },
 ];
 
 // Comfort, fear, learning, growth: the arrow goes out.
@@ -65,9 +65,9 @@ function Zones({ label }) {
   const tx = useTx();
   return (
     <svg viewBox="260 490 920 820" role="img" aria-label={label} className="w-full h-auto">
-      <g fill="none" strokeWidth="3">
+      <g fill="none" stroke="currentColor" strokeWidth="3">
         {ZONES.map((z) => (
-          <circle key={z.r} cx={z.cx} cy="900" r={z.r} stroke={z.stroke} />
+          <circle key={z.r} cx={z.cx} cy="900" r={z.r} />
         ))}
       </g>
       <line x1="389" y1="943" x2="1135" y2="943" stroke="currentColor" strokeWidth="3" />

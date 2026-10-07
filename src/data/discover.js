@@ -4,6 +4,15 @@
 // `{ en, fr }`: the language switch in the header picks one.
 export const DISCOVER = [
   {
+    // drawn in src/components/Diagrams.jsx, in the site's font
+    type: "diagrams",
+    oneLine: true, // the title never wraps, it shrinks to the screen instead
+    title: {
+      en: "two diagrams describe me well",
+      fr: "deux schémas qui me représentent",
+    },
+  },
+  {
     type: "text",
     title: { en: "a human. you and I are.", fr: "un être humain. comme vous et moi." },
     body: {
@@ -37,14 +46,6 @@ export const DISCOVER = [
         "**Ma quatrième passion : la marche.**\nMarcher me vide la tête.",
         "**Mon but : devenir riche, mais d'une richesse qui ne s'achète pas.**\n**Je veux devenir la meilleure version de moi-même.**",
       ],
-    },
-  },
-  {
-    // drawn in src/components/Diagrams.jsx, in the site's font
-    type: "diagrams",
-    title: {
-      en: "two diagrams describe me well:",
-      fr: "deux schémas me représentent bien :",
     },
   },
   {

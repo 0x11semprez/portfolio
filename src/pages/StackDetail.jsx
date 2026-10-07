@@ -8,12 +8,12 @@ export default function StackDetail() {
   const t = useT();
   const tx = useTx();
   const s = STACKS.find((x) => x.slug === slug);
-  if (!s) return <Navigate to="/stacks" replace />;
+  if (!s) return <Navigate to="/17" replace />;
   const cats = stackCategories(s).map(t).join(" / ");
 
   return (
     <Detail
-      back="/stacks"
+      back="/17"
       image={s.image}
       title={s.name}
       subtitle={cats}

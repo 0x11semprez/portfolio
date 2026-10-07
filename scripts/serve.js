@@ -35,7 +35,7 @@ function serve(port) {
         return res.end("not found");
       }
       // like vercel.json's rewrite, else Vercel's 404.html
-      if (url.startsWith("/album/")) file = path.join(BUILD, "album-shell.html");
+      if (url.startsWith("/20/")) file = path.join(BUILD, "album-shell.html");
       else {
         file = path.join(BUILD, "404.html");
         status = 404;

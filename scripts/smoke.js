@@ -218,7 +218,7 @@ async function main() {
     await page.getByRole("button", { name: "open menu" }).click();
     const links = page.locator("nav a");
     check("menu opens with 5 section links", (await links.count()) === 5);
-    for (const [label, target] of [["03", "/03"], ["11", "/projects"], ["17", "/stacks"], ["20", "/album"], ["98", "/"]]) {
+    for (const [label, target] of [["03", "/03"], ["11", "/11"], ["17", "/17"], ["20", "/20"], ["98", "/"]]) {
       await page.getByRole("button", { name: "open menu" }).click().catch(() => {});
       await page.locator("nav a", { hasText: label }).first().click();
       await page.waitForTimeout(150);
@@ -227,12 +227,12 @@ async function main() {
     }
     await go(page, "/does-not-exist");
     check("unknown route redirects to /", new URL(page.url()).pathname === "/");
-    await go(page, "/stacks/nope");
-    check("unknown stack redirects to /stacks", new URL(page.url()).pathname === "/stacks");
-    await go(page, "/album/nope");
-    check("unknown album redirects to /album", new URL(page.url()).pathname === "/album");
-    await go(page, "/projects/nope");
-    check("unknown project redirects to /projects", new URL(page.url()).pathname === "/projects");
+    await go(page, "/17/nope");
+    check("unknown stack redirects to /17", new URL(page.url()).pathname === "/17");
+    await go(page, "/20/nope");
+    check("unknown album redirects to /20", new URL(page.url()).pathname === "/20");
+    await go(page, "/11/nope");
+    check("unknown project redirects to /11", new URL(page.url()).pathname === "/11");
     check("no console errors", page.errors.length === 0, page.errors.join(" | "));
     await page.context().close();
   });
@@ -241,9 +241,9 @@ async function main() {
   const tiles = (page) => page.locator("main a[href]").filter({ hasNot: page.locator("[aria-label=back]") });
 
   for (const [name, route, list, filters, tags] of [
-    ["projects", "/projects", PROJECTS, [], null],
-    ["stacks", "/stacks", STACKS, STACK_CATEGORIES, STACK_TAGS],
-    ["album", "/album", ALBUMS, ALBUM_LANGUAGES, ALBUM_TAGS.map((t) => [t])],
+    ["projects", "/11", PROJECTS, [], null],
+    ["stacks", "/17", STACKS, STACK_CATEGORIES, STACK_TAGS],
+    ["album", "/20", ALBUMS, ALBUM_LANGUAGES, ALBUM_TAGS.map((t) => [t])],
   ]) {
     section(name);
     await attempt(name, async () => {
@@ -282,7 +282,7 @@ async function main() {
     const page = await newPage();
     await go(page, "/");
     await chooseMode(page, true);
-    const expect = { "/": 1, "/album": 1, [`/album/${ALBUMS[0]}`]: 1, "/03": 0, "/projects": 0, "/stacks": 0, [`/stacks/${STACKS[0]}`]: 0, [`/projects/${PROJECTS[0]}`]: 0 };
+    const expect = { "/": 1, "/20": 1, [`/20/${ALBUMS[0]}`]: 1, "/03": 0, "/11": 0, "/17": 0, [`/17/${STACKS[0]}`]: 0, [`/11/${PROJECTS[0]}`]: 0 };
     for (const [route, n] of Object.entries(expect)) {
       await go(page, route);
       // the video stays mounted site-wide (so it never restarts), it's just
@@ -292,20 +292,20 @@ async function main() {
       const header = await page.locator("header").evaluate((e) => getComputedStyle(e).backgroundColor);
       check(`${route}: header ${n ? "transparent" : "white"}`, n ? header === "rgba(0, 0, 0, 0)" : header === "rgb(255, 255, 255)", header);
       const white = (sel) => page.locator(sel).first().evaluate((e) => getComputedStyle(e).color === "rgb(255, 255, 255)").catch(() => false);
-      if (route === "/album") {
-        check("/album: active filter is white", await white("main button[class*='text-white']"));
-        check("/album: tile titles are white", await white("main a p"));
+      if (route === "/20") {
+        check("/20: active filter is white", await white("main button[class*='text-white']"));
+        check("/20: tile titles are white", await white("main a p"));
       }
-      if (route.startsWith("/album/")) check(`${route}: title is white`, await white("main h1"));
+      if (route.startsWith("/20/")) check(`${route}: title is white`, await white("main h1"));
     }
     // navigating between video pages must not restart the video
-    await go(page, "/album");
+    await go(page, "/20");
     await page.waitForTimeout(1500);
     const before = await page.locator("video").evaluate((v) => v.currentTime);
-    await page.locator("main a[href^='/album/']").first().click();
+    await page.locator("main a[href^='/20/']").first().click();
     await page.waitForSelector("main h1");
     const after = await page.locator("video").evaluate((v) => v.currentTime);
-    check("video keeps playing across /album → /album/:slug (no restart)", after >= before && before > 1, `${before.toFixed(2)}s → ${after.toFixed(2)}s`);
+    check("video keeps playing across /20 → /20/:slug (no restart)", after >= before && before > 1, `${before.toFixed(2)}s → ${after.toFixed(2)}s`);
     const filter = await page.locator("video").evaluate((v) => getComputedStyle(v).filter);
     check("video has the contrast boost", /contrast\(1\.\d+\)/.test(filter), filter);
     check("video loops", await page.locator("video").evaluate((v) => v.loop));
@@ -332,7 +332,7 @@ async function main() {
     await go(page, "/");
     check("/: dialog fits (no horizontal scroll)", !(await overflow(page)));
     await chooseMode(page, true);
-    for (const route of ["/", "/03", "/projects", "/stacks", "/album", `/album/${ALBUMS[0]}`, `/stacks/${STACKS[0]}`, `/projects/${PROJECTS[0]}`]) {
+    for (const route of ["/", "/03", "/11", "/17", "/20", `/20/${ALBUMS[0]}`, `/17/${STACKS[0]}`, `/11/${PROJECTS[0]}`]) {
       await go(page, route);
       check(`${route}: no horizontal scroll`, !(await overflow(page)));
     }
@@ -347,7 +347,7 @@ async function main() {
   section("responsive");
   await attempt("responsive", async () => {
     const SIZES = [[320, 568], [360, 740], [390, 844], [414, 896], [768, 1024], [1024, 768], [1280, 800], [1440, 900], [1920, 1080], [2560, 1440], [844, 390], [740, 360]];
-    const ROUTES = ["/", "/03", "/projects", "/stacks", "/album", `/projects/${PROJECTS[0]}`, `/stacks/${STACKS[0]}`, `/album/${ALBUMS[0]}`];
+    const ROUTES = ["/", "/03", "/11", "/17", "/20", `/11/${PROJECTS[0]}`, `/17/${STACKS[0]}`, `/20/${ALBUMS[0]}`];
     // smallest touch target we accept (WCAG 2.5.8 says 24, Apple/Google say 44)
     const MIN = 40;
     const tooSmall = (page, sel, tol = 0) =>

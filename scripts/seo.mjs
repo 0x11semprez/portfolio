@@ -5,7 +5,7 @@
 // a duplicate of it. Also writes sitemap.xml, the album shell and 404.html.
 //
 //   build/projects/roze/index.html   one per project, stack and section
-//   build/album-shell.html           every /album/:slug (vercel.json rewrite), noindex
+//   build/album-shell.html           every /20/:slug (vercel.json rewrite), noindex
 //   build/404.html                   any unknown URL, served with a 404, noindex
 //   build/sitemap.xml
 //
@@ -65,7 +65,7 @@ function pages({ PROJECTS, PROJECTS_INTRO, STACKS, DISCOVER }, root) {
   const mod = (...f) => lastmod(root, f.map((x) => `src/data/${x}`));
   const projectsDate = mod("projects.js");
   const stacksDate = mod("stacks.js");
-  const nav = `<p><a href="/">home</a> · <a href="/projects">projects</a> · <a href="/stacks">stacks</a></p>`;
+  const nav = `<p><a href="/">home</a> · <a href="/11">projects</a> · <a href="/17">stacks</a></p>`;
 
   const list = [
     {
@@ -90,24 +90,24 @@ function pages({ PROJECTS, PROJECTS_INTRO, STACKS, DISCOVER }, root) {
         ).join("") + nav,
     },
     {
-      url: "/projects",
+      url: "/11",
       lastmod: projectsDate,
       title: `Projects | ${SITE}`,
       description: clip(
         `Projects by ${SITE}: ${PROJECTS.map((p) => `${p.name}, ${en(p.tagline)}`).join("; ")}.`,
       ),
-      jsonld: [breadcrumb([["home", "/"], ["projects", "/projects"]])],
+      jsonld: [breadcrumb([["home", "/"], ["projects", "/11"]])],
       body:
         `<h1>Projects</h1><p>${rich(en(PROJECTS_INTRO))}</p><ul>` +
         PROJECTS.map(
-          (p) => `<li><a href="/projects/${p.slug}">${esc(p.name)}</a>: ${esc(en(p.tagline))}.</li>`,
+          (p) => `<li><a href="/11/${p.slug}">${esc(p.name)}</a>: ${esc(en(p.tagline))}.</li>`,
         ).join("") +
         `</ul>${nav}`,
     },
     ...PROJECTS.map((p) => {
       const stack = Object.fromEntries(p.details).stack;
       return {
-        url: `/projects/${p.slug}`,
+        url: `/11/${p.slug}`,
         lastmod: projectsDate,
         title: `${p.name} (${en(p.category)}) | ${SITE}`,
         description: clip(`${p.name}: ${sentence(en(p.tagline))} ${en(p.description).join(" ")}`),
@@ -123,7 +123,7 @@ function pages({ PROJECTS, PROJECTS_INTRO, STACKS, DISCOVER }, root) {
             image: ORIGIN + (p.detailImage || p.image),
             author: { "@id": PERSON_ID },
           },
-          breadcrumb([["home", "/"], ["projects", "/projects"], [p.name, `/projects/${p.slug}`]]),
+          breadcrumb([["home", "/"], ["projects", "/11"], [p.name, `/11/${p.slug}`]]),
         ],
         body:
           `<h1>${esc(p.name)}</h1><p>${esc(sentence(en(p.tagline)))}</p>` +
@@ -134,31 +134,31 @@ function pages({ PROJECTS, PROJECTS_INTRO, STACKS, DISCOVER }, root) {
       };
     }),
     {
-      url: "/stacks",
+      url: "/17",
       lastmod: stacksDate,
       title: `Stacks | ${SITE}`,
       description: clip(
         `The languages and tools ${SITE} works with: ${STACKS.map((s) => s.name).join(", ")}.`,
       ),
-      jsonld: [breadcrumb([["home", "/"], ["stacks", "/stacks"]])],
+      jsonld: [breadcrumb([["home", "/"], ["stacks", "/17"]])],
       body:
         `<h1>Stacks</h1><ul>` +
-        STACKS.map((s) => `<li><a href="/stacks/${s.slug}">${esc(s.name)}</a>: ${esc(en(s.how))}</li>`).join("") +
+        STACKS.map((s) => `<li><a href="/17/${s.slug}">${esc(s.name)}</a>: ${esc(en(s.how))}</li>`).join("") +
         `</ul>${nav}`,
     },
     ...STACKS.map((s) => ({
-      url: `/stacks/${s.slug}`,
+      url: `/17/${s.slug}`,
       lastmod: stacksDate,
       title: `${s.name} | ${SITE}`,
       description: clip(`How ${SITE} uses ${s.name}: ${en(s.how)} ${en(s.what)}`),
-      jsonld: [breadcrumb([["home", "/"], ["stacks", "/stacks"], [s.name, `/stacks/${s.slug}`]])],
+      jsonld: [breadcrumb([["home", "/"], ["stacks", "/17"], [s.name, `/17/${s.slug}`]])],
       body:
         `<h1>${esc(s.name)}</h1><p>${esc(en(s.what))}</p><p>${esc(en(s.how))}</p>` +
         (s.link ? `<p><a href="${esc(s.link)}">${esc(s.link)}</a></p>` : "") +
         nav,
     })),
     {
-      url: "/album",
+      url: "/20",
       lastmod: mod("albums.js", "albumsListened.js"),
       title: `Album | ${SITE}`,
       description: `The albums ${SITE} listens to, A to Z.`,

@@ -23,12 +23,12 @@ export default function AlbumDetail({ dark = false, onTheme }) {
     return () => onTheme?.(null);
   }, [color, onTheme]);
 
-  if (!a) return <Navigate to="/album" replace />;
+  if (!a) return <Navigate to="/20" replace />;
 
   return (
     <>
       <Detail
-        back="/album"
+        back="/20"
         dark={dark || color?.ink === "#fff"}
         bg={color?.bg}
         accent={color?.accent}

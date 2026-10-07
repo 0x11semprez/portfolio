@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect, useState } from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, useParams } from "react-router-dom";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
 import Semprez from "./pages/Semprez";
@@ -19,6 +19,16 @@ const Albums = lazy(() => import("./pages/Albums"));
 const AlbumDetail = lazy(() => import("./pages/AlbumDetail"));
 const SecretAlbum = lazy(() => import("./pages/SecretAlbum"));
 
+// The sections used to live under words (/projects, /stacks, /album): old
+// links land on their number, same page, same hash. Vercel redirects them
+// first (vercel.json), this covers the dev server and in-app history.
+const OLD = { projects: "11", stacks: "17", album: "20" };
+function Moved({ to }) {
+  const { "*": rest } = useParams();
+  const { hash } = useLocation();
+  return <Navigate to={`/${to}${rest ? `/${rest}` : ""}${hash}`} replace />;
+}
+
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [videoMode, setVideoMode] = useVideoMode();
@@ -32,17 +42,17 @@ export default function App() {
   // keeps its slide's colours, so the bar follows that project.
   const [screen, setScreen] = useState(0);
   const project =
-    pathname === "/projects"
+    pathname === "/11"
       ? PROJECTS[screen - 1]
-      : PROJECTS.find((p) => pathname === `/projects/${p.slug}`);
+      : PROJECTS.find((p) => pathname === `/11/${p.slug}`);
   // an album page paints itself its cover's main colour, the bar follows
   const [album, setAlbum] = useState(null);
-  const theme = project || (pathname.startsWith("/album/") ? album : null);
+  const theme = project || (pathname.startsWith("/20/") ? album : null);
   const dark = (on && videoPage) || theme?.ink === "#fff";
 
   useEffect(() => {
     // the album grid puts itself back where you left it (Albums.jsx)
-    if (pathname !== "/album") window.scrollTo(0, 0);
+    if (pathname !== "/20") window.scrollTo(0, 0);
     setMenuOpen(false);
   }, [pathname]);
 
@@ -79,21 +89,25 @@ export default function App() {
             />
             <Route path="/03" element={<Discover />} />
             <Route
-              path="/projects"
+              path="/11"
               element={<Projects onScreen={setScreen} />}
             />
-            <Route path="/projects/:slug" element={<ProjectDetail />} />
-            <Route path="/stacks" element={<Stacks />} />
-            <Route path="/stacks/:slug" element={<StackDetail />} />
-            <Route path="/album" element={<Albums />} />
+            <Route path="/11/:slug" element={<ProjectDetail />} />
+            <Route path="/17" element={<Stacks />} />
+            <Route path="/17/:slug" element={<StackDetail />} />
+            <Route path="/20" element={<Albums />} />
             <Route
-              path="/album/neverforgetloyalty"
+              path="/20/neverforgetloyalty"
               element={<SecretAlbum onTheme={setAlbum} />}
             />
             <Route
-              path="/album/:slug"
+              path="/20/:slug"
               element={<AlbumDetail onTheme={setAlbum} />}
             />
+            <Route path="/98" element={<Navigate to="/" replace />} />
+            {Object.entries(OLD).map(([word, n]) => (
+              <Route key={word} path={`/${word}/*`} element={<Moved to={n} />} />
+            ))}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>

@@ -24,7 +24,7 @@ export default function Stacks() {
         {STACKS.map((s) => (
           <Tile
             key={s.slug}
-            to={`/stacks/${s.slug}`}
+            to={`/17/${s.slug}`}
             image={s.image}
             label={s.name}
           />
