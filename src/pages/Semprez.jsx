@@ -38,21 +38,23 @@ function useFitLines(ref, key) {
     const lines = Array.from(el.children);
 
     const fit = () => {
+      // fit the width, and the height too (phone in landscape): the lines'
+      // stack must fit between the container's top and the bottom of the
+      // screen, above its bottom padding (the box is min-h, so measure the
+      // screen, not the box). Measured before the 100px probe below: the
+      // probe makes the page tall, the browser may scroll to keep its
+      // anchor, and the box's top on screen would move with it.
+      const box = el.parentElement;
+      const free =
+        window.innerHeight -
+        (box.getBoundingClientRect().top + window.scrollY) -
+        parseFloat(getComputedStyle(box).paddingBottom);
       lines.forEach((l) => (l.style.whiteSpace = "nowrap"));
       el.style.fontSize = "100px";
       const widest = Math.max(...lines.map((l) => l.scrollWidth));
       const rem = parseFloat(
         getComputedStyle(document.documentElement).fontSize,
       );
-      // fit the width, and the height too (phone in landscape): the lines'
-      // stack must fit between the container's top and the bottom of the
-      // screen, above its bottom padding (the box is min-h, so measure the
-      // screen, not the box)
-      const box = el.parentElement;
-      const free =
-        window.innerHeight -
-        box.getBoundingClientRect().top -
-        parseFloat(getComputedStyle(box).paddingBottom);
       const lineHeight =
         parseFloat(getComputedStyle(el).lineHeight) /
         parseFloat(el.style.fontSize);

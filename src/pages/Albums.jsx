@@ -126,8 +126,8 @@ export default function Albums({ dark = false }) {
               setAt(l);
             }}
             aria-pressed={l === at}
-            // px-2 py-2: ≥ 40px touch targets
-            className={`px-2 py-2 ${
+            // ≥ 40px touch targets
+            className={`min-w-[2.5rem] px-2 py-2 ${
               l === at
                 ? "font-bold"
                 : "font-normal hover:underline underline-offset-4"

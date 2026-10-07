@@ -59,8 +59,8 @@ export default function Header({
               key={l}
               onClick={() => setLang(l)}
               aria-pressed={l === lang}
-              // px-2 py-2: ≥ 40px touch targets, same look
-              className={`px-2 py-2 uppercase transition-colors ${l === lang ? active : idle}`}
+              // ≥ 40px touch targets, same look
+              className={`min-h-[2.5rem] min-w-[2.5rem] px-2 py-2.5 uppercase transition-colors ${l === lang ? active : idle}`}
             >
               {l}
             </button>
@@ -73,7 +73,7 @@ export default function Header({
                 video.on ? "pause background video" : "play background video",
               )}
               aria-pressed={video.on}
-              className={`px-2 py-2 transition-transform ${color}`}
+              className={`min-h-[2.5rem] min-w-[2.5rem] px-2 py-2.5 transition-transform ${color}`}
             >
               <Icon
                 name={video.on ? "pause" : "play"}

@@ -140,7 +140,7 @@ export default function Detail({
           }
         >
           <h1
-            className={`flex items-center gap-3 text-lg sm:text-xl font-bold uppercase tracking-wide text-[color:var(--accent,currentColor)] ${
+            className={`flex items-center gap-3 text-xl sm:text-2xl font-bold uppercase tracking-wide text-[color:var(--accent,currentColor)] ${
               centered ? "justify-center" : ""
             }`}
           >
@@ -175,10 +175,10 @@ export default function Detail({
               ))}
           </h1>
           {subtitle && (
-            <p className="mt-1 text-base sm:text-lg uppercase">{subtitle}</p>
+            <p className="mt-1 text-lg sm:text-xl uppercase">{subtitle}</p>
           )}
 
-          <div className="mt-10 space-y-8 text-base sm:text-lg leading-relaxed">
+          <div className="mt-10 space-y-8 text-lg sm:text-xl leading-relaxed">
             {children}
           </div>
         </div>
@@ -191,7 +191,7 @@ export default function Detail({
 export function Block({ label, children }) {
   return (
     <section>
-      <h2 className="text-sm sm:text-base font-bold uppercase mb-2 text-[color:var(--accent,currentColor)]">
+      <h2 className="text-base sm:text-lg font-bold uppercase mb-2 text-[color:var(--accent,currentColor)]">
         {label}
       </h2>
       <div className="space-y-3">{children}</div>
@@ -203,10 +203,10 @@ export function Block({ label, children }) {
 export function Specs({ rows, centered = false }) {
   return (
     <dl
-      className={`text-sm sm:text-base uppercase ${
+      className={`text-base sm:text-lg uppercase ${
         centered
           ? "flex flex-col items-center gap-y-1"
-          : "grid grid-cols-[6rem_1fr] sm:grid-cols-[7rem_1fr] gap-y-1"
+          : "grid grid-cols-[7rem_1fr] sm:grid-cols-[8rem_1fr] gap-y-1"
       }`}
     >
       {rows.map(([k, v]) => (

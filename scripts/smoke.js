@@ -162,8 +162,10 @@ async function main() {
     check("static: dialog closes", !(await dialog.isVisible()));
     check("static: no video", (await hasVideo(page)) === 0);
     check("static: choice persisted", (await page.evaluate(() => localStorage.getItem("semprez.video"))) === "0");
+    await go(page, "/");
+    check("static: dialog not shown again on a new visit", (await page.getByRole("dialog").count()) === 0);
     await page.reload({ waitUntil: "load" });
-    check("static: dialog not shown again", (await page.getByRole("dialog").count()) === 0);
+    check("reload: the warning asks again", await page.getByRole("dialog").isVisible());
     check("no console errors", page.errors.length === 0, page.errors.join(" | "));
     check("no failed requests", page.failed.length === 0, page.failed.join(" | "));
     await page.context().close();
@@ -214,7 +216,7 @@ async function main() {
     const page = await newPage();
     await go(page, "/");
     await chooseMode(page, false);
-    await page.reload({ waitUntil: "load" });
+    await go(page, "/");
     await page.getByRole("button", { name: "open menu" }).click();
     const links = page.locator("nav a");
     check("menu opens with 5 section links", (await links.count()) === 5);
