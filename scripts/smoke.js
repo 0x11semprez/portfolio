@@ -217,8 +217,8 @@ async function main() {
     await page.reload({ waitUntil: "load" });
     await page.getByRole("button", { name: "open menu" }).click();
     const links = page.locator("nav a");
-    check("menu opens with 4 section links", (await links.count()) === 4);
-    for (const [label, target] of [["11", "/projects"], ["17", "/stacks"], ["20", "/album"], ["98", "/"]]) {
+    check("menu opens with 5 section links", (await links.count()) === 5);
+    for (const [label, target] of [["03", "/03"], ["11", "/projects"], ["17", "/stacks"], ["20", "/album"], ["98", "/"]]) {
       await page.getByRole("button", { name: "open menu" }).click().catch(() => {});
       await page.locator("nav a", { hasText: label }).first().click();
       await page.waitForTimeout(150);
@@ -282,7 +282,7 @@ async function main() {
     const page = await newPage();
     await go(page, "/");
     await chooseMode(page, true);
-    const expect = { "/": 1, "/album": 1, [`/album/${ALBUMS[0]}`]: 1, "/projects": 0, "/stacks": 0, [`/stacks/${STACKS[0]}`]: 0, [`/projects/${PROJECTS[0]}`]: 0 };
+    const expect = { "/": 1, "/album": 1, [`/album/${ALBUMS[0]}`]: 1, "/03": 0, "/projects": 0, "/stacks": 0, [`/stacks/${STACKS[0]}`]: 0, [`/projects/${PROJECTS[0]}`]: 0 };
     for (const [route, n] of Object.entries(expect)) {
       await go(page, route);
       // the video stays mounted site-wide (so it never restarts), it's just
@@ -332,7 +332,7 @@ async function main() {
     await go(page, "/");
     check("/: dialog fits (no horizontal scroll)", !(await overflow(page)));
     await chooseMode(page, true);
-    for (const route of ["/", "/projects", "/stacks", "/album", `/album/${ALBUMS[0]}`, `/stacks/${STACKS[0]}`, `/projects/${PROJECTS[0]}`]) {
+    for (const route of ["/", "/03", "/projects", "/stacks", "/album", `/album/${ALBUMS[0]}`, `/stacks/${STACKS[0]}`, `/projects/${PROJECTS[0]}`]) {
       await go(page, route);
       check(`${route}: no horizontal scroll`, !(await overflow(page)));
     }
@@ -347,7 +347,7 @@ async function main() {
   section("responsive");
   await attempt("responsive", async () => {
     const SIZES = [[320, 568], [360, 740], [390, 844], [414, 896], [768, 1024], [1024, 768], [1280, 800], [1440, 900], [1920, 1080], [2560, 1440], [844, 390], [740, 360]];
-    const ROUTES = ["/", "/projects", "/stacks", "/album", `/projects/${PROJECTS[0]}`, `/stacks/${STACKS[0]}`, `/album/${ALBUMS[0]}`];
+    const ROUTES = ["/", "/03", "/projects", "/stacks", "/album", `/projects/${PROJECTS[0]}`, `/stacks/${STACKS[0]}`, `/album/${ALBUMS[0]}`];
     // smallest touch target we accept (WCAG 2.5.8 says 24, Apple/Google say 44)
     const MIN = 40;
     const tooSmall = (page, sel, tol = 0) =>

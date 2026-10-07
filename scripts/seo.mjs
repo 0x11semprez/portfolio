@@ -61,7 +61,7 @@ function breadcrumb(trail) {
 }
 
 // every page the sitemap lists, with what goes in its <head> and <noscript>
-function pages({ PROJECTS, PROJECTS_INTRO, STACKS }, root) {
+function pages({ PROJECTS, PROJECTS_INTRO, STACKS, DISCOVER }, root) {
   const mod = (...f) => lastmod(root, f.map((x) => `src/data/${x}`));
   const projectsDate = mod("projects.js");
   const stacksDate = mod("stacks.js");
@@ -72,6 +72,22 @@ function pages({ PROJECTS, PROJECTS_INTRO, STACKS }, root) {
       url: "/",
       lastmod: lastmod(root, ["index.html", "src/data/profile.js"]),
       // the home keeps index.html's own head and noscript
+    },
+    {
+      url: "/03",
+      lastmod: mod("discover.js"),
+      title: `Discover me | ${SITE}`,
+      description: clip(
+        `${SITE} beyond the code: music and writing, breaking down problems, being strong, walking.`,
+      ),
+      jsonld: [breadcrumb([["home", "/"], ["discover me", "/03"]])],
+      body:
+        DISCOVER.map(
+          (b) =>
+            `<h2>${esc(en(b.title))}</h2>` +
+            (en(b.body) || []).map((p) => `<p>${rich(p)}</p>`).join("") +
+            (b.href ? `<p><a href="${esc(b.href)}">${esc(b.label)}</a></p>` : ""),
+        ).join("") + nav,
     },
     {
       url: "/projects",
@@ -209,7 +225,11 @@ export default function seo() {
       const root = config.root;
       const out = path.resolve(root, config.build.outDir);
       const load = async (f) => (await runnerImport(path.join(root, "src/data", f))).module;
-      const data = { ...(await load("projects.js")), ...(await load("stacks.js")) };
+      const data = {
+        ...(await load("projects.js")),
+        ...(await load("stacks.js")),
+        ...(await load("discover.js")),
+      };
       const template = fs.readFileSync(path.join(out, "index.html"), "utf8");
 
       const list = pages(data, root);

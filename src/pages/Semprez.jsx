@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { PROFILE } from "../data/profile";
-import { useLang, useTx } from "../i18n";
+import { useLang, useT, useTx } from "../i18n";
 
 // Font-size bounds for the bio, in rem. MAX = text-6xl, the projects intro's
 // desktop size. Every sentence stays on one line on every screen: the size
@@ -201,6 +202,7 @@ export default function Semprez({
 }) {
   const [lang] = useLang();
   const tx = useTx();
+  const t = useT();
   const bioRef = useRef(null);
   useFitLines(bioRef, lang);
 
@@ -220,6 +222,12 @@ export default function Semprez({
           className={`w-full font-bold leading-snug tracking-tight text-center transition-colors ${on ? "text-white" : ""}`}
         >
           {renderBio(tx(PROFILE.bio))}
+          {/* last line, sized with the bio: opens the "03" page */}
+          <span className="block">
+            <Link to="/03" className="underline underline-offset-8">
+              {t("discover me")}
+            </Link>
+          </span>
         </p>
       </div>
     </>

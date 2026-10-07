@@ -6,6 +6,7 @@ import Semprez from "./pages/Semprez";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import Stacks from "./pages/Stacks";
+import Discover from "./pages/Discover";
 import StackDetail from "./pages/StackDetail";
 import useVideoMode from "./components/useVideoMode";
 import BackgroundVideo from "./components/BackgroundVideo";
@@ -76,6 +77,7 @@ export default function App() {
                 />
               }
             />
+            <Route path="/03" element={<Discover />} />
             <Route
               path="/projects"
               element={<Projects onScreen={setScreen} />}

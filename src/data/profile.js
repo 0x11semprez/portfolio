@@ -69,9 +69,11 @@ export const CONTACTS = [
 ];
 
 // Menu entries, named after the major C++ releases.
-// 98 = semprez (profile), 11 = projects, 17 = stacks, 20 = album.
+// 98 = semprez (profile), 03 = discover me, 11 = projects, 17 = stacks,
+// 20 = album.
 export const SECTIONS = [
   { label: "98", path: "/" },
+  { label: "03", path: "/03" },
   { label: "11", path: "/projects" },
   { label: "17", path: "/stacks" },
   { label: "20", path: "/album" },

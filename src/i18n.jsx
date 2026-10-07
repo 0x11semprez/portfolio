@@ -66,6 +66,8 @@ const UI = {
     "play background video": "lire la vidéo de fond",
     "pause background video": "mettre la vidéo de fond en pause",
     copied: "copié",
+    // home
+    "discover me": "découvre-moi",
     // projects
     "next project": "projet suivant",
     "back to top": "retour en haut",
