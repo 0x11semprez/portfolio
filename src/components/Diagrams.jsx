@@ -118,7 +118,7 @@ export function Knowing() {
   const tx = useTx();
   return (
     <svg
-      viewBox="110 200 520 300"
+      viewBox="110 231 520 251"
       role="img"
       aria-label={tx({
         en: "Knowing: twelve separate dots. Understanding: the same dots, all connected",
