@@ -6,7 +6,7 @@ import { useTx } from "../i18n";
 
 // Both diagrams share one viewBox size and one label size, so they draw at
 // the same scale side by side: POLYMATH is as big as COMFORT ZONE.
-const VIEW = "920 820";
+const VIEW = "920 808";
 const SIZE = 23;
 
 // Centered label, one <tspan> per line.
