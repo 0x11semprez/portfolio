@@ -29,7 +29,7 @@ export const PROFILE = {
     poster: "/videos/profile.jpg",
     dim: 0.7,
     contrast: 1.15,
-    credit: { name: "yotsu", url: "https://www.youtube.com/@yot-su" },
+    credit: { name: "yotsu" },
   },
 };
 

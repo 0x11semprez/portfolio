@@ -176,16 +176,7 @@ function VideoPrompt({ credit, onChoose }) {
 
         {credit && (
           <p className="mt-8 text-sm sm:text-base">
-            {t.credit(
-              <a
-                href={credit.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-2 -mx-2 py-2.5 -my-2.5 underline underline-offset-4"
-              >
-                {credit.name}
-              </a>,
-            )}
+            {t.credit(credit.name)}
           </p>
         )}
       </div>

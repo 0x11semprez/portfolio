@@ -48,6 +48,8 @@ export const DISCOVER = [
       ],
     },
   },
+  // a diagram alone, set apart by a bigger gap before and after
+  { type: "knowing" },
   {
     type: "text",
     title: { en: "what am I doing right now?", fr: "ce que je fais en ce moment" },

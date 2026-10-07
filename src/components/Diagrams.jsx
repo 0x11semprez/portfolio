@@ -84,6 +84,56 @@ function Zones({ label }) {
   );
 }
 
+// Twelve dots on a ring and one in the middle. Knowing: the dots alone.
+// Understanding: each dot joined to the fifth one after it (a 12-point star)
+// and to the one opposite, through the middle.
+const DOTS = Array.from({ length: 12 }, (_, i) => {
+  const a = (i * Math.PI) / 6;
+  return [Math.round(Math.sin(a) * 92), Math.round(-Math.cos(a) * 92)];
+});
+
+function Dots({ cx, linked }) {
+  return (
+    <g transform={`translate(${cx} 330)`} fill="currentColor">
+      {linked && (
+        <g fill="none" stroke="currentColor" strokeWidth="1.5">
+          {DOTS.map(([x, y], i) => {
+            const [x2, y2] = DOTS[(i + 5) % 12];
+            return <line key={i} x1={x} y1={y} x2={x2} y2={y2} />;
+          })}
+          {DOTS.slice(0, 6).map(([x, y], i) => (
+            <line key={`d${i}`} x1={x} y1={y} x2={-x} y2={-y} />
+          ))}
+        </g>
+      )}
+      {[...DOTS, [0, 0]].map(([x, y], i) => (
+        <circle key={i} cx={x} cy={y} r="4.5" />
+      ))}
+    </g>
+  );
+}
+
+// Knowing vs understanding: the same dots, connected or not.
+export function Knowing() {
+  const tx = useTx();
+  return (
+    <svg
+      viewBox="110 200 520 300"
+      role="img"
+      aria-label={tx({
+        en: "Knowing: twelve separate dots. Understanding: the same dots, all connected",
+        fr: "Savoir : douze points séparés. Comprendre : les mêmes points, tous reliés",
+      })}
+      className="mx-auto w-full max-w-2xl h-auto"
+    >
+      <Dots cx={234} />
+      <Dots cx={502} linked />
+      <Label x={234} y={480} lines={[tx({ en: "KNOWING", fr: "SAVOIR" })]} />
+      <Label x={502} y={480} lines={[tx({ en: "UNDERSTANDING", fr: "COMPRENDRE" })]} />
+    </svg>
+  );
+}
+
 export default function Diagrams() {
   const tx = useTx();
   return (

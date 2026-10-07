@@ -72,7 +72,7 @@ export default function Detail({
       <div
         className={`mt-6 sm:mt-8 ${
           stacked
-            ? "mx-auto max-w-2xl flex flex-col gap-10 sm:gap-14"
+            ? "mx-auto max-w-4xl flex flex-col gap-10 sm:gap-14"
             : "grid md:grid-cols-2 gap-8 md:gap-16"
         }`}
       >
@@ -136,11 +136,11 @@ export default function Detail({
 
         <div
           className={
-            centered ? "w-full text-center" : stacked ? "w-full" : "max-w-md"
+            centered ? "w-full text-center" : stacked ? "w-full" : "max-w-2xl"
           }
         >
           <h1
-            className={`flex items-center gap-3 text-2xl sm:text-3xl font-bold uppercase tracking-wide text-[color:var(--accent,currentColor)] ${
+            className={`flex items-center gap-3 text-4xl sm:text-6xl font-bold uppercase tracking-wide text-[color:var(--accent,currentColor)] ${
               centered ? "justify-center" : ""
             }`}
           >
@@ -158,7 +158,7 @@ export default function Detail({
                   <Icon
                     name={action.icon}
                     label={action.label}
-                    className="h-5 w-5"
+                    className="h-8 w-8 sm:h-10 sm:w-10"
                   />
                 </a>
               ) : (
@@ -170,16 +170,16 @@ export default function Detail({
                   <Icon
                     name={action.icon}
                     label={action.label}
-                    className="h-5 w-5"
+                    className="h-8 w-8 sm:h-10 sm:w-10"
                   />
                 </span>
               ))}
           </h1>
           {subtitle && (
-            <p className="mt-1 text-xl sm:text-2xl uppercase">{subtitle}</p>
+            <p className="mt-2 text-2xl sm:text-4xl uppercase">{subtitle}</p>
           )}
 
-          <div className="mt-10 space-y-10 text-xl sm:text-2xl leading-relaxed">
+          <div className="mt-12 space-y-12 text-2xl sm:text-3xl leading-relaxed uppercase">
             {children}
           </div>
         </div>
@@ -192,7 +192,7 @@ export default function Detail({
 export function Block({ label, children }) {
   return (
     <section>
-      <h2 className="text-lg sm:text-xl font-bold uppercase mb-3 text-[color:var(--accent,currentColor)]">
+      <h2 className="text-2xl sm:text-3xl font-bold uppercase mb-4 text-[color:var(--accent,currentColor)]">
         {label}
       </h2>
       <div className="space-y-3">{children}</div>
@@ -204,16 +204,16 @@ export function Block({ label, children }) {
 export function Specs({ rows, centered = false }) {
   return (
     <dl
-      className={`text-lg sm:text-xl uppercase ${
+      className={`text-xl sm:text-2xl uppercase ${
         centered
           ? "flex flex-col items-center gap-y-1"
-          : "grid grid-cols-[8rem_1fr] sm:grid-cols-[10rem_1fr] gap-y-1"
+          : "grid grid-cols-[9rem_minmax(0,1fr)] sm:grid-cols-[12rem_minmax(0,1fr)] gap-y-1"
       }`}
     >
       {rows.map(([k, v]) => (
         <div key={k} className={centered ? "flex gap-3" : "contents"}>
           <dt className="font-bold text-[color:var(--accent,currentColor)]">{k}</dt>
-          <dd>{v}</dd>
+          <dd className="[overflow-wrap:anywhere]">{v}</dd>
         </div>
       ))}
     </dl>
