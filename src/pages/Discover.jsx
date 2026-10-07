@@ -24,18 +24,7 @@ export default function Discover() {
   return (
     <article className="mx-auto max-w-3xl px-5 pb-24 text-center text-lg sm:text-xl leading-relaxed">
       {DISCOVER.map((block, i) => (
-        <section
-          key={i}
-          className={
-            !i
-              ? ""
-              : [block.type, DISCOVER[i - 1].type].includes("knowing")
-                ? "mt-28 sm:mt-36"
-                : block.type === "text" && DISCOVER[i - 1].type === "text"
-                  ? "mt-32 sm:mt-40"
-                  : "mt-16"
-          }
-        >
+        <section key={i} className={i ? "mt-32 sm:mt-40" : ""}>
           {block.title && (
             <h2
               className={`font-bold uppercase tracking-wide ${

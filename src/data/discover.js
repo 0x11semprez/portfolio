@@ -48,7 +48,7 @@ export const DISCOVER = [
       ],
     },
   },
-  // a diagram alone, set apart by a bigger gap before and after
+  // a diagram alone, between the passions and what I am doing now
   { type: "knowing" },
   {
     type: "text",
