@@ -43,7 +43,7 @@ export const PROJECTS = [
       ],
     },
     details: [
-      ["stack", "c++, juce, cmake, go"],
+      ["stack", "c++, go"],
       ["status", "active"],
       ["year", "2026"],
     ],
