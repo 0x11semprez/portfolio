@@ -11,7 +11,7 @@ export default function Stacks() {
   return (
     <>
       {/* GitHub contributions over the last 12 months (npm run github) */}
-      <div className="pb-10 text-center">
+      <div className="px-5 pb-10 text-center">
         {/* as big as the menu's numbers */}
         <p className="text-[min(12vh,22vw)] font-bold leading-none tracking-tight">
           {GITHUB.contributions.toLocaleString("fr-FR")}
