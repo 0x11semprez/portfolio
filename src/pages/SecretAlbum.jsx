@@ -59,10 +59,10 @@ export default function SecretAlbum({ onTheme }) {
       <Block label={t("tracks")}>
         <ol className="space-y-1 flex flex-col items-center">
           {A.tracks.map((tr, i) => (
-            <li key={tr.src}>
+            <li key={tr.src} className="max-w-full">
               <button
                 onClick={() => play(i)}
-                className={`flex items-center gap-3 hover:underline underline-offset-4 ${
+                className={`flex items-center gap-3 max-w-full text-left [overflow-wrap:anywhere] hover:underline underline-offset-4 ${
                   i === at ? "font-bold" : ""
                 }`}
               >

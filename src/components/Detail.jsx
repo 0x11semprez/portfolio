@@ -140,11 +140,12 @@ export default function Detail({
           }
         >
           <h1
-            className={`flex items-center gap-3 text-xl sm:text-2xl font-bold uppercase tracking-wide text-[color:var(--accent,currentColor)] ${
+            className={`flex items-center gap-3 text-2xl sm:text-3xl font-bold uppercase tracking-wide text-[color:var(--accent,currentColor)] ${
               centered ? "justify-center" : ""
             }`}
           >
-            {title}
+            {/* one long word (an album title) breaks instead of pushing the page sideways */}
+            <span className="min-w-0 [overflow-wrap:anywhere]">{title}</span>
             {action &&
               (action.href ? (
                 <a
@@ -175,10 +176,10 @@ export default function Detail({
               ))}
           </h1>
           {subtitle && (
-            <p className="mt-1 text-lg sm:text-xl uppercase">{subtitle}</p>
+            <p className="mt-1 text-xl sm:text-2xl uppercase">{subtitle}</p>
           )}
 
-          <div className="mt-10 space-y-8 text-lg sm:text-xl leading-relaxed">
+          <div className="mt-10 space-y-10 text-xl sm:text-2xl leading-relaxed">
             {children}
           </div>
         </div>
@@ -191,7 +192,7 @@ export default function Detail({
 export function Block({ label, children }) {
   return (
     <section>
-      <h2 className="text-base sm:text-lg font-bold uppercase mb-2 text-[color:var(--accent,currentColor)]">
+      <h2 className="text-lg sm:text-xl font-bold uppercase mb-3 text-[color:var(--accent,currentColor)]">
         {label}
       </h2>
       <div className="space-y-3">{children}</div>
@@ -203,10 +204,10 @@ export function Block({ label, children }) {
 export function Specs({ rows, centered = false }) {
   return (
     <dl
-      className={`text-base sm:text-lg uppercase ${
+      className={`text-lg sm:text-xl uppercase ${
         centered
           ? "flex flex-col items-center gap-y-1"
-          : "grid grid-cols-[7rem_1fr] sm:grid-cols-[8rem_1fr] gap-y-1"
+          : "grid grid-cols-[8rem_1fr] sm:grid-cols-[10rem_1fr] gap-y-1"
       }`}
     >
       {rows.map(([k, v]) => (
