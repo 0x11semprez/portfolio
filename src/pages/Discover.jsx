@@ -1,5 +1,6 @@
 import { DISCOVER } from "../data/discover";
 import bold from "../components/bold";
+import Diagrams from "../components/Diagrams";
 import { useTx } from "../i18n";
 
 // One paragraph: line breaks kept, ** bold.
@@ -31,30 +32,7 @@ export default function Discover() {
             <Paragraph key={j} text={p} />
           ))}
 
-          {block.type === "images" && (
-            <div className="mt-8 grid gap-8 sm:grid-cols-2">
-              {block.images.map((img) => (
-                <figure key={img.src}>
-                  <img
-                    src={img.src}
-                    alt={tx(img.alt)}
-                    loading="lazy"
-                    className="w-full h-auto border border-black"
-                  />
-                  <figcaption className="mt-2 text-sm">
-                    <a
-                      href={img.source}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline underline-offset-4"
-                    >
-                      pinterest
-                    </a>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          )}
+          {block.type === "diagrams" && <Diagrams />}
 
           {block.type === "link" && (
             <p className="mt-6">

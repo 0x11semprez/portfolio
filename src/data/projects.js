@@ -19,8 +19,8 @@ export const PROJECTS = [
     name: "Röze",
     category: "audio / c++ / go",
     tagline: {
-      en: "a digital audio sampler designed to create atmospheric melodies in a sad, melancholic world",
-      fr: "un sampler audio numérique conçu pour créer des mélodies atmosphériques dans un monde triste et mélancolique",
+      en: "a digital audio sampler designed to create atmospheric melodies",
+      fr: "un sampler audio numérique pour composer des mélodies atmosphériques",
     },
     image: "/images/projects/roze.png",
     detailImage: "/images/projects/roze-detail.png",
@@ -33,11 +33,11 @@ export const PROJECTS = [
     description: {
       en: [
         "A **sampler VST** built with JUCE (VST3 & Standalone), running on its own **sampling engine written from scratch**. **47 audio formats** supported out of the box, with automatic format detection.",
-        "Load, map and play your sounds straight from your DAW. Röze also ships with its own **command line tool, written in Go**, so the whole workflow (build, install, scan a sample folder, build a keymap) lives in one place.",
+        "Load, map and play your sounds straight from your DAW. Röze is not only a plugin: it ships with its own **command line tool, written in Go**, that drives the full pipeline, from building the VST to managing your sample library, without leaving the terminal.",
       ],
       fr: [
-        "Un **sampler VST** construit avec JUCE (VST3 et Standalone), sur un **moteur de sampling écrit from scratch**. **47 formats audio** pris en charge nativement, avec détection automatique du format.",
-        "Chargez, mappez et jouez vos sons directement depuis votre DAW. Röze embarque aussi son propre **outil en ligne de commande, écrit en Go** : tout le workflow (build, installation, scan d'un dossier de samples, création d'un keymap) au même endroit.",
+        "Un **sampler VST** développé avec JUCE (VST3 et version autonome), qui repose sur son propre **moteur d'échantillonnage, écrit de zéro**. Il lit **47 formats audio** sans rien configurer et reconnaît seul le format de chaque fichier.",
+        "Chargez vos sons, assignez-les aux touches et jouez-les directement dans votre DAW. Mais Röze ne se limite pas au plugin : il est livré avec son propre **outil en ligne de commande, écrit en Go**, qui gère tout le reste, de la compilation du VST à l'organisation de votre bibliothèque de samples, sans quitter le terminal.",
       ],
     },
     details: [
@@ -67,9 +67,9 @@ export const PROJECTS = [
         "A local **TCP bridge** plugs each chain node into its own mixnet client. Three nodes run over it and all end at the same height and tip.",
       ],
       fr: [
-        "Le nom vient de la **scopophobie**, la peur intense d'être observé. Les privacy coins cachent les montants et les adresses, mais fuient par **la couche réseau** : adresses IP, timing de propagation et topologie des pairs suffisent à désanonymiser une partie des transactions. ophobia a deux parties : **un mixnet** qui cache ces métadonnées, et **une chaîne Rust** (ring signatures, PoW, mempool) dont les nœuds font circuler leurs blocs et transactions à travers lui.",
+        "Le nom vient de la **scopophobie**, la peur intense d'être observé. Les privacy coins cachent les montants et les adresses, mais laissent fuiter des informations par **la couche réseau** : adresses IP, timing de propagation et topologie des pairs suffisent à désanonymiser une partie des transactions. ophobia a deux parties : **un mixnet** qui cache ces métadonnées, et **une chaîne Rust** (ring signatures, PoW, mempool) dont les nœuds font transiter leurs blocs et leurs transactions par ce mixnet.",
         "Nous sommes deux. **J'ai construit le mixnet**, en Go, d'après le papier **Loopix** : clients, providers et une topologie de mix nodes en couches, des **délais tirés selon une loi de Poisson** à chaque saut, et du **trafic de couverture** (messages loop et drop), pour qu'un adversaire qui observe tout internet ne puisse pas relier qui parle à qui.",
-        "Un **bridge TCP** local branche chaque nœud de la chaîne sur son propre client mixnet. Trois nœuds lancés dessus finissent tous à la même hauteur, sur le même tip.",
+        "Un **bridge TCP** local branche chaque nœud de la chaîne sur son propre client mixnet. Trois nœuds lancés dessus finissent tous à la même hauteur, sur le même dernier bloc.",
       ],
     },
     details: [

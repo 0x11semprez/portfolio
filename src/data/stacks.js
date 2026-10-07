@@ -27,7 +27,7 @@ export const STACKS = [
     },
     how: {
       en: "Low-latency systems, performance-critical code, anything where every microsecond counts.",
-      fr: "Systèmes basse latence, code critique en performance, tout ce où chaque microseconde compte.",
+      fr: "Systèmes basse latence, code critique en performance : partout où chaque microseconde compte.",
     },
     level: "primary",
   },
@@ -46,7 +46,7 @@ export const STACKS = [
       en: "APIs, CLIs, infrastructure tooling.",
       fr: "APIs, CLIs, outillage d'infrastructure.",
     },
-    level: "working",
+    level: "primary",
   },
   {
     slug: "rust",
@@ -61,9 +61,9 @@ export const STACKS = [
     },
     how: {
       en: "Networking layers, cryptographic transports, anything where latency and correctness both matter.",
-      fr: "Couches réseau, transports cryptographiques, tout ce où latence et exactitude comptent autant.",
+      fr: "Couches réseau, transports cryptographiques : partout où la latence compte autant que l'exactitude.",
     },
-    level: "primary",
+    level: "working",
   },
   {
     slug: "python",
@@ -114,7 +114,7 @@ export const STACKS = [
       en: "Gas-optimized contracts, low-level Yul/assembly, Foundry test suites.",
       fr: "Contrats optimisés en gas, Yul/assembleur bas niveau, suites de tests Foundry.",
     },
-    level: "primary",
+    level: "working",
   },
   {
     slug: "postgres",
@@ -131,7 +131,7 @@ export const STACKS = [
       en: "Schema design, indexing, query tuning. Default database for every service I build.",
       fr: "Conception de schémas, indexation, optimisation de requêtes. Base par défaut de chaque service que je construis.",
     },
-    level: "working",
+    level: "primary",
   },
   {
     slug: "aws",
@@ -148,7 +148,7 @@ export const STACKS = [
       en: "Architecture design, cost optimisation (FinOps), IAM and networking.",
       fr: "Conception d'architecture, optimisation des coûts (FinOps), IAM et réseau.",
     },
-    level: "primary",
+    level: "working",
   },
   {
     slug: "docker",
@@ -180,7 +180,7 @@ export const STACKS = [
     },
     how: {
       en: "Daily. Clean history, small commits, reviewable branches.",
-      fr: "Tous les jours. Historique propre, petits commits, branches relisibles.",
+      fr: "Tous les jours. Historique propre, petits commits, branches faciles à relire.",
     },
     level: "primary",
   },
@@ -199,7 +199,7 @@ export const STACKS = [
       en: "GitHub Actions pipelines: lint, test, build, deploy.",
       fr: "Pipelines GitHub Actions : lint, test, build, déploiement.",
     },
-    level: "working",
+    level: "primary",
   },
 ];
 
