@@ -28,12 +28,12 @@ export default function ProjectDetail() {
     >
       <p className="italic">{tx(p.tagline)}</p>
       <Block label={t("about")}>
+        <div className="pb-6">
+          <ProjectDiagram slug={p.slug} />
+        </div>
         {tx(p.description).map((d, i) => (
           <p key={i}>{bold(d)}</p>
         ))}
-        <div className="pt-6">
-          <ProjectDiagram slug={p.slug} />
-        </div>
       </Block>
       <Block label={t("details")}>
         <Specs centered rows={p.details.map(([k, v]) => [t(k), t(v)])} />
