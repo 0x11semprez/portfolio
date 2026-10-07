@@ -82,10 +82,13 @@ function Zones({ label }) {
 export default function Diagrams() {
   const tx = useTx();
   return (
-    <div className="mt-8 grid gap-8 sm:grid-cols-2">
+    // wider than the text column from lg up (centered on the page), so each
+    // question fits on one line over its diagram; on phones they stack, the
+    // question sized to the screen width
+    <div className="mt-8 grid gap-10 sm:gap-8 sm:grid-cols-2 lg:relative lg:left-1/2 lg:w-[min(72rem,calc(100vw-2.5rem))] lg:-translate-x-1/2">
       <figure>
-        <figcaption className="mb-4 font-bold">
-          {tx({ en: "1 - What is a polymath?", fr: "1 - Qu'est-ce qu'un polymathe ?" })}
+        <figcaption className="mb-4 font-bold text-center whitespace-nowrap text-[min(1.25rem,4.2vw)] sm:text-[min(1.25rem,2vw)]">
+          {tx({ en: "What is a polymath?", fr: "Qu'est-ce qu'un polymathe ?" })}
         </figcaption>
         <Venn
           label={tx({
@@ -95,8 +98,8 @@ export default function Diagrams() {
         />
       </figure>
       <figure>
-        <figcaption className="mb-4 font-bold">
-          {tx({ en: "2 - How to get out of your comfort zone?", fr: "2 - Comment sortir de sa zone de confort ?" })}
+        <figcaption className="mb-4 font-bold text-center whitespace-nowrap text-[min(1.25rem,4.2vw)] sm:text-[min(1.25rem,2vw)]">
+          {tx({ en: "How to get out of your comfort zone?", fr: "Comment sortir de sa zone de confort ?" })}
         </figcaption>
         <Zones
           label={tx({

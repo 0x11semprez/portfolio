@@ -17,7 +17,7 @@ export const PROJECTS = [
   {
     slug: "roze",
     name: "Röze",
-    category: "audio / c++ / go",
+    category: "audio",
     tagline: {
       en: "a digital audio sampler designed to create atmospheric melodies",
       fr: "un sampler audio numérique pour composer des mélodies atmosphériques",
@@ -51,7 +51,7 @@ export const PROJECTS = [
   {
     slug: "ophobia",
     name: "ophobia",
-    category: "privacy / networking / go / rust",
+    category: "privacy",
     tagline: {
       en: "a privacy blockchain whose nodes talk through a Loopix-style mixnet, hiding network-level metadata from a global passive adversary",
       fr: "une privacy blockchain dont les nodes communiquent via un mixnet inspiré de Loopix, qui cache les metadata réseau à un global passive adversary",
