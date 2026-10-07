@@ -1,12 +1,13 @@
-Site typeface: Hina Mincho, one weight (Regular), everywhere.
+Site typeface, in order of preference:
 
-  HinaMincho-Regular.woff2  (committed; SIL OFL, see HinaMincho-OFL.txt)
-    Subset of the Google Fonts TTF to Latin, Greek and Cyrillic, which
-    covers every French accent:
-      pyftsubset HinaMincho-Regular.ttf \
-        --unicodes="U+0000-024F,U+0300-036F,U+0370-03FF,U+0400-04FF,U+1E00-1EFF,U+2000-206F,U+20A0-20CF,U+2100-214F,U+2190-21FF,U+2212,U+25A0-25FF" \
-        --layout-features='*' --flavor=woff2 --output-file=HinaMincho-Regular.woff2
+  NanumMyeongjo-{Regular,ExtraBold}.woff2  (committed; Naver, SIL OFL,
+    see NanumMyeongjo-OFL.txt; Latin subset from Google Fonts; ExtraBold
+    serves weight 700, its Bold is too light next to YDMyungjo). The font
+    has no accented letters, so é è à ç … are added as composites of its
+    own ` ^ . ~ , glyphs by scripts/font-accents.py (needs fonttools):
+      python3 scripts/font-accents.py in.woff2 out.woff2
 
-  The font has no bold: `font-bold` text is emboldened by the browser.
+  YDMyungjo-Regular.woff2 / YDMyungjo-Bold.woff2  (licensed, NOT committed —
+    drop them here and the site switches to them, nothing else to change)
 
-`index.html` declares the @font-face for this path.
+`public/index.html` declares the @font-face for exactly these paths.
