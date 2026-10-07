@@ -6,8 +6,9 @@ const RATIO = {
   wide: "aspect-[16/10]",
 };
 
-// One "product" in the grid: image on top, uppercase label below.
+// One "product" in the grid: image on top, label below.
 // `dark`: the page is showing the background video, so the label is white.
+// `upper`: labels in capitals (albums); false keeps them as written (stacks).
 export default function Tile({
   to,
   image,
@@ -18,6 +19,7 @@ export default function Tile({
   ratio = "square",
   fit = "contain",
   dark = false,
+  upper = true,
   onClick,
 }) {
   return (
@@ -40,7 +42,7 @@ export default function Tile({
           />
         ) : (
           <div
-            className={`h-full w-full flex items-center justify-center px-2 text-center text-sm sm:text-base uppercase ${
+            className={`h-full w-full flex items-center justify-center px-2 text-center text-sm sm:text-base ${upper ? "uppercase" : ""} ${
               dark ? "border border-white text-white" : "border border-black text-black"
             }`}
           >
@@ -49,7 +51,7 @@ export default function Tile({
         )}
       </div>
       <p
-        className={`mt-4 text-base sm:text-lg font-bold uppercase tracking-wide text-center [overflow-wrap:anywhere] transition-colors ${
+        className={`mt-4 text-base sm:text-lg font-bold ${upper ? "uppercase tracking-wide" : ""} text-center [overflow-wrap:anywhere] transition-colors ${
           dark ? "text-white" : ""
         }`}
       >
@@ -57,7 +59,7 @@ export default function Tile({
       </p>
       {sublabel && (
         <p
-          className={`mt-1 text-sm sm:text-base uppercase text-center [overflow-wrap:anywhere] ${
+          className={`mt-1 text-sm sm:text-base ${upper ? "uppercase" : ""} text-center [overflow-wrap:anywhere] ${
             dark ? "text-white" : ""
           }`}
         >

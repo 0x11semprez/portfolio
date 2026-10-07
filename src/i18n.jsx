@@ -98,8 +98,8 @@ const UI = {
     // albums
     favorites: "favoris",
     tracks: "titres",
-    "contributions on github in the last 12 months":
-      "contributions sur github ces 12 derniers mois",
+    "contributions on GitHub in the last 12 months":
+      "contributions sur GitHub ces 12 derniers mois",
     play: "lire",
     pause: "pause",
     album: "album",

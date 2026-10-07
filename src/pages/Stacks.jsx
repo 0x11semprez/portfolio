@@ -11,13 +11,13 @@ export default function Stacks() {
   return (
     <>
       {/* GitHub contributions over the last 12 months (npm run github) */}
-      <div className="pb-10 text-center uppercase tracking-wide">
+      <div className="pb-10 text-center">
         {/* as big as the menu's numbers */}
         <p className="text-[min(12vh,22vw)] font-bold leading-none tracking-tight">
           {GITHUB.contributions.toLocaleString("fr-FR")}
         </p>
         <p className="mt-3 text-sm sm:text-base">
-          {t("contributions on github in the last 12 months")}
+          {t("contributions on GitHub in the last 12 months")}
         </p>
       </div>
       <Grid cols={6}>
@@ -27,6 +27,7 @@ export default function Stacks() {
             to={`/17/${s.slug}`}
             image={s.image}
             label={s.name}
+            upper={false}
           />
         ))}
       </Grid>
