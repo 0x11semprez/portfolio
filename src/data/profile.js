@@ -16,7 +16,7 @@ export const PROFILE = {
       "semprez est ingénieur logiciel.",
       'la phrase préférée de semprez : "tout a un coût".',
       "Ouvert aux postes de DevOps.",
-      "Ouvert aux postes en C++ ou Golang en finance ou défense.",
+      "Ouvert aux postes en finance ou défense, en C++ ou Golang.",
     ].join("\n"),
   },
   // Background video for this page ("interactive mode"): a file in

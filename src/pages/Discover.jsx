@@ -17,12 +17,12 @@ function Paragraph({ text }) {
 }
 
 // "03": the text in one column, the diagrams side by side (stacked on phones),
-// then what I'm doing now. Plain page, no effects.
+// then what I'm doing now. Plain page, text centered, no effects.
 export default function Discover() {
   const tx = useTx();
 
   return (
-    <article className="mx-auto max-w-3xl px-5 pb-24 text-lg sm:text-xl leading-relaxed">
+    <article className="mx-auto max-w-3xl px-5 pb-24 text-center text-lg sm:text-xl leading-relaxed">
       {DISCOVER.map((block, i) => (
         <section key={i} className={i ? "mt-16" : ""}>
           <h2 className="text-xl sm:text-2xl font-bold uppercase tracking-wide">
