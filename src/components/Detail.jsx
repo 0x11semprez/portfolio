@@ -179,7 +179,7 @@ export default function Detail({
             <p className="mt-2 text-2xl sm:text-4xl uppercase">{subtitle}</p>
           )}
 
-          <div className="mt-12 space-y-12 text-2xl sm:text-3xl leading-relaxed">
+          <div className="mt-8 sm:mt-12 space-y-8 sm:space-y-12 text-lg sm:text-3xl leading-relaxed">
             {children}
           </div>
         </div>
@@ -192,7 +192,7 @@ export default function Detail({
 export function Block({ label, children }) {
   return (
     <section>
-      <h2 className="text-2xl sm:text-3xl font-bold uppercase mb-4 text-[color:var(--accent,currentColor)]">
+      <h2 className="text-xl sm:text-3xl font-bold uppercase mb-3 sm:mb-4 text-[color:var(--accent,currentColor)]">
         {label}
       </h2>
       <div className="space-y-3">{children}</div>
@@ -204,7 +204,7 @@ export function Block({ label, children }) {
 export function Specs({ rows, centered = false }) {
   return (
     <dl
-      className={`text-xl sm:text-2xl uppercase ${
+      className={`text-base sm:text-2xl uppercase ${
         centered
           ? "flex flex-col items-center gap-y-1"
           : "grid grid-cols-[9rem_minmax(0,1fr)] sm:grid-cols-[12rem_minmax(0,1fr)] gap-y-1"
