@@ -7,7 +7,7 @@ import { useTx } from "../i18n";
 // Both diagrams share one viewBox size and one label size, so they draw at
 // the same scale side by side: POLYMATH is as big as COMFORT ZONE.
 const VIEW = "920 820";
-const SIZE = 22;
+const SIZE = 23;
 
 // Centered label, one <tspan> per line.
 function Label({ x, y, lines }) {
@@ -92,7 +92,7 @@ export default function Diagrams() {
     // question sized to the screen width
     <div className="mt-8 grid gap-10 sm:gap-8 sm:grid-cols-2 lg:relative lg:left-1/2 lg:w-[min(72rem,calc(100vw-2.5rem))] lg:-translate-x-1/2">
       <figure>
-        <figcaption className="mb-4 font-bold text-center whitespace-nowrap text-[min(1.25rem,4.2vw)] sm:text-[min(1.25rem,2vw)]">
+        <figcaption className="mb-4 font-bold text-center whitespace-nowrap text-[min(1.45rem,4.2vw)] sm:text-[min(1.45rem,2vw)]">
           {tx({ en: "What is a polymath?", fr: "Qu'est-ce qu'un polymathe ?" })}
         </figcaption>
         <Venn
@@ -103,7 +103,7 @@ export default function Diagrams() {
         />
       </figure>
       <figure>
-        <figcaption className="mb-4 font-bold text-center whitespace-nowrap text-[min(1.25rem,4.2vw)] sm:text-[min(1.25rem,2vw)]">
+        <figcaption className="mb-4 font-bold text-center whitespace-nowrap text-[min(1.45rem,4.2vw)] sm:text-[min(1.45rem,2vw)]">
           {tx({ en: "How to get out of your comfort zone?", fr: "Comment sortir de sa zone de confort ?" })}
         </figcaption>
         <Zones

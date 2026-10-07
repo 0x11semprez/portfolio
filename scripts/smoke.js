@@ -151,14 +151,14 @@ async function main() {
     check("first visit shows the interactive-mode dialog", await dialog.isVisible());
     const text = await dialog.innerText();
     check('dialog has no "—" characters', !/[—–]/.test(text), text.replace(/\n/g, " | "));
-    check("dialog shows one language at a time", !(text.includes("Interactive mode") && text.includes("mode interactif")));
+    check("dialog shows one language at a time", !(text.includes("Flashing images") && text.includes("Flashs lumineux")));
     check("dialog text is centered", (await dialog.locator("h2").evaluate((e) => getComputedStyle(e).textAlign)) === "center");
     await dialog.getByRole("button", { name: "fr", exact: true }).click();
-    check("FR switch shows French copy", (await dialog.innerText()).toLowerCase().includes("mode interactif"));
+    check("FR switch shows French copy", (await dialog.innerText()).toLowerCase().includes("flashs lumineux"));
     await dialog.getByRole("button", { name: "en", exact: true }).click();
-    check("EN switch shows English copy", (await dialog.innerText()).toLowerCase().includes("interactive mode?"));
+    check("EN switch shows English copy", (await dialog.innerText()).toLowerCase().includes("flashing images"));
 
-    await dialog.getByRole("button", { name: "static" }).click();
+    await dialog.getByRole("button", { name: "no video" }).click();
     check("static: dialog closes", !(await dialog.isVisible()));
     check("static: no video", (await hasVideo(page)) === 0);
     check("static: choice persisted", (await page.evaluate(() => localStorage.getItem("semprez.video"))) === "0");
@@ -172,7 +172,7 @@ async function main() {
   await attempt("interactive", async () => {
     const page = await newPage();
     await go(page, "/");
-    await page.getByRole("dialog").getByRole("button", { name: "interactive" }).click();
+    await page.getByRole("dialog").getByRole("button", { name: "watch the video" }).click();
     await page.waitForSelector("video");
     check("interactive: video mounted", (await hasVideo(page)) === 1);
     const v = page.locator("video");

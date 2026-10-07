@@ -7,6 +7,20 @@ module.exports = {
     fontFamily: {
       sans: ['"Hina Mincho"', "serif"],
     },
+    // Hina Mincho draws small for its size (low x-height): every step of the
+    // type scale is ~15% bigger than Tailwind's default.
+    fontSize: {
+      xs: ["0.875rem", { lineHeight: "1.25rem" }],
+      sm: ["1rem", { lineHeight: "1.5rem" }],
+      base: ["1.125rem", { lineHeight: "1.75rem" }],
+      lg: ["1.3125rem", { lineHeight: "2rem" }],
+      xl: ["1.4375rem", { lineHeight: "2rem" }],
+      "2xl": ["1.75rem", { lineHeight: "2.25rem" }],
+      "3xl": ["2.125rem", { lineHeight: "2.5rem" }],
+      "4xl": ["2.5rem", { lineHeight: "2.75rem" }],
+      "5xl": ["3.5rem", { lineHeight: "1" }],
+      "6xl": ["4.25rem", { lineHeight: "1" }],
+    },
     extend: {
       // one letter of a wavy line: up and down on an eased (sine-like) curve
       keyframes: {

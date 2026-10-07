@@ -7,7 +7,7 @@ import { useLang, useT, useTx } from "../i18n";
 // desktop size. Every sentence stays on one line on every screen: the size
 // follows the widest line down to MIN (text-xs), and only below that (very
 // narrow phones) do lines wrap.
-const MAX = 3.75;
+const MAX = 4.25;
 const MIN = 0.75;
 
 // Renders **bold** and line breaks from the bio string. One block per line.
@@ -92,29 +92,27 @@ function useFitLines(ref, key) {
 // Copy for the first-visit dialog, per language.
 const PROMPT = {
   en: {
-    title: "interactive mode?",
-    body: "Interactive mode plays a video in the background of this page.",
-    warning: "Warning: it contains flashing images.",
+    title: "warning",
+    warning: "Flashing images.",
     sound: "Sound is off.",
-    yes: "interactive",
-    no: "static",
+    yes: "watch the video",
+    no: "no video",
     credit: (name) => <>Video by {name}, thank you for this edit.</>,
   },
   fr: {
-    title: "mode interactif ?",
-    body: "Le mode interactif lit une vidéo en fond de page.",
-    warning: "Attention : elle contient des flashs lumineux.",
+    title: "attention",
+    warning: "Flashs lumineux.",
     sound: "Le son est coupé.",
-    yes: "interactif",
-    no: "statique",
+    yes: "voir la vidéo",
+    no: "sans vidéo",
     credit: (name) => <>Vidéo de {name}, merci pour ce montage.</>,
   },
 };
 
-// First-visit choice between the video ("interactive") and a plain page,
-// with the flashing-images warning and the credit. The visitor picks the
-// language (EN / FR) at the top: it is the site's language (same as the
-// header switch), starting on the browser's.
+// First-visit choice between the background video and a plain page: a black
+// screen, white text, so the flashing-images warning can't be missed. The
+// visitor picks the language (EN / FR) at the top: it is the site's language
+// (same as the header switch), starting on the browser's.
 function VideoPrompt({ credit, onChoose }) {
   const [lang, setLang] = useLang();
   const t = PROMPT[lang];
@@ -124,7 +122,7 @@ function VideoPrompt({ credit, onChoose }) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="video-prompt-title"
-      className="fixed inset-0 z-50 flex justify-center overflow-y-auto bg-white px-5 py-8"
+      className="fixed inset-0 z-50 flex justify-center overflow-y-auto bg-black text-white px-5 py-8"
     >
       {/* my-auto: centered when it fits, scrollable when the screen is too
           short (phone in landscape with the browser bars out) */}
@@ -135,7 +133,7 @@ function VideoPrompt({ credit, onChoose }) {
               key={l}
               onClick={() => setLang(l)}
               aria-pressed={l === lang}
-              className={`px-4 py-3 -my-3 transition-colors ${
+              className={`px-4 py-3 -my-3 uppercase ${
                 l === lang
                   ? "font-bold"
                   : "font-normal hover:underline underline-offset-4"
@@ -148,27 +146,27 @@ function VideoPrompt({ credit, onChoose }) {
 
         <h2
           id="video-prompt-title"
-          className="mt-8 text-lg sm:text-xl font-bold uppercase tracking-wide"
+          className="mt-8 text-2xl sm:text-3xl font-bold uppercase tracking-wide"
         >
           {t.title}
         </h2>
 
         <p className="mt-6">
-          {t.body}
+          <strong>{t.warning}</strong>
           <br />
-          <strong>{t.warning}</strong> {t.sound}
+          {t.sound}
         </p>
 
-        <div className="mt-6 flex justify-center gap-2 uppercase tracking-wide font-bold">
+        <div className="mt-8 flex flex-wrap justify-center gap-x-2 uppercase tracking-wide font-bold whitespace-nowrap text-[min(1.125rem,4.4vw)] sm:text-lg">
           <button
             onClick={() => onChoose(true)}
-            className="px-3 py-2 hover:underline underline-offset-4"
+            className="px-3 py-2 uppercase hover:underline underline-offset-4"
           >
             {t.yes}
           </button>
           <button
             onClick={() => onChoose(false)}
-            className="px-3 py-2 font-normal hover:underline underline-offset-4"
+            className="px-3 py-2 uppercase font-normal hover:underline underline-offset-4"
           >
             {t.no}
           </button>
@@ -181,7 +179,7 @@ function VideoPrompt({ credit, onChoose }) {
                 href={credit.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-2 -mx-2 py-2.5 -my-2.5 underline underline-offset-4 hover:text-black"
+                className="inline-block px-2 -mx-2 py-2.5 -my-2.5 underline underline-offset-4"
               >
                 {credit.name}
               </a>,
