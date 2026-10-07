@@ -47,7 +47,7 @@ export default function AlbumDetail({ dark = false, onTheme }) {
           <Block label={t("favorites")}>
             <ol className="space-y-1 flex flex-col items-center">
               {a.favorites.slice(0, 3).map((t, i) => (
-                <li key={t.title} className="flex gap-3">
+                <li key={t.title} className="flex gap-3 max-w-full">
                   <span className="font-bold text-[color:var(--accent,currentColor)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -56,12 +56,12 @@ export default function AlbumDetail({ dark = false, onTheme }) {
                       href={t.spotify}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:underline underline-offset-4"
+                      className="min-w-0 [overflow-wrap:anywhere] hover:underline underline-offset-4"
                     >
                       {t.title}
                     </a>
                   ) : (
-                    <span>{t.title}</span>
+                    <span className="min-w-0 [overflow-wrap:anywhere]">{t.title}</span>
                   )}
                 </li>
               ))}
