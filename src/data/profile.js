@@ -10,6 +10,7 @@ export const PROFILE = {
       'motto: "all comes with a cost".',
       "Open to DevOps roles.",
       "Open to real-time C++ roles.",
+      "Open to Go backend roles.",
     ].join("\n"),
     fr: [
       "semprez s'appelle Kassim.",
@@ -17,6 +18,7 @@ export const PROFILE = {
       'sa devise : "tout a un coût".',
       "Ouvert aux postes DevOps.",
       "Ouvert aux postes C++ temps réel.",
+      "Ouvert aux postes backend Go.",
     ].join("\n"),
   },
   // Background video for this page ("interactive mode"): a file in
