@@ -179,7 +179,7 @@ export default function Detail({
             <p className="mt-2 text-2xl sm:text-4xl uppercase">{subtitle}</p>
           )}
 
-          <div className="mt-12 space-y-12 text-2xl sm:text-3xl leading-relaxed uppercase">
+          <div className="mt-12 space-y-12 text-2xl sm:text-3xl leading-relaxed">
             {children}
           </div>
         </div>
