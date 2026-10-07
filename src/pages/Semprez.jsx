@@ -4,11 +4,11 @@ import { PROFILE } from "../data/profile";
 import { useLang, useT, useTx } from "../i18n";
 
 // Font-size bounds for the bio, in rem. MAX = text-6xl, the projects intro's
-// desktop size. Each sentence stays on one line while the size can follow the
-// widest line down to MIN (text-3xl); below that (phones) the text stays at
-// MIN and the lines wrap, so it never gets small.
+// desktop size. Every sentence stays on one line on every screen: the size
+// follows the widest line down to MIN (text-xs), and only below that (very
+// narrow phones) do lines wrap.
 const MAX = 4.25;
-const MIN = 2.125;
+const MIN = 0.75;
 
 // Renders **bold** and line breaks from the bio string. One block per line.
 function renderBio(text) {
@@ -207,7 +207,7 @@ export default function Semprez({
       )}
       {/* 6rem + notch = main's top padding, so the page is exactly one screen tall (no
           scrollbar on a one-line page). dvh ignores the phone browser bars. */}
-      <div className="min-h-[calc(100vh-6rem-env(safe-area-inset-top))] supports-[height:100dvh]:min-h-[calc(100dvh-6rem-env(safe-area-inset-top))] flex items-center justify-center px-4 pb-24">
+      <div className="min-h-[calc(100vh-6rem-env(safe-area-inset-top))] supports-[height:100dvh]:min-h-[calc(100dvh-6rem-env(safe-area-inset-top))] flex items-center justify-center px-2 pb-24">
         <p
           ref={bioRef}
           className={`w-full font-bold leading-snug tracking-tight text-center transition-colors ${on ? "text-white" : ""}`}
