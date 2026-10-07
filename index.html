@@ -47,39 +47,16 @@
         ]
       }
     </script>
-    <link rel="preload" href="/fonts/YDMyungjo-Regular.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/NanumMyeongjo-ExtraBold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/HinaMincho-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <style>
-      /* One typeface. YDMyungjo (licensed, files not committed) when its files
-         are present, else Nanum Myeongjo (OFL, committed): same Myeongjo
-         family, same feel. Declared here (not in src/index.css) so Vite does
-         not try to bundle the font files at build time. */
+      /* One typeface everywhere: Hina Mincho (SIL OFL, committed, Latin +
+         Cyrillic subset). It has one weight: bold text is drawn by the
+         browser from the regular. Declared here (not in src/index.css) so
+         Vite does not try to bundle the font file at build time. */
       @font-face {
-        font-family: "YDMyungjo";
-        src: url("/fonts/YDMyungjo-Regular.woff2") format("woff2");
+        font-family: "Hina Mincho";
+        src: url("/fonts/HinaMincho-Regular.woff2") format("woff2");
         font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "YDMyungjo";
-        src: url("/fonts/YDMyungjo-Bold.woff2") format("woff2");
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "Nanum Myeongjo";
-        src: url("/fonts/NanumMyeongjo-Regular.woff2") format("woff2");
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        /* Nanum's Bold reads light next to YDMyungjo's; ExtraBold is the match */
-        font-family: "Nanum Myeongjo";
-        src: url("/fonts/NanumMyeongjo-ExtraBold.woff2") format("woff2");
-        font-weight: 700;
         font-style: normal;
         font-display: swap;
       }

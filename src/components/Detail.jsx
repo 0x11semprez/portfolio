@@ -125,7 +125,7 @@ export default function Detail({
             ) : (
               <div
                 className={`h-full w-full flex items-center justify-center px-2 text-center text-sm sm:text-base uppercase ${
-                  dark ? "bg-white/10 text-white" : "bg-neutral-100 text-black"
+                  dark ? "border border-white text-white" : "border border-black text-black"
                 }`}
               >
                 {title}

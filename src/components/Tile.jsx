@@ -32,7 +32,7 @@ export default function Tile({
             sizes={srcSet ? sizes : undefined}
             alt={label}
             loading="lazy"
-            className={`max-h-full max-w-full transition-opacity duration-300 group-hover:opacity-70 ${
+            className={`max-h-full max-w-full transition-transform duration-300 group-hover:scale-105 ${
               fit === "cover"
                 ? "h-full w-full object-cover object-top"
                 : "object-contain"
@@ -41,7 +41,7 @@ export default function Tile({
         ) : (
           <div
             className={`h-full w-full flex items-center justify-center px-2 text-center text-sm sm:text-base uppercase ${
-              dark ? "bg-white/10 text-white" : "bg-neutral-100 text-black"
+              dark ? "border border-white text-white" : "border border-black text-black"
             }`}
           >
             {sublabel || label}

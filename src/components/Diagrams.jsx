@@ -4,20 +4,25 @@ import { useTx } from "../i18n";
 // as SVG: black lines on white (no grey), labels in the site's font (inherited), in the
 // current language. Coordinates are the originals' pixels.
 
+// Both diagrams share one viewBox size and one label size, so they draw at
+// the same scale side by side: POLYMATH is as big as COMFORT ZONE.
+const VIEW = "920 820";
+const SIZE = 22;
+
 // Centered label, one <tspan> per line.
-function Label({ x, y, lines, size = 26 }) {
+function Label({ x, y, lines }) {
   return (
     <text
       x={x}
       y={y}
       textAnchor="middle"
-      fontSize={size}
+      fontSize={SIZE}
       fontWeight="700"
       fill="currentColor"
       style={{ fontFamily: "inherit" }}
     >
       {lines.map((l, i) => (
-        <tspan key={i} x={x} dy={i ? size * 1.3 : 0}>
+        <tspan key={i} x={x} dy={i ? SIZE * 1.3 : 0}>
           {l}
         </tspan>
       ))}
@@ -27,10 +32,10 @@ function Label({ x, y, lines, size = 26 }) {
 
 const VENN = [
   { x: 540, y: 362, en: "ARTIST", fr: "ARTISTE" },
-  { x: 387, y: 466, en: "INTELLECTUAL", fr: "INTELLECTUEL", size: 21 },
-  { x: 693, y: 466, en: "SPIRITUAL", fr: "SPIRITUEL", size: 21 },
+  { x: 387, y: 466, en: "INTELLECTUAL", fr: "INTELLECTUEL" },
+  { x: 693, y: 466, en: "SPIRITUAL", fr: "SPIRITUEL" },
   { x: 540, y: 583, en: "POLYMATH", fr: "POLYMATHE" },
-  { x: 270, y: 700, en: "ENTREPRENEUR", fr: "ENTREPRENEUR", size: 22 },
+  { x: 270, y: 700, en: "ENTREPRENEUR", fr: "ENTREPRENEUR" },
   { x: 540, y: 736, en: "PHYSICAL", fr: "PHYSIQUE" },
   { x: 805, y: 700, en: "ATHLETE", fr: "ATHLÈTE" },
 ];
@@ -39,14 +44,14 @@ const VENN = [
 function Venn({ label }) {
   const tx = useTx();
   return (
-    <svg viewBox="120 140 840 800" role="img" aria-label={label} className="w-full h-auto">
-      <g fill="none" stroke="currentColor" strokeWidth="4">
+    <svg viewBox={`80 130 ${VIEW}`} role="img" aria-label={label} className="w-full h-auto">
+      <g fill="none" stroke="currentColor" strokeWidth="3">
         <circle cx="540" cy="422" r="267" />
         <circle cx="405" cy="657" r="267" />
         <circle cx="675" cy="657" r="267" />
       </g>
       {VENN.map((l) => (
-        <Label key={l.en} x={l.x} y={l.y} size={l.size} lines={[tx(l)]} />
+        <Label key={l.en} x={l.x} y={l.y} lines={[tx(l)]} />
       ))}
     </svg>
   );
@@ -64,7 +69,7 @@ const ZONES = [
 function Zones({ label }) {
   const tx = useTx();
   return (
-    <svg viewBox="260 490 920 820" role="img" aria-label={label} className="w-full h-auto">
+    <svg viewBox={`260 490 ${VIEW}`} role="img" aria-label={label} className="w-full h-auto">
       <g fill="none" stroke="currentColor" strokeWidth="3">
         {ZONES.map((z) => (
           <circle key={z.r} cx={z.cx} cy="900" r={z.r} />
@@ -73,7 +78,7 @@ function Zones({ label }) {
       <line x1="389" y1="943" x2="1135" y2="943" stroke="currentColor" strokeWidth="3" />
       <path d="M1135 931 L1155 943 L1135 955 Z" fill="currentColor" />
       {ZONES.map((z) => (
-        <Label key={z.r} x={z.x} y={872} size={21} lines={tx(z)} />
+        <Label key={z.r} x={z.x} y={872} lines={tx(z)} />
       ))}
     </svg>
   );
