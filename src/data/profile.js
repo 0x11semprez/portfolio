@@ -9,14 +9,14 @@ export const PROFILE = {
       "semprez is a software engineer.",
       'semprez\'s favorite saying is "all comes with a cost".',
       "Open to DevOps roles.",
-      "Open to C++, Go roles in finance or defense.",
+      "Open to C++ or Golang roles in finance or defense.",
     ].join("\n"),
     fr: [
       "semprez s'appelle Kassim.",
       "semprez est ingénieur logiciel.",
       'la phrase préférée de semprez : "tout a un coût".',
-      "Ouvert aux postes DevOps.",
-      "Ouvert aux postes C++, Go en finance ou défense.",
+      "Ouvert aux postes de DevOps.",
+      "Ouvert aux postes en C++ ou Golang en finance ou défense.",
     ].join("\n"),
   },
   // Background video for this page ("interactive mode"): a file in

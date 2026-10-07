@@ -23,11 +23,11 @@ export const STACKS = [
     link: "https://isocpp.org",
     what: {
       en: "The language underneath everything that has to be fast: game engines, trading systems, browsers, operating systems. Direct control over memory and hardware, no safety net.",
-      fr: "Le langage sous tout ce qui doit être rapide : moteurs de jeu, systèmes de trading, navigateurs, systèmes d'exploitation. Contrôle direct de la mémoire et du matériel, sans filet.",
+      fr: "Le langage derrière tout ce qui doit être rapide : game engines, systèmes de trading, navigateurs, systèmes d'exploitation. Contrôle direct de la mémoire et du hardware, sans filet.",
     },
     how: {
       en: "Low-latency systems, performance-critical code, anything where every microsecond counts.",
-      fr: "Systèmes basse latence, code critique en performance : partout où chaque microseconde compte.",
+      fr: "Systèmes low-latency, code performance-critical : partout où chaque microseconde compte.",
     },
     level: "primary",
   },
@@ -40,11 +40,11 @@ export const STACKS = [
     link: "https://go.dev",
     what: {
       en: "Google's language for backend services. Simple syntax, built-in concurrency, compiles to a single binary. Most cloud infrastructure (Docker, Kubernetes) is written in it.",
-      fr: "Le langage de Google pour les services backend. Syntaxe simple, concurrence intégrée, compile en un seul binaire. La plupart de l'infrastructure cloud (Docker, Kubernetes) est écrite avec.",
+      fr: "Le langage de Google pour les services backend. Syntaxe simple, concurrency intégrée, compile en un seul binaire. La plupart de l'infrastructure cloud (Docker, Kubernetes) est écrite en Go.",
     },
     how: {
       en: "APIs, CLIs, infrastructure tooling.",
-      fr: "APIs, CLIs, outillage d'infrastructure.",
+      fr: "APIs, CLIs, tooling d'infrastructure.",
     },
     level: "primary",
   },
@@ -57,11 +57,11 @@ export const STACKS = [
     link: "https://www.rust-lang.org",
     what: {
       en: "A systems programming language with no garbage collector and no runtime. Memory safety is checked at compile time, so the class of bugs that crashes C/C++ programs simply cannot be written.",
-      fr: "Un langage système sans ramasse-miettes ni runtime. La sûreté mémoire est vérifiée à la compilation : la classe de bugs qui fait planter les programmes C/C++ ne peut tout simplement pas s'écrire.",
+      fr: "Un langage de systems programming sans garbage collector ni runtime. La memory safety est vérifiée au compile time : les bugs qui font planter les programmes C/C++ ne peuvent tout simplement pas s'écrire.",
     },
     how: {
       en: "Networking layers, cryptographic transports, anything where latency and correctness both matter.",
-      fr: "Couches réseau, transports cryptographiques : partout où la latence compte autant que l'exactitude.",
+      fr: "Networking layers, transports cryptographiques : partout où la latence compte autant que la correctness.",
     },
     level: "working",
   },
@@ -74,11 +74,11 @@ export const STACKS = [
     link: "https://python.org",
     what: {
       en: "General-purpose scripting language. The default for automation, data work and prototyping.",
-      fr: "Langage de script généraliste. Le choix par défaut pour l'automatisation, la donnée et le prototypage.",
+      fr: "Un langage de scripting généraliste. Le choix par défaut pour l'automatisation, la data et le prototypage.",
     },
     how: {
       en: "Glue scripts, automation, quick experiments before rewriting in Rust.",
-      fr: "Scripts de liaison, automatisation, expériences rapides avant réécriture en Rust.",
+      fr: "Glue scripts, automatisation, expériences rapides avant de réécrire en Rust.",
     },
     level: "working",
   },
@@ -91,11 +91,11 @@ export const STACKS = [
     link: "https://noir-lang.org",
     what: {
       en: "A language for writing zero-knowledge circuits: programs that prove a statement is true without revealing the data behind it.",
-      fr: "Un langage pour écrire des circuits à divulgation nulle : des programmes qui prouvent qu'une affirmation est vraie sans révéler les données derrière.",
+      fr: "Un langage pour écrire des circuits zero-knowledge : des programmes qui prouvent qu'une affirmation est vraie sans révéler les données derrière.",
     },
     how: {
       en: "Privacy primitives and proof circuits in research work.",
-      fr: "Primitives de confidentialité et circuits de preuve en travaux de recherche.",
+      fr: "Privacy primitives et proof circuits dans des travaux de recherche.",
     },
     level: "working",
   },
@@ -108,11 +108,11 @@ export const STACKS = [
     link: "https://soliditylang.org",
     what: {
       en: "The language of Ethereum smart contracts: programs that run on the blockchain and move real money. Every instruction costs gas, so efficiency is measured in cents.",
-      fr: "Le langage des smart contracts Ethereum : des programmes qui tournent sur la blockchain et déplacent de l'argent réel. Chaque instruction coûte du gas, l'efficacité se mesure en centimes.",
+      fr: "Le langage des smart contracts Ethereum : des programmes qui tournent sur la blockchain et déplacent de l'argent réel. Chaque instruction coûte du gas, donc l'efficacité se mesure en centimes.",
     },
     how: {
       en: "Gas-optimized contracts, low-level Yul/assembly, Foundry test suites.",
-      fr: "Contrats optimisés en gas, Yul/assembleur bas niveau, suites de tests Foundry.",
+      fr: "Contrats gas-optimized, Yul/assembly low-level, test suites Foundry.",
     },
     level: "working",
   },
@@ -125,11 +125,11 @@ export const STACKS = [
     link: "https://www.postgresql.org",
     what: {
       en: "The most trusted open-source relational database. Strict about data integrity, extensible, and it scales further than most teams will ever need.",
-      fr: "La base de données relationnelle open source la plus fiable. Stricte sur l'intégrité des données, extensible, et elle monte en charge bien plus loin que la plupart des équipes n'en auront besoin.",
+      fr: "La relational database open source la plus fiable. Stricte sur l'intégrité des données, extensible, et elle scale bien plus loin que ce dont la plupart des équipes auront besoin.",
     },
     how: {
       en: "Schema design, indexing, query tuning. Default database for every service I build.",
-      fr: "Conception de schémas, indexation, optimisation de requêtes. Base par défaut de chaque service que je construis.",
+      fr: "Schema design, indexing, query tuning. La database par défaut de chaque service que je construis.",
     },
     level: "primary",
   },
@@ -142,11 +142,11 @@ export const STACKS = [
     link: "https://aws.amazon.com",
     what: {
       en: "Amazon's cloud: rented servers, storage, networking and hundreds of managed services, billed by the hour.",
-      fr: "Le cloud d'Amazon : serveurs, stockage, réseau et des centaines de services managés, facturés à l'heure.",
+      fr: "Le cloud d'Amazon : serveurs, storage, networking et des centaines de managed services, facturés à l'heure.",
     },
     how: {
       en: "Architecture design, cost optimisation (FinOps), IAM and networking.",
-      fr: "Conception d'architecture, optimisation des coûts (FinOps), IAM et réseau.",
+      fr: "Architecture design, cost optimization (FinOps), IAM et networking.",
     },
     level: "working",
   },
@@ -159,11 +159,11 @@ export const STACKS = [
     link: "https://docker.com",
     what: {
       en: "Packages an application with everything it needs into a container, so it runs identically on a laptop and in production.",
-      fr: "Empaquette une application avec tout ce dont elle a besoin dans un conteneur, pour qu'elle tourne à l'identique sur un portable et en production.",
+      fr: "Package une application avec tout ce dont elle a besoin dans un container, pour qu'elle tourne à l'identique sur un laptop et en production.",
     },
     how: {
       en: "Every service I ship is containerised. Multi-stage builds, minimal images.",
-      fr: "Chaque service que je livre est conteneurisé. Builds multi-étapes, images minimales.",
+      fr: "Chaque service que je livre est containerisé. Multi-stage builds, images minimales.",
     },
     level: "primary",
   },
@@ -176,11 +176,11 @@ export const STACKS = [
     link: "https://git-scm.com",
     what: {
       en: "Version control: the full history of every change to a codebase, and the way teams collaborate on it.",
-      fr: "Gestion de versions : l'historique complet de chaque changement d'un code, et la façon dont les équipes collaborent dessus.",
+      fr: "Version control : l'historique complet de chaque changement d'une codebase, et la façon dont les équipes collaborent dessus.",
     },
     how: {
       en: "Daily. Clean history, small commits, reviewable branches.",
-      fr: "Tous les jours. Historique propre, petits commits, branches faciles à relire.",
+      fr: "Tous les jours. Historique propre, petits commits, branches faciles à review.",
     },
     level: "primary",
   },
@@ -193,11 +193,11 @@ export const STACKS = [
     link: "https://github.com/features/actions",
     what: {
       en: "Continuous integration and delivery: every change is automatically tested and deployed, without a human clicking buttons.",
-      fr: "Intégration et livraison continues : chaque changement est testé et déployé automatiquement, sans qu'un humain clique.",
+      fr: "Continuous integration et continuous delivery : chaque changement est testé et déployé automatiquement, sans qu'un humain clique sur un bouton.",
     },
     how: {
       en: "GitHub Actions pipelines: lint, test, build, deploy.",
-      fr: "Pipelines GitHub Actions : lint, test, build, déploiement.",
+      fr: "Pipelines GitHub Actions : lint, test, build, deploy.",
     },
     level: "primary",
   },

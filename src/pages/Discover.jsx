@@ -17,7 +17,7 @@ function Paragraph({ text }) {
 }
 
 // "03": the text in one column, the diagrams side by side (stacked on phones),
-// then where to follow what I'm doing now. Plain page, no effects.
+// then what I'm doing now. Plain page, no effects.
 export default function Discover() {
   const tx = useTx();
 
@@ -34,18 +34,6 @@ export default function Discover() {
 
           {block.type === "diagrams" && <Diagrams />}
 
-          {block.type === "link" && (
-            <p className="mt-6">
-              <a
-                href={block.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-bold uppercase tracking-wide underline underline-offset-4"
-              >
-                {block.label}
-              </a>
-            </p>
-          )}
         </section>
       ))}
     </article>

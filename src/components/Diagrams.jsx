@@ -82,19 +82,29 @@ function Zones({ label }) {
 export default function Diagrams() {
   const tx = useTx();
   return (
-    <div className="mt-8 grid gap-8 sm:grid-cols-2 items-center">
-      <Venn
-        label={tx({
-          en: "Venn diagram of artist, entrepreneur and athlete: intellectual, spiritual and physical where two meet, polymath in the middle",
-          fr: "Diagramme de Venn artiste, entrepreneur et athlète : intellectuel, spirituel et physique aux croisements, polymathe au centre",
-        })}
-      />
-      <Zones
-        label={tx({
-          en: "Nested circles from the comfort zone to the fear zone, the learning zone and the growth zone",
-          fr: "Cercles imbriqués de la zone de confort à la zone de peur, la zone d'apprentissage et la zone de croissance",
-        })}
-      />
+    <div className="mt-8 grid gap-8 sm:grid-cols-2">
+      <figure>
+        <figcaption className="mb-4 font-bold">
+          {tx({ en: "1 - What is a polymath?", fr: "1 - Qu'est-ce qu'un polymathe ?" })}
+        </figcaption>
+        <Venn
+          label={tx({
+            en: "Venn diagram of artist, entrepreneur and athlete: intellectual, spiritual and physical where two meet, polymath in the middle",
+            fr: "Diagramme de Venn artiste, entrepreneur et athlète : intellectuel, spirituel et physique aux croisements, polymathe au centre",
+          })}
+        />
+      </figure>
+      <figure>
+        <figcaption className="mb-4 font-bold">
+          {tx({ en: "2 - How to get out of your comfort zone?", fr: "2 - Comment sortir de sa zone de confort ?" })}
+        </figcaption>
+        <Zones
+          label={tx({
+            en: "Nested circles from the comfort zone to the fear zone, the learning zone and the growth zone",
+            fr: "Cercles imbriqués de la zone de confort à la zone de peur, la zone d'apprentissage et la zone de croissance",
+          })}
+        />
+      </figure>
     </div>
   );
 }

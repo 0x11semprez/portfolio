@@ -2,8 +2,8 @@
 // Text is `{ en, fr }` wherever it is translated: the language switch in the
 // header picks one. `**bold**` works in both.
 export const PROJECTS_INTRO = {
-  en: "I've built **over 40 projects** in tech since I started designing no-code websites at **10**. Here are the recent ones I'm the proudest of.",
-  fr: "J'ai construit **plus de 40 projets** tech depuis mes premiers sites no-code à **10 ans**. Voici les récents dont je suis le plus fier.",
+  en: "I've built **over 40 projects** in tech since I started designing no-code websites at **10**. Here are the most recent ones I'm proud of.",
+  fr: "J'ai réalisé **plus de 40 projets** tech depuis mes premiers sites no-code, à **10 ans**. Voici les plus récents dont je suis fier.",
 };
 
 // Each project is a "product". `image` = its logo in public/images/projects/,
@@ -32,12 +32,14 @@ export const PROJECTS = [
     linkLabel: "view on github",
     description: {
       en: [
-        "A **sampler VST** built with JUCE (VST3 & Standalone), running on its own **sampling engine written from scratch**. **47 audio formats** supported out of the box, with automatic format detection.",
-        "Load, map and play your sounds straight from your DAW. Röze is not only a plugin: it ships with its own **command line tool, written in Go**, that drives the full pipeline, from building the VST to managing your sample library, without leaving the terminal.",
+        "A **sampler VST** built with JUCE (VST3 & Standalone), on its own **sampling engine written from scratch**. **47 audio formats** supported, with automatic format detection.",
+        "Röze also ships with its own **CLI, written in Go**: build, install and manage your sample library without leaving the terminal.",
+        "More on GitHub.",
       ],
       fr: [
-        "Un **sampler VST** développé avec JUCE (VST3 et version autonome), qui repose sur son propre **moteur d'échantillonnage, écrit de zéro**. Il lit **47 formats audio** sans rien configurer et reconnaît seul le format de chaque fichier.",
-        "Chargez vos sons, assignez-les aux touches et jouez-les directement dans votre DAW. Mais Röze ne se limite pas au plugin : il est livré avec son propre **outil en ligne de commande, écrit en Go**, qui gère tout le reste, de la compilation du VST à l'organisation de votre bibliothèque de samples, sans quitter le terminal.",
+        "Un **sampler VST** développé avec JUCE (VST3 et Standalone), sur son propre **sampling engine écrit de zéro**. **47 formats audio** pris en charge, avec détection automatique du format.",
+        "Röze est aussi livré avec sa propre **CLI, écrite en Golang** : build, installation et gestion de votre bibliothèque de samples, sans quitter le terminal.",
+        "Plus d'informations sur GitHub.",
       ],
     },
     details: [
@@ -49,10 +51,10 @@ export const PROJECTS = [
   {
     slug: "ophobia",
     name: "ophobia",
-    category: { en: "privacy / networking / go / rust", fr: "vie privée / réseau / go / rust" },
+    category: "privacy / networking / go / rust",
     tagline: {
       en: "a privacy blockchain whose nodes talk through a Loopix-style mixnet, hiding network-level metadata from a global passive adversary",
-      fr: "une blockchain privée dont les nœuds communiquent à travers un mixnet inspiré de Loopix, qui cache les métadonnées réseau à un adversaire passif global",
+      fr: "une privacy blockchain dont les nodes communiquent via un mixnet inspiré de Loopix, qui cache les metadata réseau à un global passive adversary",
     },
     image: "/images/projects/ophobia.png",
     detailImage: "/images/projects/ophobia-detail.png",
@@ -62,14 +64,14 @@ export const PROJECTS = [
     linkLabel: "view on github",
     description: {
       en: [
-        "The name comes from **scopophobia**, the intense fear of being watched. Privacy coins hide amounts and addresses, but leak at **the network layer**: IP addresses, propagation timing and peer topology are enough to deanonymize a share of transactions. ophobia has two parts: **a mixnet** that hides that metadata, and **a Rust chain** (ring signatures, PoW, mempool) whose nodes gossip their blocks and transactions through it.",
-        "We're two. **I built the mixnet**, in Go, after the **Loopix** paper: clients, providers and a stratified topology of mix nodes, **Poisson-distributed delays** at each hop, and **cover traffic** (loop and drop messages), so an adversary watching the whole internet can't link who talks to whom.",
-        "A local **TCP bridge** plugs each chain node into its own mixnet client. Three nodes run over it and all end at the same height and tip.",
+        "The name comes from **scopophobia**, the fear of being watched. Privacy coins hide amounts and addresses, but leak at **the network layer**: IP addresses and propagation timing are enough to deanonymize transactions.",
+        "ophobia has two parts: **a mixnet in Go** and **a blockchain in Rust**. We're two, and **I built the mixnet**, after the **Loopix** paper: Poisson delays at each hop and cover traffic, so a global passive adversary can't link who talks to whom.",
+        "More on GitHub.",
       ],
       fr: [
-        "Le nom vient de la **scopophobie**, la peur intense d'être observé. Les privacy coins cachent les montants et les adresses, mais laissent fuiter des informations par **la couche réseau** : adresses IP, timing de propagation et topologie des pairs suffisent à désanonymiser une partie des transactions. ophobia a deux parties : **un mixnet** qui cache ces métadonnées, et **une chaîne Rust** (ring signatures, PoW, mempool) dont les nœuds font transiter leurs blocs et leurs transactions par ce mixnet.",
-        "Nous sommes deux. **J'ai construit le mixnet**, en Go, d'après le papier **Loopix** : clients, providers et une topologie de mix nodes en couches, des **délais tirés selon une loi de Poisson** à chaque saut, et du **trafic de couverture** (messages loop et drop), pour qu'un adversaire qui observe tout internet ne puisse pas relier qui parle à qui.",
-        "Un **bridge TCP** local branche chaque nœud de la chaîne sur son propre client mixnet. Trois nœuds lancés dessus finissent tous à la même hauteur, sur le même dernier bloc.",
+        "Le nom vient de la **scopophobie**, la peur d'être observé. Les privacy coins cachent les montants et les adresses, mais exposent des informations sur **la network layer** : les adresses IP et le timing de propagation suffisent à désanonymiser des transactions.",
+        "ophobia se compose de deux parties : **un mixnet en Golang** et **une blockchain en Rust**. Nous sommes deux, et **j'ai construit le mixnet**, d'après le paper **Loopix** : des Poisson delays à chaque hop et du cover traffic, pour qu'un global passive adversary ne puisse pas savoir qui parle à qui.",
+        "Plus d'informations sur GitHub.",
       ],
     },
     details: [
@@ -83,7 +85,7 @@ export const PROJECTS = [
   {
     slug: "ayze",
     name: "AYZE",
-    category: { en: "financial engineering", fr: "ingénierie financière" },
+    category: "financial engineering",
     tagline: {
       en: "an on-chain credit default swap on the XRP Ledger, so lending no longer needs collateral",
       fr: "un credit default swap on-chain sur le XRP Ledger, pour prêter sans collatéral",
@@ -96,12 +98,14 @@ export const PROJECTS = [
     linkLabel: "view on github",
     description: {
       en: [
-        "A marketplace of **lending vaults on the XRP Ledger**. A broker opens a vault and posts first-loss cover, lenders fund it, borrowers draw fixed tickets against it, and accredited protection sellers guarantee individual loans with conditional escrows: **a credit default swap, settled on-chain**.",
-        "Everything settles in **native XRP**, no issuer, no trust lines, no IOU. Built on the XLS-65 vault and XLS-66 lending protocol with XLS-70 credentials.",
+        "A marketplace of **lending vaults on the XRP Ledger**. A broker opens a vault and posts **first-loss capital**, lenders fund it, borrowers draw from it, and protection sellers guarantee the loans: **a credit default swap, settled on-chain**.",
+        "Everything settles in **native XRP**. Built on XLS-65 vaults, the XLS-66 lending protocol and XLS-70 credentials.",
+        "More on GitHub.",
       ],
       fr: [
-        "Une place de marché de **vaults de prêt sur le XRP Ledger**. Un broker ouvre un vault et dépose une couverture de première perte, des prêteurs le financent, des emprunteurs y tirent des tickets fixes, et des vendeurs de protection accrédités garantissent chaque prêt avec des escrows conditionnels : **un credit default swap, réglé on-chain**.",
-        "Tout se règle en **XRP natif**, sans émetteur, sans trust line, sans IOU. Construit sur le vault XLS-65 et le protocole de prêt XLS-66 avec les credentials XLS-70.",
+        "Une marketplace de **lending vaults sur le XRP Ledger**. Un broker ouvre un vault et y dépose du **first-loss capital**, des prêteurs le financent, des emprunteurs y empruntent, et des protection sellers garantissent les prêts : **un credit default swap, settled on-chain**.",
+        "Tout se règle en **XRP natif**. Construit sur les vaults XLS-65, le lending protocol XLS-66 et les credentials XLS-70.",
+        "Plus d'informations sur GitHub.",
       ],
     },
     details: [
