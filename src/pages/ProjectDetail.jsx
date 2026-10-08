@@ -1,5 +1,5 @@
 import { useParams, Navigate } from "react-router-dom";
-import Detail, { Block, Specs } from "../components/Detail";
+import Detail, { Block } from "../components/Detail";
 import { PROJECTS } from "../data/projects";
 import { useT, useTx } from "../i18n";
 import bold from "../components/bold";
@@ -35,9 +35,6 @@ export default function ProjectDetail() {
         {tx(p.description).map((d, i) => (
           <p key={i}>{bold(d)}</p>
         ))}
-      </Block>
-      <Block label={t("details")}>
-        <Specs centered rows={p.details.map(([k, v]) => [t(k), t(v)])} />
       </Block>
     </Detail>
   );

@@ -12,6 +12,7 @@ export const PROJECTS_INTRO = {
 // `detailImage` = a different image for the project page (defaults to `image`).
 // `description` takes **bold** too.
 // `wave`: the tagline rides a sine wave on the slide.
+// `details`: no longer shown on the page, only in the SEO pages (scripts/seo.mjs).
 // `link` null → the github icon is grey and inert, `linkLabel` is its tooltip.
 export const PROJECTS = [
   {
