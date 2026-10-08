@@ -23,6 +23,7 @@ export default function ProjectDetail() {
       bg={p.bg}
       dark={p.ink === "#fff"}
       title={p.name}
+      hideTitle
       subtitle={tx(p.category)}
       action={{ href: p.link, icon: "github", label: t(p.linkLabel) }}
     >

@@ -14,6 +14,8 @@ import { useT } from "../i18n";
 // `stacked`: one column, like a GitHub README: the image centered on top,
 // the text under it. `centered`: stacked, and the text centered too.
 // `accent`: colour for the title and the labels (an album's cover accent).
+// `hideTitle`: the image already spells the name (a project logo), so the
+// title is for screen readers only and the action icon stands alone.
 const RATIO = {
   square: "aspect-square",
   portrait: "aspect-[2/3]",
@@ -37,6 +39,7 @@ export default function Detail({
   stacked = false,
   centered = false,
   accent = null,
+  hideTitle = false,
 }) {
   stacked = stacked || centered;
   useEffect(() => {
@@ -145,7 +148,13 @@ export default function Detail({
             }`}
           >
             {/* one long word (an album title) breaks instead of pushing the page sideways */}
-            <span className="min-w-0 [overflow-wrap:anywhere]">{title}</span>
+            <span
+              className={
+                hideTitle ? "sr-only" : "min-w-0 [overflow-wrap:anywhere]"
+              }
+            >
+              {title}
+            </span>
             {action &&
               (action.href ? (
                 <a
