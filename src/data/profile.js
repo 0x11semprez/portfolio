@@ -70,7 +70,7 @@ export const CONTACTS = [
 
 // Menu entries, named after the major C++ releases.
 // 98 = semprez (profile), 03 = discover me, 11 = projects, 17 = stacks,
-// 20 = album.
+// 20 = thanks.
 export const SECTIONS = [
   { label: "98", path: "/" },
   { label: "03", path: "/03" },

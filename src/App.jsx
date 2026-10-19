@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useLocation, useParams } from "react-router-dom";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
@@ -8,16 +8,11 @@ import ProjectDetail from "./pages/ProjectDetail";
 import Stacks from "./pages/Stacks";
 import Discover from "./pages/Discover";
 import StackDetail from "./pages/StackDetail";
+import Thanks from "./pages/Thanks";
 import useVideoMode from "./components/useVideoMode";
 import BackgroundVideo from "./components/BackgroundVideo";
 import { PROFILE } from "./data/profile";
 import { PROJECTS } from "./data/projects";
-
-// The album pages carry the whole listening history (~400 KB of data): they
-// load in their own chunk, only when one of them is opened.
-const Albums = lazy(() => import("./pages/Albums"));
-const AlbumDetail = lazy(() => import("./pages/AlbumDetail"));
-const SecretAlbum = lazy(() => import("./pages/SecretAlbum"));
 
 // The sections used to live under words (/projects, /stacks, /album): old
 // links land on their number, same page, same hash. Vercel redirects them
@@ -45,14 +40,10 @@ export default function App() {
     pathname === "/11"
       ? PROJECTS[screen - 1]
       : PROJECTS.find((p) => pathname === `/11/${p.slug}`);
-  // an album page paints itself its cover's main colour, the bar follows
-  const [album, setAlbum] = useState(null);
-  const theme = project || (pathname.startsWith("/20/") ? album : null);
-  const dark = (on && videoPage) || theme?.ink === "#fff";
+  const dark = (on && videoPage) || project?.ink === "#fff";
 
   useEffect(() => {
-    // the album grid puts itself back where you left it (Albums.jsx)
-    if (pathname !== "/20") window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     setMenuOpen(false);
   }, [pathname]);
 
@@ -62,7 +53,7 @@ export default function App() {
         menuOpen={menuOpen}
         onToggleMenu={() => setMenuOpen((o) => !o)}
         dark={dark && !menuOpen}
-        bg={theme && !menuOpen ? theme.bg : null}
+        bg={project && !menuOpen ? project.bg : null}
         video={
           hasVideo && videoPage
             ? { on: videoMode === true, toggle: () => setVideoMode((m) => !m) }
@@ -75,42 +66,32 @@ export default function App() {
       {on && <BackgroundVideo {...PROFILE.video} hidden={!videoPage} />}
 
       <main className="pt-[calc(6rem+env(safe-area-inset-top))] mx-auto max-w-[100rem]">
-        <Suspense fallback={null}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Semprez
-                  videoMode={videoMode}
-                  onVideoMode={setVideoMode}
-                  dark={dark}
-                />
-              }
-            />
-            <Route path="/03" element={<Discover />} />
-            <Route
-              path="/11"
-              element={<Projects onScreen={setScreen} />}
-            />
-            <Route path="/11/:slug" element={<ProjectDetail />} />
-            <Route path="/17" element={<Stacks />} />
-            <Route path="/17/:slug" element={<StackDetail />} />
-            <Route path="/20" element={<Albums />} />
-            <Route
-              path="/20/neverforgetloyalty"
-              element={<SecretAlbum onTheme={setAlbum} />}
-            />
-            <Route
-              path="/20/:slug"
-              element={<AlbumDetail onTheme={setAlbum} />}
-            />
-            <Route path="/98" element={<Navigate to="/" replace />} />
-            {Object.entries(OLD).map(([word, n]) => (
-              <Route key={word} path={`/${word}/*`} element={<Moved to={n} />} />
-            ))}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Suspense>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Semprez
+                videoMode={videoMode}
+                onVideoMode={setVideoMode}
+                dark={dark}
+              />
+            }
+          />
+          <Route path="/03" element={<Discover />} />
+          <Route
+            path="/11"
+            element={<Projects onScreen={setScreen} />}
+          />
+          <Route path="/11/:slug" element={<ProjectDetail />} />
+          <Route path="/17" element={<Stacks />} />
+          <Route path="/17/:slug" element={<StackDetail />} />
+          <Route path="/20" element={<Thanks />} />
+          <Route path="/98" element={<Navigate to="/" replace />} />
+          {Object.entries(OLD).map(([word, n]) => (
+            <Route key={word} path={`/${word}/*`} element={<Moved to={n} />} />
+          ))}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
     </>
   );

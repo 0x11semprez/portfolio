@@ -2,10 +2,9 @@
 // own title, description, canonical, Open Graph tags, JSON-LD and a <noscript>
 // version of its content. Without it every URL served the same index.html,
 // whose canonical pointed at the home page: search engines read every page as
-// a duplicate of it. Also writes sitemap.xml, the album shell and 404.html.
+// a duplicate of it. Also writes sitemap.xml and 404.html.
 //
 //   build/projects/roze/index.html   one per project, stack and section
-//   build/album-shell.html           every /20/:slug (vercel.json rewrite), noindex
 //   build/404.html                   any unknown URL, served with a 404, noindex
 //   build/sitemap.xml
 //
@@ -61,7 +60,7 @@ function breadcrumb(trail) {
 }
 
 // every page the sitemap lists, with what goes in its <head> and <noscript>
-function pages({ PROJECTS, PROJECTS_INTRO, STACKS, DISCOVER }, root) {
+function pages({ PROJECTS, PROJECTS_INTRO, STACKS, DISCOVER, THANKS }, root) {
   const mod = (...f) => lastmod(root, f.map((x) => `src/data/${x}`));
   const projectsDate = mod("projects.js");
   const stacksDate = mod("stacks.js");
@@ -159,10 +158,13 @@ function pages({ PROJECTS, PROJECTS_INTRO, STACKS, DISCOVER }, root) {
     })),
     {
       url: "/20",
-      lastmod: mod("albums.js", "albumsListened.js"),
-      title: `Album | ${SITE}`,
-      description: `The albums ${SITE} listens to, A to Z.`,
-      body: `<h1>Album</h1><p>The albums ${esc(SITE)} listens to, A to Z.</p>${nav}`,
+      lastmod: mod("thanks.js"),
+      title: `Thanks | ${SITE}`,
+      description: `The people who inspired ${SITE}.`,
+      body:
+        `<h1>Thanks</h1><p>The people who inspired ${esc(SITE)}.</p>` +
+        (THANKS.length ? `<ul>${THANKS.map((p) => `<li>${esc(p.name)}</li>`).join("")}</ul>` : "") +
+        nav,
     },
   ];
   return list;
@@ -229,6 +231,7 @@ export default function seo() {
         ...(await load("projects.js")),
         ...(await load("stacks.js")),
         ...(await load("discover.js")),
+        ...(await load("thanks.js")),
       };
       const template = fs.readFileSync(path.join(out, "index.html"), "utf8");
 
@@ -237,9 +240,6 @@ export default function seo() {
         if (page.url === "/") continue;
         write(path.join(out, page.url, "index.html"), render(template, page));
       }
-      // the album pages: the listening history, personal, not what this
-      // site is found for. One shell serves them all (vercel.json).
-      write(path.join(out, "album-shell.html"), shell(template));
       // unknown URLs: a real 404 status, the app then sends you home
       write(path.join(out, "404.html"), shell(template));
 
@@ -253,7 +253,7 @@ export default function seo() {
         path.join(out, "sitemap.xml"),
         `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`,
       );
-      config.logger.info(`seo: ${list.length} pages, album shell, 404, sitemap.xml`);
+      config.logger.info(`seo: ${list.length} pages, 404, sitemap.xml`);
     },
   };
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Serves build/ like Vercel does (static files, a folder's index.html,
-// vercel.json's album rewrite, 404.html with a 404, Range requests for the
+// 404.html with a 404, Range requests for the
 // video). Used by scripts/smoke.js; standalone: node scripts/serve.js 4173
 const fs = require("fs");
 const path = require("path");
@@ -34,12 +34,9 @@ function serve(port) {
         res.writeHead(404);
         return res.end("not found");
       }
-      // like vercel.json's rewrite, else Vercel's 404.html
-      if (url.startsWith("/20/")) file = path.join(BUILD, "album-shell.html");
-      else {
-        file = path.join(BUILD, "404.html");
-        status = 404;
-      }
+      // like Vercel's 404.html
+      file = path.join(BUILD, "404.html");
+      status = 404;
     }
     const type = MIME[path.extname(file)] || "application/octet-stream";
     const size = fs.statSync(file).size;

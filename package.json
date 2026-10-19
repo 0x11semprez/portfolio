@@ -13,7 +13,6 @@
     "build": "vite build",
     "preview": "vite preview --outDir build",
     "smoke": "node scripts/smoke.js",
-    "covers": "node scripts/covers.js",
     "github": "node scripts/github.js"
   },
   "browserslist": {

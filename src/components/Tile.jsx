@@ -8,7 +8,7 @@ const RATIO = {
 
 // One "product" in the grid: image on top, label below.
 // `dark`: the page is showing the background video, so the label is white.
-// `upper`: labels in capitals (albums); false keeps them as written (stacks).
+// `upper`: labels in capitals; false keeps them as written (stacks).
 export default function Tile({
   to,
   image,

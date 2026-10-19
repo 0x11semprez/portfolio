@@ -53,17 +53,13 @@ const field = (src, key) =>
 
 const DATA = {
   stacks: read("stacks.js"),
-  albums: read("albums.js"),
   projects: read("projects.js"),
   profile: read("profile.js"),
 };
 const STACK_CATEGORIES = strArray(DATA.stacks, "STACK_CATEGORIES");
-const ALBUM_LANGUAGES = strArray(DATA.albums, "ALBUM_LANGUAGES");
 const STACKS = slugs(DATA.stacks);
-const ALBUMS = slugs(DATA.albums);
 const PROJECTS = slugs(DATA.projects);
 const STACK_TAGS = field(DATA.stacks, "category").map((c) => [].concat(c));
-const ALBUM_TAGS = field(DATA.albums, "language");
 
 // ----------------------------------------------------------------- reporting
 const results = [];
@@ -131,14 +127,12 @@ async function main() {
   STACK_CATEGORIES.forEach((c) =>
     check(`filter "${c}" matches at least one stack`, STACK_TAGS.some((t) => t.includes(c)))
   );
-  ALBUM_TAGS.forEach((t, i) => check(`album "${ALBUMS[i]}" language "${t}" is a filter option`, ALBUM_LANGUAGES.includes(t)));
-  ALBUM_LANGUAGES.forEach((l) => check(`filter "${l}" matches at least one album`, ALBUM_TAGS.includes(l)));
   for (const src of Object.values(DATA)) {
     for (const m of src.matchAll(/(?:image|cover|poster|src):\s*"(\/[^"]+)"/g)) {
       check(`file exists ${m[1]}`, fs.existsSync(path.join(PUBLIC, m[1])));
     }
   }
-  for (const [name, list] of Object.entries({ stacks: STACKS, albums: ALBUMS, projects: PROJECTS })) {
+  for (const [name, list] of Object.entries({ stacks: STACKS, projects: PROJECTS })) {
     check(`${name}: slugs unique`, new Set(list).size === list.length, `${list.length} entries`);
   }
 
@@ -232,7 +226,7 @@ async function main() {
     await go(page, "/17/nope");
     check("unknown stack redirects to /17", new URL(page.url()).pathname === "/17");
     await go(page, "/20/nope");
-    check("unknown album redirects to /20", new URL(page.url()).pathname === "/20");
+    check("unknown /20 page redirects to /", new URL(page.url()).pathname === "/");
     await go(page, "/11/nope");
     check("unknown project redirects to /11", new URL(page.url()).pathname === "/11");
     check("no console errors", page.errors.length === 0, page.errors.join(" | "));
@@ -245,7 +239,6 @@ async function main() {
   for (const [name, route, list, filters, tags] of [
     ["projects", "/11", PROJECTS, [], null],
     ["stacks", "/17", STACKS, STACK_CATEGORIES, STACK_TAGS],
-    ["album", "/20", ALBUMS, ALBUM_LANGUAGES, ALBUM_TAGS.map((t) => [t])],
   ]) {
     section(name);
     await attempt(name, async () => {
@@ -278,54 +271,41 @@ async function main() {
     });
   }
 
-  // ---- video on the album pages, not elsewhere -----------------------------
+  // ---- background video on the profile page only --------------------------
   section("video pages");
   await attempt("video pages", async () => {
     const page = await newPage();
     await go(page, "/");
     await chooseMode(page, true);
-    const expect = { "/": 1, "/20": 1, [`/20/${ALBUMS[0]}`]: 1, "/03": 0, "/11": 0, "/17": 0, [`/17/${STACKS[0]}`]: 0, [`/11/${PROJECTS[0]}`]: 0 };
+    const bg = () => page.locator("video.bg-video");
+    const expect = { "/": 1, "/03": 0, "/11": 0, "/17": 0, "/20": 0, [`/17/${STACKS[0]}`]: 0, [`/11/${PROJECTS[0]}`]: 0 };
     for (const [route, n] of Object.entries(expect)) {
       await go(page, route);
       // the video stays mounted site-wide (so it never restarts), it's just
       // hidden on pages that don't use it
-      const vis = await page.locator("video").evaluate((v) => getComputedStyle(v).visibility).catch(() => "none");
+      const vis = await bg().evaluate((v) => getComputedStyle(v).visibility).catch(() => "none");
       check(`${route}: background video ${n ? "visible" : "hidden"}`, n ? vis === "visible" : vis !== "visible", `visibility ${vis}`);
-      const header = await page.locator("header").evaluate((e) => getComputedStyle(e).backgroundColor);
-      check(`${route}: header ${n ? "transparent" : "white"}`, n ? header === "rgba(0, 0, 0, 0)" : header === "rgb(255, 255, 255)", header);
-      const white = (sel) => page.locator(sel).first().evaluate((e) => getComputedStyle(e).color === "rgb(255, 255, 255)").catch(() => false);
-      if (route === "/20") {
-        check("/20: active filter is white", await white("main button[class*='text-white']"));
-        check("/20: tile titles are white", await white("main a p"));
-      }
-      if (route.startsWith("/20/")) check(`${route}: title is white`, await white("main h1"));
     }
-    // navigating between video pages must not restart the video
-    await go(page, "/20");
-    await page.waitForTimeout(1500);
-    const before = await page.locator("video").evaluate((v) => v.currentTime);
-    await page.locator("main a[href^='/20/']").first().click();
-    await page.waitForSelector("main h1");
-    const after = await page.locator("video").evaluate((v) => v.currentTime);
-    check("video keeps playing across /20 → /20/:slug (no restart)", after >= before && before > 1, `${before.toFixed(2)}s → ${after.toFixed(2)}s`);
-    const filter = await page.locator("video").evaluate((v) => getComputedStyle(v).filter);
+    await go(page, "/");
+    const filter = await bg().evaluate((v) => getComputedStyle(v).filter);
     check("video has the contrast boost", /contrast\(1\.\d+\)/.test(filter), filter);
-    check("video loops", await page.locator("video").evaluate((v) => v.loop));
+    check("video loops", await bg().evaluate((v) => v.loop));
     check("no console errors", page.errors.length === 0, page.errors.join(" | "));
     await page.context().close();
   });
 
-  // ---- spotify covers (network) ---------------------------------------
-  section("spotify covers");
-  for (const m of DATA.albums.matchAll(/slug:\s*"([^"]+)"[\s\S]*?spotify:\s*"([^"]+)"/g)) {
-    const [, slug, url] = m;
-    try {
-      const r = await fetch(`https://open.spotify.com/oembed?url=${encodeURIComponent(url)}`);
-      check(`"${slug}" cover resolves from Spotify`, r.ok, `${r.status} for ${url}`);
-    } catch (e) {
-      check(`"${slug}" cover resolves from Spotify`, false, `offline? ${e.message}`);
-    }
-  }
+  // ---- 20: thanks ------------------------------------------------------------
+  section("thanks /20");
+  await attempt("thanks", async () => {
+    const page = await newPage();
+    await go(page, "/");
+    await chooseMode(page, false);
+    await go(page, "/20");
+    const title = await page.locator("main h1").first().innerText().catch(() => "");
+    check(`/20: title "${title}"`, title.trim().length > 0);
+    check("no console errors", page.errors.length === 0, page.errors.join(" | "));
+    await page.context().close();
+  });
 
   // ---- phone width ---------------------------------------------------------
   section("mobile 390px");
@@ -334,7 +314,7 @@ async function main() {
     await go(page, "/");
     check("/: dialog fits (no horizontal scroll)", !(await overflow(page)));
     await chooseMode(page, true);
-    for (const route of ["/", "/03", "/11", "/17", "/20", `/20/${ALBUMS[0]}`, `/17/${STACKS[0]}`, `/11/${PROJECTS[0]}`]) {
+    for (const route of ["/", "/03", "/11", "/17", "/20", `/17/${STACKS[0]}`, `/11/${PROJECTS[0]}`]) {
       await go(page, route);
       check(`${route}: no horizontal scroll`, !(await overflow(page)));
     }
@@ -349,7 +329,7 @@ async function main() {
   section("responsive");
   await attempt("responsive", async () => {
     const SIZES = [[320, 568], [360, 740], [390, 844], [414, 896], [768, 1024], [1024, 768], [1280, 800], [1440, 900], [1920, 1080], [2560, 1440], [844, 390], [740, 360]];
-    const ROUTES = ["/", "/03", "/11", "/17", "/20", `/11/${PROJECTS[0]}`, `/17/${STACKS[0]}`, `/20/${ALBUMS[0]}`];
+    const ROUTES = ["/", "/03", "/11", "/17", "/20", `/11/${PROJECTS[0]}`, `/17/${STACKS[0]}`];
     // smallest touch target we accept (WCAG 2.5.8 says 24, Apple/Google say 44)
     const MIN = 40;
     const tooSmall = (page, sel, tol = 0) =>

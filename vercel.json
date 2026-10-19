@@ -9,6 +9,5 @@
     { "source": "/stacks/:path*", "destination": "/17/:path*", "permanent": true },
     { "source": "/album", "destination": "/20", "permanent": true },
     { "source": "/album/:path*", "destination": "/20/:path*", "permanent": true }
-  ],
-  "rewrites": [{ "source": "/20/:path*", "destination": "/album-shell.html" }]
+  ]
 }

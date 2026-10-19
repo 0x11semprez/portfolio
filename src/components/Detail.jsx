@@ -13,7 +13,7 @@ import { useT } from "../i18n";
 // background (the video, or a dark `bg`), so the text and links go white.
 // `stacked`: one column, like a GitHub README: the image centered on top,
 // the text under it. `centered`: stacked, and the text centered too.
-// `accent`: colour for the title and the labels (an album's cover accent).
+// `accent`: colour for the title and the labels.
 // `hideTitle`: the image already spells the name (a project logo), so the
 // title is for screen readers only and the action icon stands alone.
 const RATIO = {
@@ -147,7 +147,7 @@ export default function Detail({
               centered ? "justify-center" : ""
             }`}
           >
-            {/* one long word (an album title) breaks instead of pushing the page sideways */}
+            {/* one long word breaks instead of pushing the page sideways */}
             <span
               className={
                 hideTitle ? "sr-only" : "min-w-0 [overflow-wrap:anywhere]"
@@ -197,7 +197,7 @@ export default function Detail({
   );
 }
 
-// Small labelled block inside a Detail: "WHAT IT IS", "FAVORITES", ...
+// Small labelled block inside a Detail: "ABOUT", "IN ACTION", ...
 export function Block({ label, children }) {
   return (
     <section>
