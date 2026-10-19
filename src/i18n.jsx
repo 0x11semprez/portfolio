@@ -98,6 +98,7 @@ const UI = {
       "contributions sur GitHub ces 12 derniers mois",
     play: "lire",
     pause: "pause",
+    "in action": "en action",
     // 20
     thanks: "merci",
     back: "retour",

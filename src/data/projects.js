@@ -30,6 +30,8 @@ export const PROJECTS = [
     color: "#fab9c9",
     wave: true, // the tagline rides a sine wave on its slide
     link: "https://github.com/0x11semprez/roze",
+    // the sampler in action, shown under the description
+    demo: { src: "/videos/roze-demo.mp4", poster: "/videos/roze-demo.jpg" },
     linkLabel: "view on github",
     description: {
       en: [

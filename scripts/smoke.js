@@ -307,6 +307,21 @@ async function main() {
     await page.context().close();
   });
 
+  // ---- roze demo video -------------------------------------------------------
+  section("roze demo");
+  await attempt("roze demo", async () => {
+    const page = await newPage();
+    await go(page, "/");
+    await chooseMode(page, false);
+    await go(page, "/11/roze");
+    const demo = page.locator("main video");
+    check("/11/roze: demo video shown", (await demo.count()) === 1);
+    const ready = await demo.evaluate((v) => new Promise((ok) => (v.readyState >= 1 ? ok(true) : (v.onloadedmetadata = () => ok(true), v.onerror = () => ok(false), setTimeout(() => ok(false), 5000)))));
+    check("/11/roze: demo video loads", ready);
+    check("no console errors", page.errors.length === 0, page.errors.join(" | "));
+    await page.context().close();
+  });
+
   // ---- phone width ---------------------------------------------------------
   section("mobile 390px");
   await attempt("mobile", async () => {

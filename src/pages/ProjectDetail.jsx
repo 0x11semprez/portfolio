@@ -36,6 +36,18 @@ export default function ProjectDetail() {
           <p key={i}>{bold(d)}</p>
         ))}
       </Block>
+      {p.demo && (
+        <Block label={t("in action")}>
+          <video
+            src={p.demo.src}
+            poster={p.demo.poster}
+            controls
+            playsInline
+            preload="metadata"
+            className="w-full h-auto"
+          />
+        </Block>
+      )}
     </Detail>
   );
 }
