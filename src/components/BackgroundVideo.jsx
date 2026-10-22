@@ -49,7 +49,7 @@ export default function BackgroundVideo({ src, poster, dim, contrast, hidden = f
   };
   return (
     <div
-      className={`fixed inset-0 -z-10 overflow-hidden bg-black pointer-events-none select-none ${
+      className={`fixed inset-x-0 top-0 h-lvh min-h-full -z-10 overflow-hidden bg-black pointer-events-none select-none ${
         hidden ? "invisible" : ""
       }`}
       aria-hidden="true"
