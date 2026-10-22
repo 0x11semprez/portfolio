@@ -47,10 +47,8 @@ export default function Header({
           />
         </button>
 
-        {/* one row, one baseline: EN, FR and play / pause are spaced alike
-            (px-2 each) and the icon is exactly as tall as the capitals */}
         <div
-          className={`flex items-baseline text-xl sm:text-2xl leading-none tracking-tight ${
+          className={`flex items-center gap-1 text-xl sm:text-2xl leading-none tracking-tight ${
             dark ? "text-white" : "text-black"
           }`}
         >
@@ -59,7 +57,6 @@ export default function Header({
               key={l}
               onClick={() => setLang(l)}
               aria-pressed={l === lang}
-              // ≥ 40px touch targets, same look
               className={`min-h-[2.5rem] min-w-[2.5rem] px-2 py-2.5 uppercase transition-colors ${l === lang ? active : idle}`}
             >
               {l}
@@ -83,6 +80,12 @@ export default function Header({
               />
             </button>
           )}
+
+          <img
+            src="/images/me.jpeg"
+            alt="semprez"
+            className="h-9 w-9 sm:h-10 sm:w-10 rounded-full object-cover ml-1"
+          />
         </div>
       </div>
     </header>
