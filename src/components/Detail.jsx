@@ -47,15 +47,12 @@ export default function Detail({
     const meta = document.querySelector('meta[name="theme-color"]');
     const prev = {
       body: document.body.style.backgroundColor,
-      html: document.documentElement.style.backgroundColor,
       meta: meta?.getAttribute("content"),
     };
     document.body.style.backgroundColor = bg;
-    document.documentElement.style.backgroundColor = bg;
     meta?.setAttribute("content", bg);
     return () => {
       document.body.style.backgroundColor = prev.body;
-      document.documentElement.style.backgroundColor = prev.html;
       meta?.setAttribute("content", prev.meta || "#ffffff");
     };
   }, [bg]);

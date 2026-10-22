@@ -2,6 +2,7 @@ import { useParams, Navigate } from "react-router-dom";
 import Detail, { Block, Specs } from "../components/Detail";
 import { STACKS, stackCategories } from "../data/stacks";
 import { useT, useTx } from "../i18n";
+import FadeIn from "../components/FadeIn";
 
 export default function StackDetail() {
   const { slug } = useParams();
@@ -17,23 +18,28 @@ export default function StackDetail() {
       image={s.image}
       title={s.name}
       subtitle={cats}
-      // one ↗ for every stack, no brand logos next to the name
       action={{ href: s.link, icon: "link", label: t("official site") }}
     >
-      <Block label={t("what it is")}>
-        <p>{tx(s.what)}</p>
-      </Block>
-      <Block label={t("how i use it")}>
-        <p>{tx(s.how)}</p>
-      </Block>
-      <Block label={t("details")}>
-        <Specs
-          rows={[
-            [t("level"), t(s.level)],
-            [t("category"), cats],
-          ]}
-        />
-      </Block>
+      <FadeIn>
+        <Block label={t("what it is")}>
+          <p>{tx(s.what)}</p>
+        </Block>
+      </FadeIn>
+      <FadeIn delay={0.15}>
+        <Block label={t("how i use it")}>
+          <p>{tx(s.how)}</p>
+        </Block>
+      </FadeIn>
+      <FadeIn delay={0.3}>
+        <Block label={t("details")}>
+          <Specs
+            rows={[
+              [t("level"), t(s.level)],
+              [t("category"), cats],
+            ]}
+          />
+        </Block>
+      </FadeIn>
     </Detail>
   );
 }

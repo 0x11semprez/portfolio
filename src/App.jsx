@@ -50,10 +50,8 @@ export default function App() {
   useEffect(() => {
     if (!(dark && videoPage)) return;
     document.body.style.backgroundColor = "#000";
-    document.documentElement.style.backgroundColor = "#000";
     return () => {
       document.body.style.backgroundColor = "";
-      document.documentElement.style.backgroundColor = "";
     };
   }, [dark, videoPage]);
 

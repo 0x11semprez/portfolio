@@ -6,7 +6,6 @@ html {
   -webkit-font-smoothing: antialiased;
   /* no grey box flashing over a tapped link (a whole slide is one) */
   -webkit-tap-highlight-color: transparent;
-  transition: background-color 300ms ease;
 }
 
 /* the focus ring only for the keyboard, not after a tap or a click */

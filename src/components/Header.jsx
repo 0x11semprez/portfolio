@@ -48,7 +48,7 @@ export default function Header({
         </button>
 
         <div
-          className={`flex items-center gap-1 text-xl sm:text-2xl leading-none tracking-tight ${
+          className={`flex items-center gap-0.5 sm:gap-1 text-lg sm:text-2xl leading-none tracking-tight ${
             dark ? "text-white" : "text-black"
           }`}
         >
@@ -57,7 +57,7 @@ export default function Header({
               key={l}
               onClick={() => setLang(l)}
               aria-pressed={l === lang}
-              className={`min-h-[2.5rem] min-w-[2.5rem] px-2 py-2.5 uppercase transition-colors ${l === lang ? active : idle}`}
+              className={`min-h-[2.5rem] min-w-[2rem] sm:min-w-[2.5rem] px-1.5 sm:px-2 py-2.5 uppercase transition-colors ${l === lang ? active : idle}`}
             >
               {l}
             </button>
@@ -84,7 +84,7 @@ export default function Header({
           <img
             src="/images/me.jpeg"
             alt="semprez"
-            className="h-9 w-9 sm:h-10 sm:w-10 rounded-full object-cover ml-1"
+            className="h-8 w-8 sm:h-10 sm:w-10 shrink-0 rounded-full object-cover ml-1"
           />
         </div>
       </div>

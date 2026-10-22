@@ -52,15 +52,12 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
     const prev = {
       meta: meta?.getAttribute("content"),
       body: document.body.style.backgroundColor,
-      html: document.documentElement.style.backgroundColor,
     };
     meta?.setAttribute("content", bg);
     document.body.style.backgroundColor = bg;
-    document.documentElement.style.backgroundColor = bg;
     return () => {
       meta?.setAttribute("content", prev.meta || "#ffffff");
       document.body.style.backgroundColor = prev.body;
-      document.documentElement.style.backgroundColor = prev.html;
     };
   }, [i, onScreen, projects]);
 
