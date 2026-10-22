@@ -8,12 +8,20 @@ export default function Thanks() {
   const tx = useTx();
 
   return (
-    <article className="mx-auto max-w-3xl px-5 pb-24 text-center text-base sm:text-lg lg:text-xl leading-relaxed">
+    <article className="mx-auto flex flex-col items-center max-w-3xl px-5 pb-24 text-center text-base sm:text-lg lg:text-xl leading-relaxed">
       <h1 className="text-lg sm:text-xl lg:text-2xl font-bold uppercase tracking-wide">
         {t("thanks")}
       </h1>
-      <p className="mt-6">{tx(THANKS_INTRO)}</p>
-      <ul className="mt-16 sm:mt-20 flex flex-col gap-10">
+      <p className="mt-8 sm:mt-10">
+        {tx(THANKS_INTRO)
+          .split("\n")
+          .map((line, i) => (
+            <span key={i} className="block">
+              {line}
+            </span>
+          ))}
+      </p>
+      <ul className="mt-16 sm:mt-20 flex flex-col items-center gap-10">
         {THANKS.map((p) => (
           <li key={p.name}>
             {p.href ? (

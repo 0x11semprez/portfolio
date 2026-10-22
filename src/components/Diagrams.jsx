@@ -6,7 +6,7 @@ const SIZE = 23;
 const TAU = 2 * Math.PI;
 
 // Fires once when the element scrolls into view.
-function useInView(ref) {
+export function useInView(ref) {
   const [on, setOn] = useState(false);
   useEffect(() => {
     const el = ref.current;

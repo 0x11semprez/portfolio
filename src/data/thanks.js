@@ -2,8 +2,8 @@
 // (opens in a new tab) and an optional line saying why, in both languages.
 //   { name: "…", href: "https://…", why: { en: "…", fr: "…" } },
 export const THANKS_INTRO = {
-  en: "The people who inspired me. Things which inspired me. Thank you.",
-  fr: "Les personnes qui m'ont inspiré. Les choses qui m'ont inspiré. Merci.",
+  en: "The people who inspired me.\nThings which inspired me.\nThank you.",
+  fr: "Les personnes qui m'ont inspiré.\nLes choses qui m'ont inspiré.\nMerci.",
 };
 
 export const THANKS = [
