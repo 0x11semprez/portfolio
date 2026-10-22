@@ -8,8 +8,8 @@ export default function Thanks() {
   const tx = useTx();
 
   return (
-    <article className="mx-auto max-w-3xl px-5 pb-24 text-center text-lg sm:text-xl leading-relaxed">
-      <h1 className="text-xl sm:text-2xl font-bold uppercase tracking-wide">
+    <article className="mx-auto max-w-3xl px-5 pb-24 text-center text-base sm:text-lg lg:text-xl leading-relaxed">
+      <h1 className="text-lg sm:text-xl lg:text-2xl font-bold uppercase tracking-wide">
         {t("thanks")}
       </h1>
       <p className="mt-6">{tx(THANKS_INTRO)}</p>

@@ -143,7 +143,7 @@ export default function Detail({
           }
         >
           <h1
-            className={`flex items-center gap-3 text-4xl sm:text-6xl font-bold uppercase tracking-wide text-[color:var(--accent,currentColor)] ${
+            className={`flex items-center gap-3 text-3xl sm:text-4xl lg:text-6xl font-bold uppercase tracking-wide text-[color:var(--accent,currentColor)] ${
               centered ? "justify-center" : ""
             }`}
           >
@@ -167,7 +167,7 @@ export default function Detail({
                   <Icon
                     name={action.icon}
                     label={action.label}
-                    className="h-8 w-8 sm:h-10 sm:w-10"
+                    className="h-7 w-7 sm:h-8 sm:w-8 lg:h-10 lg:w-10"
                   />
                 </a>
               ) : (
@@ -179,16 +179,16 @@ export default function Detail({
                   <Icon
                     name={action.icon}
                     label={action.label}
-                    className="h-8 w-8 sm:h-10 sm:w-10"
+                    className="h-7 w-7 sm:h-8 sm:w-8 lg:h-10 lg:w-10"
                   />
                 </span>
               ))}
           </h1>
           {subtitle && (
-            <p className="mt-2 text-2xl sm:text-4xl uppercase">{subtitle}</p>
+            <p className="mt-2 text-lg sm:text-2xl lg:text-4xl uppercase">{subtitle}</p>
           )}
 
-          <div className="mt-8 sm:mt-12 space-y-8 sm:space-y-12 text-lg sm:text-3xl leading-relaxed">
+          <div className="mt-6 sm:mt-8 lg:mt-12 space-y-6 sm:space-y-8 lg:space-y-12 text-base sm:text-xl lg:text-3xl leading-relaxed">
             {children}
           </div>
         </div>
@@ -201,7 +201,7 @@ export default function Detail({
 export function Block({ label, children }) {
   return (
     <section>
-      <h2 className="text-xl sm:text-3xl font-bold uppercase mb-3 sm:mb-4 text-[color:var(--accent,currentColor)]">
+      <h2 className="text-lg sm:text-xl lg:text-3xl font-bold uppercase mb-2 sm:mb-3 lg:mb-4 text-[color:var(--accent,currentColor)]">
         {label}
       </h2>
       <div className="space-y-3">{children}</div>
@@ -213,10 +213,10 @@ export function Block({ label, children }) {
 export function Specs({ rows, centered = false }) {
   return (
     <dl
-      className={`text-base sm:text-2xl uppercase ${
+      className={`text-sm sm:text-base lg:text-2xl uppercase ${
         centered
           ? "flex flex-col items-center gap-y-1"
-          : "grid grid-cols-[9rem_minmax(0,1fr)] sm:grid-cols-[12rem_minmax(0,1fr)] gap-y-1"
+          : "grid grid-cols-[7rem_minmax(0,1fr)] sm:grid-cols-[9rem_minmax(0,1fr)] lg:grid-cols-[12rem_minmax(0,1fr)] gap-y-1"
       }`}
     >
       {rows.map(([k, v]) => (

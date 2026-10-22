@@ -22,7 +22,7 @@ export default function Discover() {
   const tx = useTx();
 
   return (
-    <article className="mx-auto max-w-3xl px-5 pb-24 text-center text-lg sm:text-xl leading-relaxed">
+    <article className="mx-auto max-w-3xl px-5 pb-24 text-center text-base sm:text-lg lg:text-xl leading-relaxed">
       {DISCOVER.map((block, i) => (
         <section key={i} className={i ? "mt-32 sm:mt-40" : ""}>
           {block.title && (
@@ -30,7 +30,7 @@ export default function Discover() {
               className={`font-bold uppercase tracking-wide ${
                 block.oneLine
                   ? "whitespace-nowrap text-[min(1.75rem,calc((100vw-2.5rem)/22))]"
-                  : "text-xl sm:text-2xl"
+                  : "text-lg sm:text-xl lg:text-2xl"
               }`}
             >
               {tx(block.title)}

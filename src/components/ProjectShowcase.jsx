@@ -129,7 +129,7 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
       >
         {/* 1. the intro alone */}
         <section className={`flex h-full items-center justify-center bg-white px-5 sm:px-10 ${SHORT}`}>
-          <p className="max-w-4xl text-center text-3xl sm:text-5xl lg:text-6xl [@media(max-height:480px)]:text-3xl font-bold leading-tight tracking-tight">
+          <p className="max-w-4xl text-center text-xl sm:text-3xl md:text-5xl lg:text-6xl [@media(max-height:480px)]:text-xl font-bold leading-tight tracking-tight">
             {intro}
           </p>
         </section>
@@ -148,10 +148,10 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
               <img src={p.image} alt="" aria-hidden className={LOGO} />
             )}
             <div className="mt-8 sm:mt-12 [@media(max-height:480px)]:mt-4 text-center">
-              <p className="mx-auto max-w-2xl text-base sm:text-2xl [@media(max-height:480px)]:text-base leading-snug">
+              <p className="mx-auto max-w-2xl text-sm sm:text-base md:text-2xl [@media(max-height:480px)]:text-sm leading-snug">
                 {p.wave ? <WavyText text={tx(p.tagline)} /> : tx(p.tagline)}
               </p>
-              <p className="mt-3 sm:mt-4 text-xs sm:text-base uppercase tracking-wide">
+              <p className="mt-2 sm:mt-3 md:mt-4 text-xs sm:text-sm md:text-base uppercase tracking-wide">
                 {tx(p.category)}
               </p>
             </div>

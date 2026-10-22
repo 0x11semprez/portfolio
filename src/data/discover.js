@@ -37,33 +37,16 @@ export const DISCOVER = [
         "**My second passion is breaking down problems and research.**\nHow to explain it? My brain lights up when I find the solution.\nI have gone through so much in my life that now I welcome problems gladly.",
         "**My third passion is being strong.**\nI love seeing my progress when I add more weight at the gym, learn new techniques in combat sports, or even see a new basketball system in action.",
         "**My fourth passion is walking.**\nWalking leaves my head empty.",
-        "**My aim: to become rich, with a kind of richness that money can't buy.**\n**I want to become the best version of myself.**",
+        "**My aim: to become rich, with a kind of richness that money can't buy.**"
       ],
       fr: [
         "**Mes premières passions : la musique et l'écriture.**\nJ'aime composer, programmer de la musique, et bien sûr en écouter.\nJ'aime écrire et inventer des histoires. Depuis tout petit, je romance tout.",
         "**Ma deuxième passion : résoudre des problèmes, et la recherche.**\nComment l'expliquer ? Mon cerveau exulte lorsque je trouve la solution.\nJ'ai traversé tant d'épreuves que, désormais, j'accueille les problèmes avec plaisir.",
         "**Ma troisième passion : devenir fort.**\nJ'aime voir mes progrès : ajouter du poids à la salle, apprendre de nouvelles techniques dans les sports de combat, ou même voir en action un nouveau système de jeu au basket.",
         "**Ma quatrième passion : la marche.**\nMarcher me vide la tête.",
-        "**Mon but : devenir riche, mais d'une richesse qui ne s'achète pas.**\n**Je veux devenir la meilleure version de moi-même.**",
+        "**Mon but : devenir riche, mais d'une richesse qui ne s'achète pas.**",
       ],
     },
   },
-  // a diagram alone, between the passions and what I am doing now
   { type: "knowing" },
-  {
-    type: "text",
-    title: { en: "what am I doing right now?", fr: "ce que je fais en ce moment" },
-    body: {
-      en: [
-        "**Research Assistant, Audio Programming**\nUniversité de Lorraine · Oct 2026 – today · Paris\nTaking part in a PhD research project, contributing to the thesis.",
-        "**Head of Blockchain Research and Development**\nPoC Innovation · Jul 2026 – today · Paris\nI lead the blockchain R&D projects. I've also been a developer there since Mar 2026.",
-        "**Instructor**\nMagic Makers · Sep 2026 – today · Paris\nHelping children learn computer science.",
-      ],
-      fr: [
-        "**Assistant de recherche en programmation audio**\nUniversité de Lorraine · depuis oct. 2026 · Paris\nJe contribue à une thèse dans le cadre d'un projet de recherche doctoral.",
-        "**Responsable R&D blockchain**\nPoC Innovation · depuis juil. 2026 · Paris\nJe pilote les projets R&D en blockchain. J'y suis aussi développeur depuis mars 2026.",
-        "**Animateur**\nMagic Makers · depuis sept. 2026 · Paris\nJ'initie des enfants à l'informatique.",
-      ],
-    },
-  },
 ];
