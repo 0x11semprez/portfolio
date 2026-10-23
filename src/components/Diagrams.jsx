@@ -11,6 +11,7 @@ export function useInView(ref) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const mobile = window.matchMedia("(max-width: 640px)").matches;
     const obs = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
@@ -18,7 +19,7 @@ export function useInView(ref) {
           obs.disconnect();
         }
       },
-      { threshold: 0.2 },
+      { threshold: mobile ? 0.05 : 0.2 },
     );
     obs.observe(el);
     return () => obs.disconnect();

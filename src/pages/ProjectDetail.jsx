@@ -4,7 +4,6 @@ import { PROJECTS } from "../data/projects";
 import { useT, useTx } from "../i18n";
 import bold from "../components/bold";
 import ProjectDiagram from "../components/ProjectDiagrams";
-import FadeIn from "../components/FadeIn";
 
 export default function ProjectDetail() {
   const { slug } = useParams();
@@ -28,30 +27,26 @@ export default function ProjectDetail() {
       subtitle={tx(p.category)}
       action={{ href: p.link, icon: "github", label: t(p.linkLabel) }}
     >
-      <FadeIn as="p" className="italic">{tx(p.tagline)}</FadeIn>
-      <FadeIn delay={0.15}>
-        <Block label={t("about")}>
-          <div className="pb-6">
-            <ProjectDiagram slug={p.slug} />
-          </div>
-          {tx(p.description).map((d, i) => (
-            <FadeIn as="p" key={i} delay={0.3 + i * 0.12}>{bold(d)}</FadeIn>
-          ))}
-        </Block>
-      </FadeIn>
+      <p className="italic">{tx(p.tagline)}</p>
+      <Block label={t("about")}>
+        <div className="pb-6">
+          <ProjectDiagram slug={p.slug} />
+        </div>
+        {tx(p.description).map((d, i) => (
+          <p key={i}>{bold(d)}</p>
+        ))}
+      </Block>
       {p.demo && (
-        <FadeIn delay={0.4}>
-          <Block label={t("in action")}>
-            <video
-              src={p.demo.src}
-              poster={p.demo.poster}
-              controls
-              playsInline
-              preload="metadata"
-              className="w-full h-auto"
-            />
-          </Block>
-        </FadeIn>
+        <Block label={t("in action")}>
+          <video
+            src={p.demo.src}
+            poster={p.demo.poster}
+            controls
+            playsInline
+            preload="metadata"
+            className="w-full h-auto"
+          />
+        </Block>
       )}
     </Detail>
   );

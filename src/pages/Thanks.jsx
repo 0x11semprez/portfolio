@@ -1,6 +1,5 @@
 import { THANKS, THANKS_INTRO } from "../data/thanks";
 import { useT, useTx } from "../i18n";
-import FadeIn, { FadeInGroup } from "../components/FadeIn";
 
 export default function Thanks() {
   const t = useT();
@@ -8,12 +7,10 @@ export default function Thanks() {
 
   return (
     <article className="mx-auto flex flex-col items-center max-w-3xl px-5 pb-24 text-center text-base sm:text-lg lg:text-xl leading-relaxed">
-      <FadeIn>
-        <h1 className="text-lg sm:text-xl lg:text-2xl font-bold uppercase tracking-wide">
-          {t("thanks")}
-        </h1>
-      </FadeIn>
-      <FadeIn delay={0.2} className="mt-8 sm:mt-10">
+      <h1 className="text-lg sm:text-xl lg:text-2xl font-bold uppercase tracking-wide">
+        {t("thanks")}
+      </h1>
+      <div className="mt-8 sm:mt-10">
         {tx(THANKS_INTRO)
           .split("\n")
           .map((line, i) => (
@@ -21,12 +18,8 @@ export default function Thanks() {
               {line}
             </span>
           ))}
-      </FadeIn>
-      <FadeInGroup
-        stagger={0.06}
-        base={0}
-        className="mt-16 sm:mt-20 flex flex-col items-center gap-10"
-      >
+      </div>
+      <ul className="mt-16 sm:mt-20 flex flex-col items-center gap-10">
         {THANKS.map((p) => (
           <li key={p.name} className="list-none">
             {p.href ? (
@@ -44,7 +37,7 @@ export default function Thanks() {
             {p.why && <p className="mt-2">{tx(p.why)}</p>}
           </li>
         ))}
-      </FadeInGroup>
+      </ul>
     </article>
   );
 }
