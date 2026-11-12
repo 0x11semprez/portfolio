@@ -44,7 +44,7 @@ export default function ProjectDetail() {
             controls
             playsInline
             preload="metadata"
-            className="w-full h-auto"
+            className="w-full h-auto max-h-[70vh] object-contain"
           />
         </Block>
       )}

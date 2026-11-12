@@ -12,7 +12,7 @@ export default function Menu({ open, onClose }) {
   const t = useT();
 
   const copy = (value, label) => {
-    navigator.clipboard.writeText(value);
+    navigator.clipboard.writeText(value).catch(() => {});
     setCopied(label);
     setTimeout(() => setCopied(null), 1500);
   };

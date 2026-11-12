@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import Icon from "./Icon";
 import { useT } from "../i18n";
@@ -42,7 +42,7 @@ export default function Detail({
   hideTitle = false,
 }) {
   stacked = stacked || centered;
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!bg) return;
     const meta = document.querySelector('meta[name="theme-color"]');
     const prev = {

@@ -3,20 +3,12 @@
 // (the language switch in the header picks one). `link` is the
 // official site, shown as a ↗ next to the name (`icon` is kept for reference,
 // the page no longer shows brand logos).
-// `category` is one of STACK_CATEGORIES (spelled exactly the same, that's what
-// the filter matches on), or an array when a stack belongs to several (Solidity
-// is both a language and a blockchain tool). Order here = grid order.
-export const STACK_CATEGORIES = [
-  "languages",
-  "tools",
-  "databases",
-  "blockchain tools",
-];
-
+// `category` is spelled exactly the same everywhere (that's what the filter
+// matches on), or an array when a stack belongs to several (Solidity is both
+// a language and a blockchain tool). Order here = grid order.
 export const STACKS = [
   {
     slug: "cpp",
-    icon: "cplusplus",
     name: "C++",
     category: "languages",
     image: "/images/stacks/cpp.svg",
@@ -33,7 +25,6 @@ export const STACKS = [
   },
   {
     slug: "go",
-    icon: "go",
     name: "Go",
     category: "languages",
     image: "/images/stacks/go.svg",
@@ -50,7 +41,6 @@ export const STACKS = [
   },
   {
     slug: "rust",
-    icon: "rust",
     name: "Rust",
     category: "languages",
     image: "/images/stacks/rust.svg",
@@ -67,7 +57,6 @@ export const STACKS = [
   },
   {
     slug: "python",
-    icon: "python",
     name: "Python",
     category: "languages",
     image: "/images/stacks/python.svg",
@@ -84,7 +73,6 @@ export const STACKS = [
   },
   {
     slug: "noir",
-    icon: "link",
     name: "Noir",
     category: ["languages", "blockchain tools"],
     image: "/images/stacks/noir.png",
@@ -101,7 +89,6 @@ export const STACKS = [
   },
   {
     slug: "solidity",
-    icon: "solidity",
     name: "Solidity",
     category: ["languages", "blockchain tools"],
     image: "/images/stacks/solidity.svg",
@@ -118,7 +105,6 @@ export const STACKS = [
   },
   {
     slug: "postgres",
-    icon: "postgresql",
     name: "Postgres",
     category: "databases",
     image: "/images/stacks/postgresql.svg",
@@ -135,7 +121,6 @@ export const STACKS = [
   },
   {
     slug: "aws",
-    icon: "link",
     name: "AWS",
     category: "tools",
     image: "/images/stacks/aws.svg",
@@ -152,7 +137,6 @@ export const STACKS = [
   },
   {
     slug: "docker",
-    icon: "docker",
     name: "Docker",
     category: "tools",
     image: "/images/stacks/docker.svg",
@@ -169,7 +153,6 @@ export const STACKS = [
   },
   {
     slug: "git",
-    icon: "git",
     name: "Git",
     category: "tools",
     image: "/images/stacks/git.svg",
@@ -186,7 +169,6 @@ export const STACKS = [
   },
   {
     slug: "ci-cd",
-    icon: "githubactions",
     name: "CI / CD",
     category: "tools",
     image: "/images/stacks/githubactions.svg",

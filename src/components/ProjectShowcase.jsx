@@ -145,7 +145,7 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
             {p.slug === "ophobia" ? (
               <OphobiaEyes active={i === at + 1} className={LOGO} />
             ) : (
-              <img src={p.image} alt="" aria-hidden className={LOGO} />
+              <img src={p.image} alt="" aria-hidden="true" className={LOGO} />
             )}
             <div className="mt-8 sm:mt-12 [@media(max-height:480px)]:mt-4 text-center">
               <p className="mx-auto max-w-2xl text-sm sm:text-base md:text-2xl [@media(max-height:480px)]:text-sm leading-snug text-balance">

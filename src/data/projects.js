@@ -27,8 +27,7 @@ export const PROJECTS = [
     detailImage: "/images/projects/roze-detail.png",
     bg: "#1c1c1c",
     ink: "#fff",
-    color: "#fab9c9",
-    wave: true, // the tagline rides a sine wave on its slide
+    wave: true,
     link: "https://github.com/0x11semprez/roze",
     // the sampler in action, shown under the description
     demo: { src: "/videos/roze-demo.mp4", poster: "/videos/roze-demo.jpg" },
@@ -60,7 +59,6 @@ export const PROJECTS = [
     image: "/images/projects/ophobia.png",
     detailImage: "/images/projects/ophobia-detail.png",
     bg: "#fff",
-    color: "#000",
     link: "https://github.com/0x11semprez/ophobia",
     linkLabel: "view on github",
     description: {
@@ -92,7 +90,6 @@ export const PROJECTS = [
     image: "/images/projects/ayze.png",
     bg: "#0a1a3f",
     ink: "#fff",
-    color: "#0085c7",
     link: "https://github.com/Keuchnotkush/AYZE",
     linkLabel: "view on github",
     description: {

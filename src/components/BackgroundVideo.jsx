@@ -25,7 +25,7 @@ export default function BackgroundVideo({ src, poster, dim, contrast, hidden = f
       video.play().catch(() => {});
     };
     const onPause = () => {
-      if (!video.ended) play();
+      if (!video.ended && !video.closest("[hidden],.invisible")) play();
     };
     document.addEventListener("visibilitychange", play);
     window.addEventListener("pageshow", play);
