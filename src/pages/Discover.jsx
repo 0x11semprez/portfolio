@@ -25,14 +25,12 @@ function Paragraph({ text, quote }) {
         {lines.map((line, i) => (
           <span key={i} className="block">
             {bold(line)}
-            {i === lines.length - 1 && (
-              <span className="text-[4rem] sm:text-[5rem] leading-[0] font-bold select-none align-bottom ml-1 not-italic" aria-hidden="true">
-                {"”"}
-              </span>
-            )}
           </span>
         ))}
       </p>
+      <span className="block text-right text-[4rem] sm:text-[5rem] leading-none font-bold select-none not-italic -mt-6" aria-hidden="true">
+        {"”"}
+      </span>
     </blockquote>
   );
 }
