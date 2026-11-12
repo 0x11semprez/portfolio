@@ -4,25 +4,35 @@ import Diagrams, { Knowing } from "../components/Diagrams";
 import { useTx } from "../i18n";
 
 function Paragraph({ text, quote }) {
-  const content = (
-    <p className={`mt-6${quote ? " italic" : ""}`}>
-      {text.split("\n").map((line, i) => (
-        <span key={i} className="block">
-          {bold(line)}
-        </span>
-      ))}
-    </p>
-  );
-  if (!quote) return content;
+  const lines = text.split("\n");
+  if (!quote) {
+    return (
+      <p className="mt-6">
+        {lines.map((line, i) => (
+          <span key={i} className="block">
+            {bold(line)}
+          </span>
+        ))}
+      </p>
+    );
+  }
   return (
     <blockquote className="relative mt-6 px-8 sm:px-12">
       <span className="absolute left-0 -top-4 text-[4rem] sm:text-[5rem] leading-none font-bold select-none" aria-hidden="true">
         {"“"}
       </span>
-      {content}
-      <span className="absolute right-0 bottom-0 text-[4rem] sm:text-[5rem] leading-none font-bold select-none" aria-hidden="true">
-        {"”"}
-      </span>
+      <p className="mt-6 italic">
+        {lines.map((line, i) => (
+          <span key={i} className="block">
+            {bold(line)}
+            {i === lines.length - 1 && (
+              <span className="text-[4rem] sm:text-[5rem] leading-[0] font-bold select-none align-bottom ml-1 not-italic" aria-hidden="true">
+                {"”"}
+              </span>
+            )}
+          </span>
+        ))}
+      </p>
     </blockquote>
   );
 }
