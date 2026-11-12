@@ -14,7 +14,7 @@ export const DISCOVER = [
   },
   {
     type: "text",
-    title: { en: "software alchimiste", fr: "software alchimiste" },
+    title: { en: "software alchemist", fr: "software alchimiste" },
     body: {
       en: [
         "*Alchemist: a person who seeks to understand the hidden properties of the world through observation, experimentation and transformation. Historically, alchemists studied the nature of matter, metals, minerals and chemical reactions. They notably sought to turn ordinary metals into gold or to discover the elixir of eternal life.*",
