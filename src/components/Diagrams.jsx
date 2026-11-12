@@ -28,7 +28,7 @@ export function useInView(ref) {
 }
 
 // Centered label. When `delay` is passed, fades in with `show`.
-export function Label({ x, y, lines, delay, show }) {
+export function Label({ x, y, lines, delay, show, fill: fillProp }) {
   const anim = delay != null;
   return (
     <text
@@ -37,7 +37,7 @@ export function Label({ x, y, lines, delay, show }) {
       textAnchor="middle"
       fontSize={SIZE}
       fontWeight="700"
-      fill="currentColor"
+      fill={fillProp || "currentColor"}
       style={{
         fontFamily: "inherit",
         ...(anim && {
@@ -59,6 +59,7 @@ export function Label({ x, y, lines, delay, show }) {
 
 const VENN_R = 267;
 const VENN_C = TAU * VENN_R;
+const VENN_COLORS = ["#ff0000", "#00ff00", "#0000ff"];
 const VENN_CIRCLES = [
   [540, 422],
   [405, 657],
@@ -80,23 +81,28 @@ function Venn({ label }) {
   const on = useInView(ref);
   return (
     <svg ref={ref} viewBox={`80 130 ${VIEW}`} role="img" aria-label={label} className="w-full h-auto">
-      <g fill="none" stroke="currentColor" strokeWidth="3">
+      <rect x="80" y="130" width="920" height="808" fill="black" rx="8" />
+      <g style={{ mixBlendMode: "screen" }}>
         {VENN_CIRCLES.map(([cx, cy], i) => (
           <circle
             key={i}
             cx={cx}
             cy={cy}
             r={VENN_R}
+            fill={VENN_COLORS[i]}
+            stroke={VENN_COLORS[i]}
+            strokeWidth="3"
             style={{
+              fillOpacity: on ? 0.85 : 0,
               strokeDasharray: VENN_C,
               strokeDashoffset: on ? 0 : VENN_C,
-              transition: `stroke-dashoffset 0.8s ease ${i * 0.15}s`,
+              transition: `stroke-dashoffset 0.8s ease ${i * 0.15}s, fill-opacity 0.8s ease ${i * 0.15}s`,
             }}
           />
         ))}
       </g>
       {VENN.map((l, i) => (
-        <Label key={l.en} x={l.x} y={l.y} lines={[tx(l)]} delay={0.7 + i * 0.06} show={on} />
+        <Label key={l.en} x={l.x} y={l.y} lines={[tx(l)]} delay={0.7 + i * 0.06} show={on} fill="white" />
       ))}
     </svg>
   );
