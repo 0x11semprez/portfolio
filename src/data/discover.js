@@ -6,7 +6,7 @@ export const DISCOVER = [
   {
     // drawn in src/components/Diagrams.jsx, in the site's font
     type: "diagrams",
-    oneLine: false,
+    oneLine: true,
     title: {
       en: "The first diagram shows how to become what I want to be, the second how to get there",
       fr: "Le premier schéma montre comment devenir ce que je veux être, le second comment y parvenir",

@@ -26,7 +26,7 @@ export default function Discover() {
             <h2
               className={`font-bold uppercase tracking-wide ${
                 block.oneLine
-                  ? "whitespace-nowrap text-[min(1.75rem,calc((100vw-2.5rem)/22))]"
+                  ? "whitespace-nowrap text-[min(1.75rem,calc((100vw-2.5rem)/55))]"
                   : "text-lg sm:text-xl lg:text-2xl"
               }`}
             >
