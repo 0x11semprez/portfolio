@@ -244,7 +244,7 @@ export default function Diagrams() {
     <div className="mt-8 grid gap-10 sm:gap-8 sm:grid-cols-2 lg:relative lg:left-1/2 lg:w-[min(72rem,calc(100vw-2.5rem))] lg:-translate-x-1/2">
       <figure>
         <figcaption className="mb-4 font-bold text-center whitespace-nowrap text-[min(1.45rem,4.2vw)] sm:text-[min(1.45rem,2vw)]">
-          {tx({ en: "What is a polymath?", fr: "Qu'est-ce qu'un polymathe ?" })}
+          {tx({ en: "How to become a polymath?", fr: "Comment devenir un polymathe ?" })}
         </figcaption>
         <Venn
           label={tx({
