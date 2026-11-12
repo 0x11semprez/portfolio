@@ -14,7 +14,7 @@ export const DISCOVER = [
   },
   {
     type: "text",
-    title: "software alchemist",
+    title: { en: "software alchemist", fr: "alchimiste du numérique" },
     quoteParagraphs: [0],
     body: {
       en: [
