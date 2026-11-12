@@ -78,8 +78,10 @@ export default function App() {
       />
       <Menu open={menuOpen} onClose={() => setMenuOpen(false)} />
 
-      {/* kept mounted across pages so it doesn't restart when you come back */}
-      {on && <BackgroundVideo {...PROFILE.video} hidden={!videoPage} />}
+      {/* mounted during the prompt too so it buffers while the user decides */}
+      {(on || (hasVideo && videoPage && videoMode === null)) && (
+        <BackgroundVideo {...PROFILE.video} hidden={!on || !videoPage} />
+      )}
 
       <main className="pt-[calc(6rem+env(safe-area-inset-top))] mx-auto max-w-[100rem]">
         <Routes>
