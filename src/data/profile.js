@@ -13,7 +13,7 @@ export const PROFILE = {
     fr: [
       "semprez est un alchimiste du numérique.",
       "semprez s'appelle Kassim.",
-      "Love Audio && Finance.",
+      "Passionné d'audio && de finance.",
       'sa devise : "tout a un coût".',
     ].join("\n"),
   },
