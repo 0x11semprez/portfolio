@@ -3,9 +3,9 @@ import bold from "../components/bold";
 import Diagrams, { Knowing } from "../components/Diagrams";
 import { useTx } from "../i18n";
 
-function Paragraph({ text }) {
+function Paragraph({ text, italic }) {
   return (
-    <p className="mt-6">
+    <p className={`mt-6${italic ? " italic" : ""}`}>
       {text.split("\n").map((line, i) => (
         <span key={i} className="block">
           {bold(line)}
@@ -34,7 +34,7 @@ export default function Discover() {
             </h2>
           )}
           {(tx(block.body) || []).map((p, j) => (
-            <Paragraph key={j} text={p} />
+            <Paragraph key={j} text={p} italic={block.italicParagraphs?.includes(j)} />
           ))}
 
           {block.type === "diagrams" && <Diagrams />}
