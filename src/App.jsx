@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Routes, Route, Navigate, useLocation, useParams } from "react-router-dom";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
@@ -42,12 +42,12 @@ export default function App() {
       : PROJECTS.find((p) => pathname === `/11/${p.slug}`);
   const dark = (on && videoPage) || project?.ink === "#fff";
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.scrollTo(0, 0);
     setMenuOpen(false);
   }, [pathname]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!(dark && videoPage)) return;
     document.body.style.backgroundColor = "#000";
     return () => {
