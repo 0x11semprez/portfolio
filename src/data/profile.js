@@ -5,13 +5,13 @@ export const PROFILE = {
   // it. `{ en, fr }`: the language switch in the header picks one.
   bio: {
     en: [
-      "semprez is an experimental developer.",
+      "semprez is a software alchimiste.",
       "semprez's name is Kassim.",
       "Love Audio && Finance.",
       'motto: "all comes with a cost".',
     ].join("\n"),
     fr: [
-      "semprez est un développeur expérimental.",
+      "semprez est un software alchimiste.",
       "semprez s'appelle Kassim.",
       "Love Audio && Finance.",
       'sa devise : "tout a un coût".',
