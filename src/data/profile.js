@@ -11,7 +11,7 @@ export const PROFILE = {
       'motto: "all comes with a cost".',
     ].join("\n"),
     fr: [
-      "semprez est un software alchimiste.",
+      "semprez est un alchimiste du numérique.",
       "semprez s'appelle Kassim.",
       "Love Audio && Finance.",
       'sa devise : "tout a un coût".',
