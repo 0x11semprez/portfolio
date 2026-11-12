@@ -3,15 +3,27 @@ import bold from "../components/bold";
 import Diagrams, { Knowing } from "../components/Diagrams";
 import { useTx } from "../i18n";
 
-function Paragraph({ text, italic }) {
-  return (
-    <p className={`mt-6${italic ? " italic" : ""}`}>
+function Paragraph({ text, quote }) {
+  const content = (
+    <p className={`mt-6${quote ? " italic" : ""}`}>
       {text.split("\n").map((line, i) => (
         <span key={i} className="block">
           {bold(line)}
         </span>
       ))}
     </p>
+  );
+  if (!quote) return content;
+  return (
+    <blockquote className="relative mt-6 px-8 sm:px-12">
+      <span className="absolute left-0 -top-4 text-[4rem] sm:text-[5rem] leading-none font-bold select-none" aria-hidden="true">
+        {"“"}
+      </span>
+      {content}
+      <span className="absolute right-0 bottom-0 text-[4rem] sm:text-[5rem] leading-none font-bold select-none" aria-hidden="true">
+        {"”"}
+      </span>
+    </blockquote>
   );
 }
 
@@ -34,7 +46,7 @@ export default function Discover() {
             </h2>
           )}
           {(tx(block.body) || []).map((p, j) => (
-            <Paragraph key={j} text={p} italic={block.italicParagraphs?.includes(j)} />
+            <Paragraph key={j} text={p} quote={block.quoteParagraphs?.includes(j)} />
           ))}
 
           {block.type === "diagrams" && <Diagrams />}
