@@ -60,6 +60,14 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
     };
   }, [i, onScreen, projects]);
 
+  useEffect(() => {
+    if (i === 0) return;
+    const p = projects[i - 1];
+    const src = p.detailImage || p.image;
+    const img = new Image();
+    img.src = src;
+  }, [i, projects]);
+
   const goRef = useRef(() => {});
   useEffect(() => {
     // the lock swallows the rest of a trackpad's inertia: one flick = one slide
