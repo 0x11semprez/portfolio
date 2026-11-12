@@ -8,8 +8,8 @@ export const DISCOVER = [
     type: "diagrams",
     oneLine: true, // the title never wraps, it shrinks to the screen instead
     title: {
-      en: "two diagrams describe me well",
-      fr: "deux schémas qui me représentent",
+      en: "The first diagram shows how to become what I want to be, the second how to get there",
+      fr: "Le premier schéma montre comment devenir ce que je veux être, le second comment y parvenir",
     },
   },
   {
