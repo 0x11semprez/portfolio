@@ -14,7 +14,7 @@ export const DISCOVER = [
   },
   {
     type: "text",
-    title: { en: "software alchemist", fr: "software alchemist" },
+    title: { en: "software alchemist", fr: "software alchimiste" },
     italicParagraphs: [0],
     body: {
       en: [
@@ -25,7 +25,7 @@ export const DISCOVER = [
         "**My ambition: to become rich, with a kind of richness that money can never buy.**",
       ],
       fr: [
-        "**Alchemist:** personne qui cherche à comprendre les propriétés cachées du monde à travers l'observation, l'expérimentation et la transformation. Historiquement, les alchimistes étudiaient la nature de la matière, les métaux, les minéraux et les réactions chimiques. Ils cherchaient notamment à transformer des métaux ordinaires en or ou à découvrir l'élixir de longue vie.",
+        "**Alchimiste :** personne qui cherche à comprendre les propriétés cachées du monde à travers l'observation, l'expérimentation et la transformation. Historiquement, les alchimistes étudiaient la nature de la matière, les métaux, les minéraux et les réactions chimiques. Ils cherchaient notamment à transformer des métaux ordinaires en or ou à découvrir l'élixir de longue vie.",
         "Dans One Piece, ~~**les chercheurs d'Ohara**~~ consacraient leur vie à comprendre le monde à travers la science et la recherche. Ils cherchaient à reconstituer l'histoire du monde, à découvrir ses secrets les plus enfouis et à accéder à des connaissances considérées comme interdites par le ~~**Gouvernement mondial**~~.",
         "Je vois le software comme une forme d'alchimie moderne. À travers le code, les mathématiques et l'expérimentation, nous pouvons transformer des idées abstraites en quelque chose de concret. J'aime trouver des solutions, explorer des problèmes complexes, concevoir des choses avec élégance. Je suis particulièrement attiré par cette recherche d'équilibre entre la **complexité technique**, la **simplicité** et la **beauté d'une conception**.",
         "Je crois que la technologie doit repousser les frontières de la créativité humaine et rendre de nouvelles possibilités accessibles à tous.",
