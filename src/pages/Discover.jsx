@@ -17,7 +17,7 @@ function Paragraph({ text, quote }) {
     );
   }
   return (
-    <blockquote className="relative mt-6 px-8 sm:px-12">
+    <blockquote className="relative mt-6 px-8 sm:px-12 text-center">
       <span className="absolute left-0 -top-4 text-[4rem] sm:text-[5rem] leading-none font-bold select-none" aria-hidden="true">
         {"“"}
       </span>
@@ -39,12 +39,12 @@ export default function Discover() {
   const tx = useTx();
 
   return (
-    <article className="mx-auto max-w-3xl px-5 pb-24 text-center text-base sm:text-lg lg:text-xl leading-relaxed">
+    <article className="mx-auto max-w-3xl px-5 pb-24 text-left sm:text-center text-base sm:text-lg lg:text-xl leading-relaxed">
       {DISCOVER.map((block, i) => (
         <section key={i} className={i ? "mt-32 sm:mt-40" : ""}>
           {block.title && (
             <h2
-              className={`font-bold uppercase tracking-wide ${
+              className={`font-bold uppercase tracking-wide text-center ${
                 block.oneLine
                   ? "whitespace-nowrap text-[min(1.75rem,calc((100vw-2.5rem)/22))]"
                   : "text-lg sm:text-xl lg:text-2xl"

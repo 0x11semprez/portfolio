@@ -49,9 +49,17 @@ export default function App() {
 
   useLayoutEffect(() => {
     if (!(dark && videoPage)) return;
+    document.body.style.transition = "none";
     document.body.style.backgroundColor = "#000";
+    requestAnimationFrame(() => {
+      document.body.style.transition = "";
+    });
     return () => {
+      document.body.style.transition = "none";
       document.body.style.backgroundColor = "";
+      requestAnimationFrame(() => {
+        document.body.style.transition = "";
+      });
     };
   }, [dark, videoPage]);
 
