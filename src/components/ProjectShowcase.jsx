@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Icon from "./Icon";
 import OphobiaEyes from "./OphobiaEyes";
@@ -44,9 +44,8 @@ export default function ProjectShowcase({ projects, intro, onScreen }) {
     navigate({ hash: i === 0 ? "" : projects[i - 1].slug }, { replace: true });
   }, [i, navigate, projects]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     onScreen?.(i);
-    // colour the browser chrome (status bar, Safari's toolbar) like the slide
     const bg = i === 0 ? "#ffffff" : projects[i - 1].bg;
     const meta = document.querySelector('meta[name="theme-color"]');
     const prev = {
