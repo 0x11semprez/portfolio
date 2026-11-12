@@ -55,11 +55,8 @@ export default function App() {
       document.body.style.transition = "";
     });
     return () => {
-      document.body.style.transition = "none";
       document.body.style.backgroundColor = "";
-      requestAnimationFrame(() => {
-        document.body.style.transition = "";
-      });
+      document.body.style.transition = "";
     };
   }, [dark, videoPage]);
 
