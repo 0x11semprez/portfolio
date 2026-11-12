@@ -36,6 +36,7 @@ export const THANKS = [
   { name: "Me" },
   { name: "Mom" },
   { name: "Neymar" },
+  { name: "One Piece" },
   { name: "Osaka" },
   { name: "Paris" },
   { name: "Playboi Carti" },
