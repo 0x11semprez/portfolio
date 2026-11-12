@@ -14,37 +14,21 @@ export const DISCOVER = [
   },
   {
     type: "text",
-    title: { en: "a human. you and I are.", fr: "un être humain. comme vous et moi." },
+    title: { en: "software alchimiste", fr: "software alchimiste" },
     body: {
       en: [
-        "I think humans need several passions to give meaning to their lives, and to find what they are made for.",
-        "A human possibly needs four passions or more:",
-        "a passion to develop creativity,\na passion to earn money,\na passion to train the body,\na passion to disconnect.",
+        "*Alchemist: a person who seeks to understand the hidden properties of the world through observation, experimentation and transformation. Historically, alchemists studied the nature of matter, metals, minerals and chemical reactions. They notably sought to turn ordinary metals into gold or to discover the elixir of eternal life.*",
+        "In One Piece, the scholars of Ohara devoted their lives to understanding the world through science and research. They sought to reconstruct the history of the world, to uncover its most deeply buried secrets and to access knowledge deemed forbidden by the World Government.",
+        "I see software as a form of modern alchemy. Through code, mathematics and experimentation, we can transform abstract ideas into something concrete, something that exists, works and can be experienced by others. I love finding solutions, exploring complex problems, and above all, designing things with elegance. I am particularly drawn to this search for balance between technical complexity, simplicity and the beauty of a design.",
+        "I believe technology must push the boundaries of human creativity and make new possibilities accessible to all.",
+        "**My ambition: to become rich, with a kind of richness that money can never buy.**",
       ],
       fr: [
-        "Je crois que chaque être humain a besoin de plusieurs passions pour donner un sens à sa vie et trouver ce pour quoi il est fait.",
-        "Il en faut sans doute au moins quatre :",
-        "une pour développer sa créativité,\nune pour gagner sa vie,\nune pour entretenir son corps,\nune pour décrocher.",
-      ],
-    },
-  },
-  {
-    type: "text",
-    title: { en: "for me", fr: "les miennes" },
-    body: {
-      en: [
-        "**My first passions are music and writing.**\nI love to create music, code music, and of course listen to it.\nI love to write and create stories. Since my childhood, I have always romanticized everything.",
-        "**My second passion is breaking down problems and research.**\nHow to explain it? My brain lights up when I find the solution.\nI have gone through so much in my life that now I welcome problems gladly.",
-        "**My third passion is being strong.**\nI love seeing my progress when I add more weight at the gym, learn new techniques in combat sports, or even see a new basketball system in action.",
-        "**My fourth passion is walking.**\nWalking leaves my head empty.",
-        "**My aim: to become rich, with a kind of richness that money can't buy.**"
-      ],
-      fr: [
-        "**Mes premières passions : la musique et l'écriture.**\nJ'aime composer, programmer de la musique, et bien sûr en écouter.\nJ'aime écrire et inventer des histoires. Depuis tout petit, je romance tout.",
-        "**Ma deuxième passion : résoudre des problèmes, et la recherche.**\nComment l'expliquer ? Mon cerveau exulte lorsque je trouve la solution.\nJ'ai traversé tant d'épreuves que, désormais, j'accueille les problèmes avec plaisir.",
-        "**Ma troisième passion : devenir fort.**\nJ'aime voir mes progrès : ajouter du poids à la salle, apprendre de nouvelles techniques dans les sports de combat, ou même voir en action un nouveau système de jeu au basket.",
-        "**Ma quatrième passion : la marche.**\nMarcher me vide la tête.",
-        "**Mon but : devenir riche, mais d'une richesse qui ne s'achète pas.**",
+        "*Alchimiste : personne qui cherche à comprendre les propriétés cachées du monde à travers l'observation, l'expérimentation et la transformation. Historiquement, les alchimistes étudiaient la nature de la matière, les métaux, les minéraux et les réactions chimiques. Ils cherchaient notamment à transformer des métaux ordinaires en or ou à découvrir l'élixir de longue vie.*",
+        "Dans One Piece, les chercheurs d'Ohara consacraient leur vie à comprendre le monde à travers la science et la recherche. Ils cherchaient à reconstituer l'histoire du monde, à découvrir ses secrets les plus enfouis et à accéder à des connaissances considérées comme interdites par le Gouvernement mondial.",
+        "Je vois le software comme une forme d'alchimie moderne. À travers le code, les mathématiques et l'expérimentation, nous pouvons transformer des idées abstraites en quelque chose de concret, qui existe, fonctionne et peut être expérimenté par les autres. J'aime trouver des solutions, explorer des problèmes complexes et, surtout, concevoir des choses avec élégance. Je suis particulièrement attiré par cette recherche d'équilibre entre la complexité technique, la simplicité et la beauté d'une conception.",
+        "Je crois que la technologie doit repousser les frontières de la créativité humaine et rendre de nouvelles possibilités accessibles à tous.",
+        "**Mon ambition : devenir riche, mais d'une richesse que l'argent ne pourra jamais acheter.**",
       ],
     },
   },
